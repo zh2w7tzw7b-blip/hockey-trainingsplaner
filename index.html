@@ -3,738 +3,565 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-      content="width=device-width,
-               initial-scale=1,
-               maximum-scale=1,
-               viewport-fit=cover">
-
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#f5f7fa">
-
-<title>Mein Trainingsplan</title>
+      content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<title>Trainingsplan</title>
 
 <style>
-:root {
-    --bg: #f4f6f8;
-    --card: #ffffff;
-    --text: #17202a;
-    --muted: #6b7280;
-    --primary: #1769aa;
-    --primary-dark: #0f4f82;
-    --border: #dfe4ea;
-    --danger: #c62828;
-    --success: #2e7d32;
-    --shadow: 0 3px 14px rgba(0,0,0,.08);
-    --radius: 16px;
-}
-
 * {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
-html {
-    font-size: 16px;
-    background: var(--bg);
+:root {
+  --bg: #f3f4f6;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --danger: #dc2626;
+  --nav-height: 76px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100%;
 }
 
 body {
-    margin: 0;
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
+  padding-bottom: calc(var(--nav-height) + env(safe-area-inset-bottom) + 20px);
 }
 
 button,
 input,
-select,
-textarea {
-    font: inherit;
+textarea,
+select {
+  font: inherit;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .topbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    height: calc(64px + env(safe-area-inset-top));
-    padding-top: env(safe-area-inset-top);
-    background: rgba(255,255,255,.96);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding-left: 16px;
-    padding-right: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding:
+    max(12px, env(safe-area-inset-top))
+    16px
+    12px;
 }
 
-.brand {
-    font-weight: 800;
-    font-size: 19px;
-    white-space: nowrap;
+.topbar-inner {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
 }
 
-.top-spacer {
-    flex: 1;
+.logo {
+  font-size: 21px;
+  font-weight: 800;
 }
 
-.icon-button {
-    border: 1px solid var(--border);
-    background: white;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 21px;
+.subtitle {
+  font-size: 12px;
+  color: var(--muted);
 }
 
-.icon-button:active {
-    transform: scale(.97);
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 18px 16px 30px;
 }
 
-.layout {
-    display: flex;
-    min-height: calc(100vh - 64px);
+.view {
+  display: none;
 }
 
-.sidebar {
-    width: 250px;
-    flex: 0 0 250px;
-    background: white;
-    border-right: 1px solid var(--border);
-    padding: 18px 12px;
-    position: sticky;
-    top: calc(64px + env(safe-area-inset-top));
-    height: calc(100vh - 64px - env(safe-area-inset-top));
-    overflow-y: auto;
+.view.active {
+  display: block;
 }
 
-.nav-button {
-    width: 100%;
-    border: 0;
-    background: transparent;
-    padding: 13px 14px;
-    margin-bottom: 5px;
-    border-radius: 12px;
-    text-align: left;
-    font-weight: 600;
-    color: var(--text);
+h1 {
+  margin: 4px 0 6px;
+  font-size: 28px;
 }
 
-.nav-button:hover {
-    background: #f1f5f9;
+h2 {
+  margin: 0 0 12px;
 }
 
-.nav-button.active {
-    background: #e8f2fb;
-    color: var(--primary);
+h3 {
+  margin: 0 0 6px;
 }
 
-.main {
-    flex: 1;
-    min-width: 0;
-    padding: 24px;
+p {
+  line-height: 1.5;
 }
 
-.page {
-    display: none;
-    max-width: 1300px;
-    margin: 0 auto;
+.muted {
+  color: var(--muted);
 }
 
-.page.active {
-    display: block;
+.btn {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  min-height: 46px;
+  font-weight: 700;
+  background: #e5e7eb;
+  color: #111827;
 }
 
-.page-title {
-    font-size: 30px;
-    font-weight: 800;
-    margin: 0 0 6px;
+.btn.primary {
+  background: var(--primary);
+  color: white;
 }
 
-.page-subtitle {
-    color: var(--muted);
-    margin: 0 0 24px;
+.btn.primary:active {
+  background: var(--primary-dark);
 }
 
-.card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 20px;
-    margin-bottom: 18px;
+.btn.danger {
+  background: #fee2e2;
+  color: var(--danger);
 }
 
-.grid {
-    display: grid;
-    gap: 18px;
+.btn.small {
+  min-height: 38px;
+  padding: 8px 12px;
+  font-size: 14px;
 }
 
-.stats-grid {
-    grid-template-columns: repeat(4, minmax(0,1fr));
-}
-
-.stat {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-}
-
-.stat-number {
-    font-size: 32px;
-    font-weight: 800;
-    margin-bottom: 5px;
-}
-
-.stat-label {
-    color: var(--muted);
-}
-
-.button {
-    border: 0;
-    border-radius: 12px;
-    padding: 12px 17px;
-    min-height: 46px;
-    font-weight: 700;
-    background: var(--primary);
-    color: white;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-}
-
-.button:active {
-    transform: scale(.98);
-}
-
-.button.secondary {
-    background: #eef2f6;
-    color: var(--text);
-}
-
-.button.success {
-    background: var(--success);
-}
-
-.button.danger {
-    background: var(--danger);
-}
-
-.button.small {
-    min-height: 38px;
-    padding: 8px 12px;
-    font-size: 14px;
-}
-
-.button.full {
-    width: 100%;
-}
-
-.button-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0,1fr));
-    gap: 16px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-}
-
-.form-group.full {
-    grid-column: 1 / -1;
-}
-
-label {
-    font-weight: 700;
-    font-size: 14px;
-}
-
-input,
-select,
-textarea {
-    width: 100%;
-    border: 1px solid #cfd6de;
-    border-radius: 11px;
-    background: white;
-    padding: 12px 13px;
-    min-height: 46px;
-    color: var(--text);
-    outline: none;
-}
-
-textarea {
-    min-height: 110px;
-    resize: vertical;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(23,105,170,.1);
+.btn.full {
+  width: 100%;
 }
 
 .toolbar {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
 }
 
-.toolbar .search {
-    flex: 1 1 250px;
+.search {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 0 14px;
+  background: white;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.filter-chip {
+  flex: 0 0 auto;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 999px;
+  padding: 9px 14px;
+}
+
+.filter-chip.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
 }
 
 .exercise-grid {
-    display: grid;
-    grid-template-columns:
-        repeat(auto-fill, minmax(250px, 1fr));
-    gap: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .exercise-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
 }
 
 .exercise-image {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    background: #e9edf1;
-    display: block;
+  width: 100%;
+  aspect-ratio: 1.25 / 1;
+  object-fit: cover;
+  background: #e5e7eb;
+  display: block;
 }
 
 .exercise-placeholder {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    background: #e9edf1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-    color: #9aa4af;
+  width: 100%;
+  aspect-ratio: 1.25 / 1;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
 }
 
 .exercise-body {
-    padding: 15px;
+  padding: 12px;
 }
 
 .exercise-title {
-    font-size: 18px;
-    font-weight: 800;
-    margin-bottom: 7px;
-}
-
-.exercise-description {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.45;
-    margin-bottom: 10px;
+  font-weight: 800;
+  font-size: 16px;
+  margin-bottom: 5px;
 }
 
 .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 13px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 8px 0;
 }
 
 .tag {
-    background: #edf4fa;
-    color: var(--primary-dark);
-    border-radius: 999px;
-    padding: 5px 9px;
-    font-size: 12px;
-    font-weight: 700;
+  font-size: 11px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #3730a3;
 }
 
-.exercise-actions {
-    display: flex;
-    gap: 7px;
-    flex-wrap: wrap;
+.card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  margin-top: 10px;
 }
 
-.training-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.training-item {
-    display: grid;
-    grid-template-columns: 90px 1fr auto;
-    gap: 14px;
-    align-items: center;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 10px;
-    background: white;
-}
-
-.training-thumb {
-    width: 90px;
-    height: 65px;
-    border-radius: 9px;
-    object-fit: cover;
-    background: #e9edf1;
-}
-
-.training-item-title {
-    font-weight: 800;
-    margin-bottom: 4px;
-}
-
-.training-item-info {
-    color: var(--muted);
-    font-size: 14px;
-}
-
-.training-controls {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-}
-
-.circle-button {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: white;
-    font-weight: 800;
+.card-actions .btn {
+  min-height: 40px;
+  padding: 8px;
+  font-size: 13px;
 }
 
 .empty {
-    padding: 50px 20px;
-    text-align: center;
-    color: var(--muted);
-}
-
-.empty-icon {
-    font-size: 50px;
-    margin-bottom: 10px;
-}
-
-.modal-backdrop {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 2000;
-    background: rgba(0,0,0,.45);
-    padding: 20px;
-    overflow-y: auto;
-}
-
-.modal-backdrop.show {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-}
-
-.modal {
-    width: min(850px, 100%);
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 15px 60px rgba(0,0,0,.25);
-    margin-top: 20px;
-    overflow: hidden;
-}
-
-.modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 18px 20px;
-    border-bottom: 1px solid var(--border);
-}
-
-.modal-title {
-    font-size: 20px;
-    font-weight: 800;
-}
-
-.modal-body {
-    padding: 20px;
-}
-
-.modal-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    flex-wrap: wrap;
-    padding: 15px 20px;
-    border-top: 1px solid var(--border);
-}
-
-.file-picker {
-    border: 2px dashed #cbd5df;
-    border-radius: 14px;
-    padding: 20px;
-    text-align: center;
-    background: #f8fafc;
-}
-
-.file-picker input {
-    border: 0;
-    padding: 10px 0;
-    min-height: auto;
-}
-
-.preview-image {
-    display: block;
-    width: 100%;
-    max-height: 300px;
-    object-fit: contain;
-    margin-top: 12px;
-    border-radius: 12px;
-    background: #f1f3f5;
-}
-
-.toast {
-    position: fixed;
-    z-index: 5000;
-    left: 50%;
-    bottom: 24px;
-    transform: translateX(-50%);
-    background: #17202a;
-    color: white;
-    padding: 12px 18px;
-    border-radius: 999px;
-    box-shadow: 0 5px 25px rgba(0,0,0,.25);
-    display: none;
-    max-width: calc(100vw - 30px);
-    text-align: center;
-}
-
-.toast.show {
-    display: block;
-}
-
-.mobile-menu {
-    display: none;
-}
-
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-bottom: 16px;
-}
-
-.section-header h2 {
-    margin: 0;
-}
-
-.notice {
-    padding: 14px;
-    border-radius: 12px;
-    background: #eef6fc;
-    border: 1px solid #cde2f3;
-    color: #24506e;
-    margin-bottom: 15px;
-}
-
-.category-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.category-button {
-    border: 1px solid var(--border);
-    background: white;
-    border-radius: 999px;
-    padding: 9px 13px;
-    font-weight: 700;
-}
-
-.category-button.active {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-}
-
-.file-name {
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 6px;
+  text-align: center;
+  padding: 45px 20px;
+  color: var(--muted);
+  background: white;
+  border: 1px dashed var(--border);
+  border-radius: 16px;
 }
 
 .training-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
 }
 
-.duration {
-    font-weight: 700;
+.training-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-@media (max-width: 900px) {
-    .sidebar {
-        display: none;
-    }
-
-    .mobile-menu {
-        display: inline-flex;
-    }
-
-    .sidebar.open {
-        display: block;
-        position: fixed;
-        z-index: 1500;
-        left: 0;
-        top: calc(64px + env(safe-area-inset-top));
-        height: calc(100vh - 64px - env(safe-area-inset-top));
-        box-shadow: 8px 0 30px rgba(0,0,0,.15);
-    }
-
-    .stats-grid {
-        grid-template-columns: repeat(2, minmax(0,1fr));
-    }
+.training-item {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
-@media (max-width: 650px) {
-    .main {
-        padding: 15px;
-    }
-
-    .form-grid,
-    .training-header {
-        grid-template-columns: 1fr;
-    }
-
-    .exercise-grid {
-        grid-template-columns: repeat(2, minmax(0,1fr));
-        gap: 10px;
-    }
-
-    .exercise-card {
-        border-radius: 13px;
-    }
-
-    .exercise-body {
-        padding: 11px;
-    }
-
-    .exercise-title {
-        font-size: 16px;
-    }
-
-    .exercise-description {
-        font-size: 13px;
-    }
-
-    .button {
-        min-height: 44px;
-    }
-
-    .training-item {
-        grid-template-columns: 70px 1fr;
-    }
-
-    .training-thumb {
-        width: 70px;
-        height: 55px;
-    }
-
-    .training-controls {
-        grid-column: 1 / -1;
-        justify-content: flex-start;
-    }
-
-    .stats-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .page-title {
-        font-size: 25px;
-    }
+.training-thumb {
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: #e5e7eb;
+  flex: 0 0 72px;
 }
 
-/* Druck / PDF */
+.training-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #eff6ff;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  flex: 0 0 28px;
+}
+
+.training-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.training-content strong {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.training-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.training-actions button {
+  border: 0;
+  background: #f3f4f6;
+  border-radius: 9px;
+  padding: 8px 10px;
+  min-height: 36px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.stat {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.stat-number {
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.form {
+  display: grid;
+  gap: 13px;
+}
+
+.form-group {
+  display: grid;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.form-control {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 10px 12px;
+  background: white;
+}
+
+textarea.form-control {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  background: rgba(0,0,0,.55);
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.modal.show {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.modal-card {
+  width: min(700px, 100%);
+  max-height: 92vh;
+  overflow-y: auto;
+  background: white;
+  border-radius: 20px 20px 12px 12px;
+  padding: 18px;
+  margin-bottom: env(safe-area-inset-bottom);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.close {
+  border: 0;
+  background: #f3f4f6;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 22px;
+}
+
+.image-preview {
+  width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #f3f4f6;
+  display: none;
+}
+
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  background: rgba(255,255,255,.98);
+  backdrop-filter: blur(15px);
+  border-top: 1px solid var(--border);
+  padding:
+    7px
+    max(7px, env(safe-area-inset-right))
+    max(7px, env(safe-area-inset-bottom))
+    max(7px, env(safe-area-inset-left));
+}
+
+.bottom-nav-inner {
+  max-width: 700px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.nav-btn {
+  border: 0;
+  background: transparent;
+  border-radius: 12px;
+  padding: 8px 4px;
+  min-height: 58px;
+  color: #6b7280;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.nav-btn .icon {
+  display: block;
+  font-size: 22px;
+  margin-bottom: 2px;
+}
+
+.nav-btn.active {
+  color: var(--primary);
+  background: #eff6ff;
+}
+
+.file-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 48px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+}
+
+.file-label input {
+  display: none;
+}
+
+.settings-box {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+@media (min-width: 700px) {
+  .exercise-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .modal.show {
+    align-items: center;
+  }
+
+  .modal-card {
+    border-radius: 20px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .exercise-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 @media print {
+  body {
+    padding: 0;
+    background: white;
+  }
 
-    @page {
-        size: A4;
-        margin: 12mm;
-    }
+  .topbar,
+  .bottom-nav,
+  .toolbar,
+  .filters,
+  .no-print,
+  .card-actions,
+  .training-actions {
+    display: none !important;
+  }
 
-    body {
-        background: white;
-    }
+  .container {
+    max-width: none;
+    padding: 0;
+  }
 
-    .topbar,
-    .sidebar,
-    .no-print,
-    .button,
-    .circle-button,
-    .training-controls {
-        display: none !important;
-    }
+  .view {
+    display: none !important;
+  }
 
-    .layout {
-        display: block;
-    }
+  #trainingView {
+    display: block !important;
+  }
 
-    .main {
-        padding: 0;
-    }
-
-    .page {
-        display: none !important;
-    }
-
-    #page-training-detail {
-        display: block !important;
-    }
-
-    .card {
-        box-shadow: none;
-        border: 1px solid #ddd;
-        break-inside: avoid;
-    }
-
-    .training-item {
-        break-inside: avoid;
-    }
+  .training-header,
+  .training-item {
+    box-shadow: none;
+    break-inside: avoid;
+  }
 }
 </style>
 </head>
@@ -742,781 +569,510 @@ textarea:focus {
 <body>
 
 <header class="topbar">
-    <button
-        class="icon-button mobile-menu"
-        onclick="toggleSidebar()"
-        aria-label="Menü">
-        ☰
+  <div class="topbar-inner">
+    <div>
+      <div class="logo">🏑 Trainingsplan</div>
+      <div class="subtitle">Übungen verwalten & Training planen</div>
+    </div>
+
+    <button class="btn primary small" onclick="openExerciseModal()">
+      + Übung
     </button>
-
-    <div class="brand">🏑 Mein Training</div>
-
-    <div class="top-spacer"></div>
-
-    <button
-        class="icon-button"
-        onclick="showPage('dashboard')"
-        title="Startseite">
-        🏠
-    </button>
+  </div>
 </header>
 
-<div class="layout">
-
-    <aside class="sidebar" id="sidebar">
-
-        <button
-            class="nav-button active"
-            data-page="dashboard"
-            onclick="showPage('dashboard')">
-            🏠 Übersicht
-        </button>
-
-        <button
-            class="nav-button"
-            data-page="exercises"
-            onclick="showPage('exercises')">
-            🖼️ Übungsbibliothek
-        </button>
-
-        <button
-            class="nav-button"
-            data-page="trainings"
-            onclick="showPage('trainings')">
-            📋 Trainingspläne
-        </button>
-
-        <button
-            class="nav-button"
-            data-page="new-training"
-            onclick="newTraining()">
-            ➕ Neues Training
-        </button>
-
-        <hr>
-
-        <button
-            class="nav-button"
-            data-page="data"
-            onclick="showPage('data')">
-            💾 Import / Export
-        </button>
-
-        <button
-            class="nav-button"
-            data-page="settings"
-            onclick="showPage('settings')">
-            ⚙️ Einstellungen
-        </button>
-
-    </aside>
-
-    <main class="main">
-
-        <!-- DASHBOARD -->
-
-        <section id="page-dashboard" class="page active">
-
-            <h1 class="page-title">Übersicht</h1>
-            <p class="page-subtitle">
-                Deine Übungen und Trainingspläne auf einen Blick.
-            </p>
-
-            <div class="grid stats-grid">
-
-                <div class="stat">
-                    <div class="stat-number" id="stat-exercises">0</div>
-                    <div class="stat-label">Übungen</div>
-                </div>
-
-                <div class="stat">
-                    <div class="stat-number" id="stat-trainings">0</div>
-                    <div class="stat-label">Trainingspläne</div>
-                </div>
-
-                <div class="stat">
-                    <div class="stat-number" id="stat-images">0</div>
-                    <div class="stat-label">Übungen mit Bild</div>
-                </div>
-
-                <div class="stat">
-                    <div class="stat-number" id="stat-categories">0</div>
-                    <div class="stat-label">Kategorien</div>
-                </div>
-
-            </div>
-
-            <div class="card">
-
-                <div class="section-header">
-                    <h2>Schnellzugriff</h2>
-                </div>
-
-                <div class="button-row">
-
-                    <button
-                        class="button"
-                        onclick="openExerciseModal()">
-                        ➕ Übung erstellen
-                    </button>
-
-                    <button
-                        class="button success"
-                        onclick="newTraining()">
-                        📋 Training erstellen
-                    </button>
-
-                    <button
-                        class="button secondary"
-                        onclick="showPage('exercises')">
-                        🖼️ Übungsbibliothek
-                    </button>
-
-                </div>
-
-            </div>
-
-            <div class="card">
-
-                <div class="section-header">
-                    <h2>Letzte Trainingspläne</h2>
-
-                    <button
-                        class="button secondary small"
-                        onclick="showPage('trainings')">
-                        Alle anzeigen
-                    </button>
-                </div>
-
-                <div id="dashboard-trainings"></div>
-
-            </div>
-
-        </section>
-
-
-        <!-- EXERCISES -->
-
-        <section id="page-exercises" class="page">
-
-            <h1 class="page-title">Übungsbibliothek</h1>
-
-            <p class="page-subtitle">
-                Deine Übungen als Bildkarten. Tippe auf eine Übung,
-                um sie einem Training hinzuzufügen.
-            </p>
-
-            <div class="card">
-
-                <div class="toolbar">
-
-                    <input
-                        class="search"
-                        id="exercise-search"
-                        type="search"
-                        placeholder="🔎 Übungen suchen..."
-                        oninput="renderExercises()">
-
-                    <select
-                        id="exercise-category"
-                        onchange="renderExercises()">
-                        <option value="">Alle Kategorien</option>
-                    </select>
-
-                    <button
-                        class="button"
-                        onclick="openExerciseModal()">
-                        ➕ Neue Übung
-                    </button>
-
-                </div>
-
-                <div
-                    class="category-list"
-                    id="category-buttons">
-                </div>
-
-            </div>
-
-            <div id="exercise-grid" class="exercise-grid"></div>
-
-        </section>
-
-
-        <!-- TRAININGS -->
-
-        <section id="page-trainings" class="page">
-
-            <h1 class="page-title">Trainingspläne</h1>
-
-            <p class="page-subtitle">
-                Gespeicherte Trainingspläne.
-            </p>
-
-            <div class="card">
-
-                <div class="toolbar">
-
-                    <input
-                        id="training-search"
-                        class="search"
-                        type="search"
-                        placeholder="🔎 Trainingsplan suchen..."
-                        oninput="renderTrainings()">
-
-                    <button
-                        class="button"
-                        onclick="newTraining()">
-                        ➕ Neues Training
-                    </button>
-
-                </div>
-
-            </div>
-
-            <div id="training-list"></div>
-
-        </section>
-
-
-        <!-- NEW TRAINING -->
-
-        <section id="page-new-training" class="page">
-
-            <h1 class="page-title">Training erstellen</h1>
-
-            <p class="page-subtitle">
-                Stelle dein Training aus deiner Übungsbibliothek zusammen.
-            </p>
-
-            <div class="card">
-
-                <div class="form-grid">
-
-                    <div class="form-group">
-                        <label for="training-name">
-                            Trainingsname
-                        </label>
-
-                        <input
-                            id="training-name"
-                            type="text"
-                            placeholder="z. B. U12 Training – Dribbling">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="training-date">
-                            Datum
-                        </label>
-
-                        <input
-                            id="training-date"
-                            type="date">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="training-team">
-                            Mannschaft
-                        </label>
-
-                        <input
-                            id="training-team"
-                            type="text"
-                            placeholder="z. B. U12">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="training-total-duration">
-                            Gesamtdauer
-                        </label>
-
-                        <input
-                            id="training-total-duration"
-                            type="number"
-                            min="0"
-                            placeholder="z. B. 90">
-                    </div>
-
-                    <div class="form-group full">
-                        <label for="training-notes">
-                            Notizen
-                        </label>
-
-                        <textarea
-                            id="training-notes"
-                            placeholder="Ziele, Hinweise, Material usw."></textarea>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="card">
-
-                <div class="section-header">
-
-                    <div>
-                        <h2>Übungen im Training</h2>
-                        <div class="page-subtitle" style="margin:4px 0 0;">
-                            <span id="selected-count">0</span>
-                            Übungen
-                        </div>
-                    </div>
-
-                    <button
-                        class="button secondary"
-                        onclick="showPage('exercises')">
-                        🖼️ Übungen hinzufügen
-                    </button>
-
-                </div>
-
-                <div id="selected-exercises"></div>
-
-            </div>
-
-            <div class="card">
-
-                <div class="button-row">
-
-                    <button
-                        class="button success"
-                        onclick="saveTraining()">
-                        💾 Training speichern
-                    </button>
-
-                    <button
-                        class="button secondary"
-                        onclick="showPage('trainings')">
-                        Abbrechen
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- TRAINING DETAIL -->
-
-        <section id="page-training-detail" class="page">
-
-            <div class="no-print button-row" style="margin-bottom:20px;">
-
-                <button
-                    class="button secondary"
-                    onclick="showPage('trainings')">
-                    ← Zurück
-                </button>
-
-                <button
-                    class="button"
-                    onclick="window.print()">
-                    📄 PDF / Drucken
-                </button>
-
-                <button
-                    class="button danger"
-                    onclick="deleteCurrentTraining()">
-                    🗑️ Löschen
-                </button>
-
-            </div>
-
-            <div class="card">
-
-                <h1
-                    id="detail-title"
-                    class="page-title">
-                    Training
-                </h1>
-
-                <p
-                    id="detail-meta"
-                    class="page-subtitle">
-                </p>
-
-                <p id="detail-notes"></p>
-
-            </div>
-
-            <div id="detail-exercises"></div>
-
-        </section>
-
-
-        <!-- DATA -->
-
-        <section id="page-data" class="page">
-
-            <h1 class="page-title">Import / Export</h1>
-
-            <p class="page-subtitle">
-                Sichere deine Übungen und Trainingspläne als Datei
-                oder importiere sie wieder.
-            </p>
-
-            <div class="card">
-
-                <h2>📤 Export</h2>
-
-                <p>
-                    Exportiert deine komplette Datenbank inklusive
-                    Bildern, Übungen, Kategorien und Trainingsplänen.
-                </p>
-
-                <button
-                    class="button"
-                    onclick="exportData()">
-                    📤 Daten exportieren
-                </button>
-
-            </div>
-
-            <div class="card">
-
-                <h2>📥 Import</h2>
-
-                <p>
-                    Wähle eine zuvor exportierte JSON-Datei aus.
-                </p>
-
-                <div class="file-picker">
-
-                    <input
-                        id="import-file"
-                        type="file"
-                        accept=".json,application/json"
-                        onchange="importData(this)">
-
-                </div>
-
-            </div>
-
-            <div class="card">
-
-                <h2>⚠️ Daten löschen</h2>
-
-                <p>
-                    Löscht alle Übungen und Trainingspläne
-                    von diesem Gerät.
-                </p>
-
-                <button
-                    class="button danger"
-                    onclick="clearAllData()">
-                    Alles löschen
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- SETTINGS -->
-
-        <section id="page-settings" class="page">
-
-            <h1 class="page-title">Einstellungen</h1>
-
-            <div class="card">
-
-                <h2>Über diese Version</h2>
-
-                <p>
-                    Mein Trainingsplan V3
-                </p>
-
-                <p>
-                    Die Daten werden lokal im Browser gespeichert.
-                    Es wird kein Benutzerkonto benötigt.
-                </p>
-
-                <div class="notice">
-                    <strong>iPad-Tipp:</strong>
-                    Nutze regelmäßig die Export-Funktion, um eine
-                    Sicherung deiner Übungen und Trainingspläne
-                    zu erstellen.
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-</div>
-
-
-<!-- EXERCISE MODAL -->
-
-<div
-    id="exercise-modal"
-    class="modal-backdrop">
-
-    <div class="modal">
-
-        <div class="modal-header">
-
-            <div
-                id="exercise-modal-title"
-                class="modal-title">
-                Neue Übung
-            </div>
-
-            <button
-                class="icon-button"
-                onclick="closeExerciseModal()">
-                ✕
-            </button>
-
+<main class="container">
+
+  <!-- BIBLIOTHEK -->
+  <section id="libraryView" class="view active">
+
+    <h1>Übungsbibliothek</h1>
+    <p class="muted">
+      Deine Übungen als Bildkarten. Tippe eine Übung an, um sie einem Training hinzuzufügen.
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-number" id="exerciseCount">0</div>
+        <div class="muted">Übungen</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" id="categoryCount">0</div>
+        <div class="muted">Kategorien</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" id="trainingCount">0</div>
+        <div class="muted">Trainings</div>
+      </div>
+    </div>
+
+    <input
+      id="searchInput"
+      class="search"
+      type="search"
+      placeholder="🔎 Übung suchen..."
+      oninput="renderLibrary()"
+    >
+
+    <div class="filters" id="categoryFilters"></div>
+
+    <div style="height:14px"></div>
+
+    <div id="exerciseGrid" class="exercise-grid"></div>
+
+  </section>
+
+
+  <!-- TRAINING -->
+  <section id="trainingView" class="view">
+
+    <h1>Mein Training</h1>
+
+    <div class="training-header">
+
+      <div class="form">
+
+        <div class="form-group">
+          <label>Trainingstitel</label>
+          <input
+            id="trainingTitle"
+            class="form-control"
+            placeholder="z. B. Techniktraining U10"
+            oninput="saveCurrentTraining()"
+          >
         </div>
 
-        <div class="modal-body">
-
-            <div class="form-grid">
-
-                <div class="form-group full">
-
-                    <label for="exercise-name">
-                        Name der Übung *
-                    </label>
-
-                    <input
-                        id="exercise-name"
-                        type="text"
-                        placeholder="z. B. Slalom-Dribbling">
-
-                </div>
-
-                <div class="form-group">
-
-                    <label for="exercise-category-input">
-                        Kategorie
-                    </label>
-
-                    <input
-                        id="exercise-category-input"
-                        type="text"
-                        list="category-datalist"
-                        placeholder="z. B. Technik">
-
-                    <datalist id="category-datalist"></datalist>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label for="exercise-duration">
-                        Dauer in Minuten
-                    </label>
-
-                    <input
-                        id="exercise-duration"
-                        type="number"
-                        min="0"
-                        placeholder="10">
-
-                </div>
-
-                <div class="form-group full">
-
-                    <label for="exercise-tags">
-                        Tags
-                    </label>
-
-                    <input
-                        id="exercise-tags"
-                        type="text"
-                        placeholder="Dribbling, Technik, Anfänger">
-
-                    <small style="color:var(--muted);">
-                        Mehrere Tags durch Kommas trennen.
-                    </small>
-
-                </div>
-
-                <div class="form-group full">
-
-                    <label for="exercise-description">
-                        Beschreibung
-                    </label>
-
-                    <textarea
-                        id="exercise-description"
-                        placeholder="Ablauf der Übung..."></textarea>
-
-                </div>
-
-                <div class="form-group full">
-
-                    <label for="exercise-coaching">
-                        Trainerhinweise
-                    </label>
-
-                    <textarea
-                        id="exercise-coaching"
-                        placeholder="Worauf soll der Trainer achten?"></textarea>
-
-                </div>
-
-                <div class="form-group full">
-
-                    <label>
-                        Bild
-                    </label>
-
-                    <div class="file-picker">
-
-                        <strong>
-                            🖼️ Foto aus der Mediathek auswählen
-                        </strong>
-
-                        <input
-                            id="exercise-image"
-                            type="file"
-                            accept="image/*">
-
-                        <div
-                            id="selected-file-name"
-                            class="file-name">
-                        </div>
-
-                        <img
-                            id="image-preview"
-                            class="preview-image"
-                            style="display:none;">
-
-                    </div>
-
-                </div>
-
-            </div>
-
+        <div class="form-group">
+          <label>Datum</label>
+          <input
+            id="trainingDate"
+            class="form-control"
+            type="date"
+            onchange="saveCurrentTraining()"
+          >
         </div>
 
-        <div class="modal-footer">
-
-            <button
-                class="button secondary"
-                onclick="closeExerciseModal()">
-                Abbrechen
-            </button>
-
-            <button
-                class="button"
-                onclick="saveExercise()">
-                💾 Übung speichern
-            </button>
-
+        <div class="form-group">
+          <label>Trainingsziel</label>
+          <textarea
+            id="trainingGoal"
+            class="form-control"
+            placeholder="Was soll heute trainiert werden?"
+            oninput="saveCurrentTraining()"
+          ></textarea>
         </div>
+
+        <div class="toolbar no-print">
+          <button class="btn primary" onclick="showView('library')">
+            + Übungen hinzufügen
+          </button>
+
+          <button class="btn" onclick="printTraining()">
+            📄 PDF / Drucken
+          </button>
+
+          <button class="btn danger" onclick="clearTraining()">
+            Training leeren
+          </button>
+        </div>
+
+      </div>
 
     </div>
+
+    <div id="trainingList" class="training-list"></div>
+
+  </section>
+
+
+  <!-- DATEN -->
+  <section id="dataView" class="view">
+
+    <h1>Daten</h1>
+
+    <div class="settings-box">
+      <h3>📤 Export</h3>
+      <p class="muted">
+        Speichert Übungen und Trainingspläne als Datei.
+      </p>
+      <button class="btn primary full" onclick="exportData()">
+        Daten exportieren
+      </button>
+    </div>
+
+    <div class="settings-box">
+      <h3>📥 Import</h3>
+      <p class="muted">
+        Importiert eine zuvor exportierte Trainingsdatei.
+      </p>
+
+      <label class="file-label">
+        Datei auswählen
+        <input
+          id="importFile"
+          type="file"
+          accept=".json,application/json"
+          onchange="importData(event)"
+        >
+      </label>
+    </div>
+
+    <div class="settings-box">
+      <h3>🗑️ Alle Daten löschen</h3>
+      <p class="muted">
+        Achtung: Dieser Vorgang kann nicht rückgängig gemacht werden.
+      </p>
+      <button class="btn danger full" onclick="deleteAllData()">
+        Alle Daten löschen
+      </button>
+    </div>
+
+    <div class="settings-box">
+      <h3>ℹ️ Über diese Version</h3>
+      <p>
+        Trainingsplan – lokale Version für iPad und Safari.
+      </p>
+      <p class="muted">
+        Die Daten werden auf diesem Gerät gespeichert.
+        Nutze regelmäßig den Export als Sicherung.
+      </p>
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- NAVIGATION -->
+
+<nav class="bottom-nav">
+  <div class="bottom-nav-inner">
+
+    <button
+      id="navLibrary"
+      class="nav-btn active"
+      onclick="showView('library')"
+    >
+      <span class="icon">📚</span>
+      Bibliothek
+    </button>
+
+    <button
+      id="navTraining"
+      class="nav-btn"
+      onclick="showView('training')"
+    >
+      <span class="icon">📋</span>
+      Training
+    </button>
+
+    <button
+      id="navData"
+      class="nav-btn"
+      onclick="showView('data')"
+    >
+      <span class="icon">⚙️</span>
+      Daten
+    </button>
+
+  </div>
+</nav>
+
+
+<!-- ÜBUNG MODAL -->
+
+<div id="exerciseModal" class="modal">
+
+  <div class="modal-card">
+
+    <div class="modal-header">
+      <h2 id="exerciseModalTitle">Neue Übung</h2>
+
+      <button class="close" onclick="closeExerciseModal()">
+        ×
+      </button>
+    </div>
+
+    <form id="exerciseForm" class="form">
+
+      <input type="hidden" id="exerciseId">
+
+      <div class="form-group">
+        <label>Übungsname *</label>
+        <input
+          id="exerciseName"
+          class="form-control"
+          required
+          placeholder="z. B. Passdreieck"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Kategorie</label>
+
+        <select id="exerciseCategory" class="form-control">
+          <option>Technik</option>
+          <option>Taktik</option>
+          <option>Passspiel</option>
+          <option>Dribbling</option>
+          <option>Schuss</option>
+          <option>Koordination</option>
+          <option>Schnelligkeit</option>
+          <option>Ausdauer</option>
+          <option>Aufwärmen</option>
+          <option>Spiel</option>
+          <option>Torwart</option>
+          <option>Sonstiges</option>
+        </select>
+
+      </div>
+
+      <div class="form-group">
+        <label>Tags</label>
+        <input
+          id="exerciseTags"
+          class="form-control"
+          placeholder="z. B. U10, Anfänger, 3 Spieler"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Beschreibung</label>
+        <textarea
+          id="exerciseDescription"
+          class="form-control"
+          placeholder="Ablauf, Aufbau, Coachingpunkte..."
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Standarddauer in Minuten</label>
+        <input
+          id="exerciseDuration"
+          class="form-control"
+          type="number"
+          min="1"
+          value="10"
+        >
+      </div>
+
+      <div class="form-group">
+
+        <label>Bild</label>
+
+        <label class="file-label">
+          🖼️ Bild aus Fotos / Dateien auswählen
+
+          <input
+            id="exerciseImage"
+            type="file"
+            accept="image/*"
+            onchange="handleImage(event)"
+          >
+        </label>
+
+        <img
+          id="imagePreview"
+          class="image-preview"
+          alt="Vorschau"
+        >
+
+      </div>
+
+      <div class="toolbar">
+
+        <button
+          type="button"
+          class="btn"
+          onclick="closeExerciseModal()"
+        >
+          Abbrechen
+        </button>
+
+        <button
+          type="submit"
+          class="btn primary"
+        >
+          Übung speichern
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
 </div>
 
 
-<div id="toast" class="toast"></div>
+<!-- ÜBUNGSDETAILS -->
+
+<div id="detailModal" class="modal">
+
+  <div class="modal-card">
+
+    <div class="modal-header">
+      <h2 id="detailTitle"></h2>
+
+      <button class="close" onclick="closeDetailModal()">
+        ×
+      </button>
+    </div>
+
+    <div id="detailContent"></div>
+
+    <div class="toolbar">
+      <button class="btn primary" onclick="addDetailExerciseToTraining()">
+        + Zum Training hinzufügen
+      </button>
+
+      <button class="btn" onclick="editDetailExercise()">
+        ✏️ Bearbeiten
+      </button>
+    </div>
+
+  </div>
+
+</div>
 
 
 <script>
 /* =========================================================
-   MEIN TRAININGSPLAN V3
+   TRAININGSPLAN – V4
    ========================================================= */
 
-const STORAGE_KEY = "meinTrainingsplanV3";
+const DB_NAME = "TrainingsplanDB";
+const DB_VERSION = 1;
+const STORE = "app";
+
+let db = null;
 
 let state = {
-    exercises: [],
-    trainings: []
+  exercises: [],
+  trainings: [],
+  currentTraining: {
+    id: null,
+    title: "",
+    date: "",
+    goal: "",
+    exercises: []
+  }
 };
 
-let editingExerciseId = null;
-let selectedExercises = [];
-let currentTrainingId = null;
+let selectedCategory = "Alle";
+let detailExerciseId = null;
 
 
 /* =========================================================
-   INITIALISIERUNG
+   INDEXED DB
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+function openDB() {
 
-    loadData();
+  return new Promise((resolve, reject) => {
 
-    document
-        .getElementById("exercise-image")
-        .addEventListener("change", handleImageSelect);
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
 
-    renderAll();
+    request.onupgradeneeded = event => {
 
-    setToday();
+      const database = event.target.result;
 
-});
+      if (!database.objectStoreNames.contains(STORE)) {
+        database.createObjectStore(STORE);
+      }
+    };
 
+    request.onsuccess = event => {
 
-/* =========================================================
-   DATEN
-   ========================================================= */
+      db = event.target.result;
 
-function loadData() {
+      resolve(db);
+    };
 
-    try {
-
-        const saved =
-            localStorage.getItem(STORAGE_KEY);
-
-        if (saved) {
-
-            const parsed = JSON.parse(saved);
-
-            state.exercises =
-                Array.isArray(parsed.exercises)
-                    ? parsed.exercises
-                    : [];
-
-            state.trainings =
-                Array.isArray(parsed.trainings)
-                    ? parsed.trainings
-                    : [];
-
-        }
-
-    } catch (error) {
-
-        console.error(error);
-
-        state = {
-            exercises: [],
-            trainings: []
-        };
-
-        alert(
-            "Die gespeicherten Daten konnten nicht gelesen werden."
-        );
-    }
+    request.onerror = () => reject(request.error);
+  });
 }
 
 
-function saveData() {
+function dbGet(key) {
 
-    try {
+  return new Promise((resolve, reject) => {
 
-        localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(state)
-        );
+    const transaction = db.transaction(STORE, "readonly");
 
-        updateStats();
+    const store = transaction.objectStore(STORE);
 
-    } catch (error) {
+    const request = store.get(key);
 
-        console.error(error);
+    request.onsuccess = () => resolve(request.result);
 
-        alert(
-            "Die Daten konnten nicht gespeichert werden. " +
-            "Möglicherweise ist der Browser-Speicher voll."
-        );
+    request.onerror = () => reject(request.error);
+  });
+}
+
+
+function dbSet(key, value) {
+
+  return new Promise((resolve, reject) => {
+
+    const transaction = db.transaction(STORE, "readwrite");
+
+    const store = transaction.objectStore(STORE);
+
+    const request = store.put(value, key);
+
+    request.onsuccess = () => resolve();
+
+    request.onerror = () => reject(request.error);
+  });
+}
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+async function init() {
+
+  try {
+
+    await openDB();
+
+    const saved = await dbGet("state");
+
+    if (saved) {
+      state = saved;
     }
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "Die lokale Datenspeicherung konnte nicht geöffnet werden. " +
+      "Bitte öffne die Seite direkt in Safari."
+    );
+  }
+
+  if (!state.currentTraining) {
+
+    state.currentTraining = {
+      id: null,
+      title: "",
+      date: "",
+      goal: "",
+      exercises: []
+    };
+  }
+
+  loadCurrentTraining();
+
+  renderAll();
+}
+
+
+async function saveState() {
+
+  await dbSet("state", state);
 }
 
 
@@ -1524,1979 +1080,56 @@ function saveData() {
    NAVIGATION
    ========================================================= */
 
-function showPage(pageName) {
+function showView(view) {
+
+  document
+    .querySelectorAll(".view")
+    .forEach(element => element.classList.remove("active"));
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(element => element.classList.remove("active"));
+
+  if (view === "library") {
 
     document
-        .querySelectorAll(".page")
-        .forEach(page => {
-            page.classList.remove("active");
-        });
-
-    const page =
-        document.getElementById(
-            "page-" + pageName
-        );
-
-    if (page) {
-        page.classList.add("active");
-    }
+      .getElementById("libraryView")
+      .classList.add("active");
 
     document
-        .querySelectorAll(".nav-button")
-        .forEach(button => {
+      .getElementById("navLibrary")
+      .classList.add("active");
 
-            button.classList.toggle(
-                "active",
-                button.dataset.page === pageName
-            );
+  }
 
-        });
-
-    closeSidebar();
-
-    renderAll();
-}
-
-
-function toggleSidebar() {
-
-    const sidebar =
-        document.getElementById("sidebar");
-
-    sidebar.classList.toggle("open");
-}
-
-
-function closeSidebar() {
+  if (view === "training") {
 
     document
-        .getElementById("sidebar")
-        .classList.remove("open");
-}
-
-
-/* =========================================================
-   DASHBOARD
-   ========================================================= */
-
-function updateStats() {
-
-    document.getElementById("stat-exercises")
-        .textContent = state.exercises.length;
-
-    document.getElementById("stat-trainings")
-        .textContent = state.trainings.length;
-
-    document.getElementById("stat-images")
-        .textContent =
-        state.exercises.filter(e => e.image).length;
-
-    const categories =
-        [...new Set(
-            state.exercises
-                .map(e => e.category)
-                .filter(Boolean)
-        )];
-
-    document.getElementById("stat-categories")
-        .textContent = categories.length;
-}
-
-
-function renderDashboard() {
-
-    const container =
-        document.getElementById(
-            "dashboard-trainings"
-        );
-
-    const trainings =
-        [...state.trainings]
-        .sort((a,b) =>
-            (b.updatedAt || "").localeCompare(
-                a.updatedAt || ""
-            )
-        )
-        .slice(0,5);
-
-    if (!trainings.length) {
-
-        container.innerHTML = `
-            <div class="empty">
-                <div class="empty-icon">📋</div>
-                Noch keine Trainingspläne vorhanden.
-            </div>
-        `;
-
-        return;
-    }
-
-    container.innerHTML =
-        trainings.map(training => `
-
-            <div class="training-item">
-
-                <div>
-                    📋
-                </div>
-
-                <div>
-                    <div class="training-item-title">
-                        ${escapeHtml(training.name)}
-                    </div>
-
-                    <div class="training-item-info">
-                        ${formatDate(training.date)}
-                        ·
-                        ${training.exercises.length} Übungen
-                    </div>
-                </div>
-
-                <div class="training-controls">
-
-                    <button
-                        class="button small"
-                        onclick="openTraining('${training.id}')">
-                        Öffnen
-                    </button>
-
-                </div>
-
-            </div>
-
-        `).join("");
-}
-
-
-/* =========================================================
-   ÜBUNGSBIBLIOTHEK
-   ========================================================= */
-
-function renderExercises() {
-
-    const grid =
-        document.getElementById(
-            "exercise-grid"
-        );
-
-    const search =
-        (
-            document.getElementById(
-                "exercise-search"
-            ).value || ""
-        ).toLowerCase().trim();
-
-    const category =
-        document.getElementById(
-            "exercise-category"
-        ).value;
-
-    let exercises =
-        [...state.exercises];
-
-    if (search) {
-
-        exercises =
-            exercises.filter(e => {
-
-                const text = [
-                    e.name,
-                    e.description,
-                    e.category,
-                    ...(e.tags || [])
-                ]
-                .join(" ")
-                .toLowerCase();
-
-                return text.includes(search);
-            });
-    }
-
-    if (category) {
-
-        exercises =
-            exercises.filter(
-                e => e.category === category
-            );
-    }
-
-    exercises.sort(
-        (a,b) =>
-            a.name.localeCompare(
-                b.name,
-                "de"
-            )
-    );
-
-    if (!exercises.length) {
-
-        grid.innerHTML = `
-            <div class="card" style="grid-column:1/-1;">
-                <div class="empty">
-                    <div class="empty-icon">🖼️</div>
-                    Keine Übungen gefunden.
-                    <br><br>
-                    <button
-                        class="button"
-                        onclick="openExerciseModal()">
-                        ➕ Erste Übung erstellen
-                    </button>
-                </div>
-            </div>
-        `;
-
-        return;
-    }
-
-    grid.innerHTML =
-        exercises.map(exercise =>
-            exerciseCard(exercise)
-        ).join("");
-}
-
-
-function exerciseCard(exercise) {
-
-    const image =
-        exercise.image
-        ? `
-            <img
-                class="exercise-image"
-                src="${exercise.image}"
-                alt="${escapeHtml(exercise.name)}">
-          `
-        : `
-            <div class="exercise-placeholder">
-                🏑
-            </div>
-          `;
-
-    const tags =
-        (exercise.tags || [])
-        .map(tag => `
-            <span class="tag">
-                ${escapeHtml(tag)}
-            </span>
-        `)
-        .join("");
-
-    return `
-        <article class="exercise-card">
-
-            ${image}
-
-            <div class="exercise-body">
-
-                <div class="exercise-title">
-                    ${escapeHtml(exercise.name)}
-                </div>
-
-                ${
-                    exercise.category
-                    ? `
-                        <div class="tag">
-                            ${escapeHtml(exercise.category)}
-                        </div>
-                      `
-                    : ""
-                }
-
-                <div class="exercise-description">
-                    ${escapeHtml(
-                        truncate(
-                            exercise.description || "",
-                            110
-                        )
-                    )}
-                </div>
-
-                <div class="tags">
-                    ${tags}
-                </div>
-
-                ${
-                    exercise.duration
-                    ? `
-                        <div
-                            class="duration"
-                            style="margin-bottom:10px;">
-                            ⏱️ ${exercise.duration} Min.
-                        </div>
-                      `
-                    : ""
-                }
-
-                <div class="exercise-actions">
-
-                    <button
-                        class="button small"
-                        onclick="addExerciseToTraining('${exercise.id}')">
-                        ➕ Training
-                    </button>
-
-                    <button
-                        class="button small secondary"
-                        onclick="editExercise('${exercise.id}')">
-                        ✏️
-                    </button>
-
-                    <button
-                        class="button small danger"
-                        onclick="deleteExercise('${exercise.id}')">
-                        🗑️
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-    `;
-}
-
-
-/* =========================================================
-   KATEGORIEN
-   ========================================================= */
-
-function renderCategories() {
-
-    const categories =
-        [...new Set(
-            state.exercises
-                .map(e => e.category)
-                .filter(Boolean)
-        )]
-        .sort((a,b) =>
-            a.localeCompare(b,"de")
-        );
-
-    const select =
-        document.getElementById(
-            "exercise-category"
-        );
-
-    const current =
-        select.value;
-
-    select.innerHTML =
-        `<option value="">
-            Alle Kategorien
-        </option>` +
-        categories.map(category => `
-            <option value="${escapeAttribute(category)}">
-                ${escapeHtml(category)}
-            </option>
-        `).join("");
-
-    if (
-        categories.includes(current)
-    ) {
-        select.value = current;
-    }
-
-    const buttons =
-        document.getElementById(
-            "category-buttons"
-        );
-
-    buttons.innerHTML =
-        categories.map(category => `
-            <button
-                class="category-button"
-                onclick="filterCategory('${escapeAttribute(category)}')">
-                ${escapeHtml(category)}
-            </button>
-        `).join("");
-
-    const datalist =
-        document.getElementById(
-            "category-datalist"
-        );
-
-    datalist.innerHTML =
-        categories.map(category => `
-            <option value="${escapeAttribute(category)}">
-        `).join("");
-}
-
-
-function filterCategory(category) {
-
-    document.getElementById(
-        "exercise-category"
-    ).value = category;
-
-    renderExercises();
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-
-
-/* =========================================================
-   ÜBUNG ERSTELLEN / BEARBEITEN
-   ========================================================= */
-
-function openExerciseModal(exerciseId = null) {
-
-    editingExerciseId =
-        exerciseId;
-
-    const modal =
-        document.getElementById(
-            "exercise-modal"
-        );
-
-    const title =
-        document.getElementById(
-            "exercise-modal-title"
-        );
-
-    if (exerciseId) {
-
-        const exercise =
-            state.exercises.find(
-                e => e.id === exerciseId
-            );
-
-        if (!exercise) return;
-
-        title.textContent =
-            "Übung bearbeiten";
-
-        document.getElementById(
-            "exercise-name"
-        ).value = exercise.name || "";
-
-        document.getElementById(
-            "exercise-category-input"
-        ).value = exercise.category || "";
-
-        document.getElementById(
-            "exercise-duration"
-        ).value =
-            exercise.duration || "";
-
-        document.getElementById(
-            "exercise-tags"
-        ).value =
-            (exercise.tags || []).join(", ");
-
-        document.getElementById(
-            "exercise-description"
-        ).value =
-            exercise.description || "";
-
-        document.getElementById(
-            "exercise-coaching"
-        ).value =
-            exercise.coaching || "";
-
-        const preview =
-            document.getElementById(
-                "image-preview"
-            );
-
-        if (exercise.image) {
-
-            preview.src =
-                exercise.image;
-
-            preview.style.display =
-                "block";
-
-            document.getElementById(
-                "selected-file-name"
-            ).textContent =
-                "Vorhandenes Bild";
-
-        } else {
-
-            preview.style.display =
-                "none";
-
-            preview.src = "";
-        }
-
-    } else {
-
-        title.textContent =
-            "Neue Übung";
-
-        clearExerciseForm();
-    }
-
-    modal.classList.add("show");
-}
-
-
-function closeExerciseModal() {
+      .getElementById("trainingView")
+      .classList.add("active");
 
     document
-        .getElementById("exercise-modal")
-        .classList.remove("show");
-
-    editingExerciseId = null;
-
-    clearExerciseForm();
-}
-
-
-function clearExerciseForm() {
-
-    document.getElementById(
-        "exercise-name"
-    ).value = "";
-
-    document.getElementById(
-        "exercise-category-input"
-    ).value = "";
-
-    document.getElementById(
-        "exercise-duration"
-    ).value = "";
-
-    document.getElementById(
-        "exercise-tags"
-    ).value = "";
-
-    document.getElementById(
-        "exercise-description"
-    ).value = "";
-
-    document.getElementById(
-        "exercise-coaching"
-    ).value = "";
-
-    document.getElementById(
-        "exercise-image"
-    ).value = "";
-
-    document.getElementById(
-        "selected-file-name"
-    ).textContent = "";
-
-    const preview =
-        document.getElementById(
-            "image-preview"
-        );
-
-    preview.src = "";
-    preview.style.display = "none";
-}
-
-
-/* =========================================================
-   BILDER
-   ========================================================= */
-
-function handleImageSelect(event) {
-
-    const file =
-        event.target.files &&
-        event.target.files[0];
-
-    if (!file) return;
-
-    if (!file.type.startsWith("image/")) {
-
-        alert(
-            "Bitte wähle eine Bilddatei aus."
-        );
-
-        event.target.value = "";
-
-        return;
-    }
-
-    document.getElementById(
-        "selected-file-name"
-    ).textContent =
-        file.name;
-
-    /*
-       WICHTIG:
-
-       capture wird NICHT verwendet.
-
-       Dadurch kann das iPad die Foto-Mediathek,
-       Dateien oder Kamera anbieten – abhängig
-       von iPadOS und Browser.
-    */
-
-    resizeImage(file, 1400)
-        .then(dataUrl => {
-
-            const preview =
-                document.getElementById(
-                    "image-preview"
-                );
-
-            preview.src =
-                dataUrl;
-
-            preview.style.display =
-                "block";
-
-            /*
-               Wir speichern das komprimierte Bild
-               temporär im DOM.
-            */
-
-            preview.dataset.pendingImage =
-                dataUrl;
-
-        })
-        .catch(error => {
-
-            console.error(error);
-
-            alert(
-                "Das Bild konnte nicht verarbeitet werden."
-            );
-        });
-}
-
-
-function resizeImage(file, maxSize) {
-
-    return new Promise(
-        (resolve, reject) => {
-
-            const reader =
-                new FileReader();
-
-            reader.onload = function(e) {
-
-                const img =
-                    new Image();
-
-                img.onload = function() {
-
-                    let width =
-                        img.width;
-
-                    let height =
-                        img.height;
-
-                    if (
-                        width > maxSize ||
-                        height > maxSize
-                    ) {
-
-                        const ratio =
-                            Math.min(
-                                maxSize / width,
-                                maxSize / height
-                            );
-
-                        width =
-                            Math.round(
-                                width * ratio
-                            );
-
-                        height =
-                            Math.round(
-                                height * ratio
-                            );
-                    }
-
-                    const canvas =
-                        document.createElement(
-                            "canvas"
-                        );
-
-                    canvas.width =
-                        width;
-
-                    canvas.height =
-                        height;
-
-                    const ctx =
-                        canvas.getContext(
-                            "2d"
-                        );
-
-                    ctx.drawImage(
-                        img,
-                        0,
-                        0,
-                        width,
-                        height
-                    );
-
-                    resolve(
-                        canvas.toDataURL(
-                            "image/jpeg",
-                            0.82
-                        )
-                    );
-                };
-
-                img.onerror =
-                    reject;
-
-                img.src =
-                    e.target.result;
-            };
-
-            reader.onerror =
-                reject;
-
-            reader.readAsDataURL(file);
-        }
-    );
-}
-
-
-/* =========================================================
-   ÜBUNG SPEICHERN
-   ========================================================= */
-
-function saveExercise() {
-
-    const name =
-        document.getElementById(
-            "exercise-name"
-        ).value.trim();
-
-    if (!name) {
-
-        alert(
-            "Bitte gib einen Namen für die Übung ein."
-        );
-
-        return;
-    }
-
-    const category =
-        document.getElementById(
-            "exercise-category-input"
-        ).value.trim();
-
-    const duration =
-        Number(
-            document.getElementById(
-                "exercise-duration"
-            ).value
-        ) || 0;
-
-    const tags =
-        document.getElementById(
-            "exercise-tags"
-        ).value
-        .split(",")
-        .map(x => x.trim())
-        .filter(Boolean);
-
-    const description =
-        document.getElementById(
-            "exercise-description"
-        ).value.trim();
-
-    const coaching =
-        document.getElementById(
-            "exercise-coaching"
-        ).value.trim();
-
-    const preview =
-        document.getElementById(
-            "image-preview"
-        );
-
-    let image =
-        preview.dataset.pendingImage || "";
-
-    if (
-        editingExerciseId &&
-        !image
-    ) {
-
-        const existing =
-            state.exercises.find(
-                e => e.id === editingExerciseId
-            );
-
-        image =
-            existing
-            ? existing.image || ""
-            : "";
-    }
-
-    const now =
-        new Date().toISOString();
-
-    if (editingExerciseId) {
-
-        const exercise =
-            state.exercises.find(
-                e => e.id === editingExerciseId
-            );
-
-        if (exercise) {
-
-            exercise.name =
-                name;
-
-            exercise.category =
-                category;
-
-            exercise.duration =
-                duration;
-
-            exercise.tags =
-                tags;
-
-            exercise.description =
-                description;
-
-            exercise.coaching =
-                coaching;
-
-            exercise.image =
-                image;
-
-            exercise.updatedAt =
-                now;
-        }
-
-        showToast(
-            "Übung wurde aktualisiert."
-        );
-
-    } else {
-
-        state.exercises.push({
-
-            id: createId(),
-
-            name,
-
-            category,
-
-            duration,
-
-            tags,
-
-            description,
-
-            coaching,
-
-            image,
-
-            createdAt: now,
-
-            updatedAt: now
-        });
-
-        showToast(
-            "Übung wurde gespeichert."
-        );
-    }
-
-    saveData();
-
-    closeExerciseModal();
-
-    renderAll();
-}
-
-
-/* =========================================================
-   ÜBUNG BEARBEITEN
-   ========================================================= */
-
-function editExercise(id) {
-
-    openExerciseModal(id);
-}
-
-
-/* =========================================================
-   ÜBUNG LÖSCHEN
-   ========================================================= */
-
-function deleteExercise(id) {
-
-    const exercise =
-        state.exercises.find(
-            e => e.id === id
-        );
-
-    if (!exercise) return;
-
-    const confirmed =
-        confirm(
-            `Übung "${exercise.name}" wirklich löschen?`
-        );
-
-    if (!confirmed) return;
-
-    state.exercises =
-        state.exercises.filter(
-            e => e.id !== id
-        );
-
-    /*
-       Auch aus Trainingsplänen entfernen.
-    */
-
-    state.trainings.forEach(training => {
-
-        training.exercises =
-            training.exercises.filter(
-                item => item.exerciseId !== id
-            );
-
-    });
-
-    saveData();
-
-    renderAll();
-
-    showToast(
-        "Übung wurde gelöscht."
-    );
-}
-
-
-/* =========================================================
-   TRAINING ERSTELLEN
-   ========================================================= */
-
-function newTraining() {
-
-    currentTrainingId = null;
-
-    selectedExercises = [];
-
-    document.getElementById(
-        "training-name"
-    ).value = "";
-
-    setToday();
-
-    document.getElementById(
-        "training-team"
-    ).value = "";
-
-    document.getElementById(
-        "training-total-duration"
-    ).value = "";
-
-    document.getElementById(
-        "training-notes"
-    ).value = "";
-
-    renderSelectedExercises();
-
-    showPage("new-training");
-}
-
-
-function setToday() {
-
-    const dateInput =
-        document.getElementById(
-            "training-date"
-        );
-
-    if (!dateInput) return;
-
-    const now =
-        new Date();
-
-    const local =
-        new Date(
-            now.getTime() -
-            now.getTimezoneOffset() * 60000
-        );
-
-    dateInput.value =
-        local.toISOString()
-            .slice(0,10);
-}
-
-
-/* =========================================================
-   ÜBUNG ZUM TRAINING HINZUFÜGEN
-   ========================================================= */
-
-function addExerciseToTraining(exerciseId) {
-
-    const exercise =
-        state.exercises.find(
-            e => e.id === exerciseId
-        );
-
-    if (!exercise) return;
-
-    if (
-        !selectedExercises.some(
-            e => e.exerciseId === exerciseId
-        )
-    ) {
-
-        selectedExercises.push({
-
-            id: createId(),
-
-            exerciseId,
-
-            duration:
-                exercise.duration || 0,
-
-            notes: ""
-        });
-
-        showToast(
-            `"${exercise.name}" hinzugefügt.`
-        );
-
-    } else {
-
-        showToast(
-            "Diese Übung ist bereits im Training."
-        );
-    }
-
-    renderSelectedExercises();
-
-    /*
-       Nach dem Hinzufügen kann man
-       weiter durch die Galerie scrollen.
-    */
-}
-
-
-function renderSelectedExercises() {
-
-    const container =
-        document.getElementById(
-            "selected-exercises"
-        );
-
-    const count =
-        document.getElementById(
-            "selected-count"
-        );
-
-    count.textContent =
-        selectedExercises.length;
-
-    if (!selectedExercises.length) {
-
-        container.innerHTML = `
-            <div class="empty">
-                <div class="empty-icon">📋</div>
-                Noch keine Übungen.
-                <br><br>
-                Gehe zur Übungsbibliothek und
-                füge Übungen hinzu.
-            </div>
-        `;
-
-        return;
-    }
-
-    container.innerHTML = `
-        <div class="training-list">
-
-            ${selectedExercises
-                .map(
-                    (item,index) =>
-                        selectedExerciseItem(
-                            item,
-                            index
-                        )
-                )
-                .join("")}
-
-        </div>
-    `;
-}
-
-
-function selectedExerciseItem(item,index) {
-
-    const exercise =
-        state.exercises.find(
-            e => e.id === item.exerciseId
-        );
-
-    if (!exercise) return "";
-
-    return `
-
-        <div class="training-item">
-
-            ${
-                exercise.image
-                ? `
-                    <img
-                        class="training-thumb"
-                        src="${exercise.image}"
-                        alt="">
-                  `
-                : `
-                    <div
-                        class="training-thumb"
-                        style="
-                            display:flex;
-                            align-items:center;
-                            justify-content:center;
-                            font-size:25px;">
-                        🏑
-                    </div>
-                  `
-            }
-
-            <div>
-
-                <div class="training-item-title">
-                    ${index + 1}.
-                    ${escapeHtml(exercise.name)}
-                </div>
-
-                <div class="training-item-info">
-                    ${escapeHtml(
-                        exercise.category || ""
-                    )}
-                </div>
-
-                <div
-                    style="
-                        display:flex;
-                        gap:8px;
-                        margin-top:8px;">
-
-                    <input
-                        type="number"
-                        min="0"
-                        style="width:100px;min-height:40px;"
-                        value="${item.duration || 0}"
-                        onchange="changeExerciseDuration(
-                            '${item.id}',
-                            this.value
-                        )">
-
-                    <span
-                        style="
-                            align-self:center;
-                            color:var(--muted);">
-                        Minuten
-                    </span>
-
-                </div>
-
-            </div>
-
-            <div class="training-controls">
-
-                <button
-                    class="circle-button"
-                    onclick="moveSelectedExercise(
-                        '${item.id}',
-                        -1
-                    )">
-                    ↑
-                </button>
-
-                <button
-                    class="circle-button"
-                    onclick="moveSelectedExercise(
-                        '${item.id}',
-                        1
-                    )">
-                    ↓
-                </button>
-
-                <button
-                    class="circle-button"
-                    onclick="removeSelectedExercise(
-                        '${item.id}'
-                    )">
-                    ✕
-                </button>
-
-            </div>
-
-        </div>
-    `;
-}
-
-
-function changeExerciseDuration(id,value) {
-
-    const item =
-        selectedExercises.find(
-            x => x.id === id
-        );
-
-    if (item) {
-
-        item.duration =
-            Number(value) || 0;
-    }
-}
-
-
-function moveSelectedExercise(id,direction) {
-
-    const index =
-        selectedExercises.findIndex(
-            x => x.id === id
-        );
-
-    if (index === -1) return;
-
-    const newIndex =
-        index + direction;
-
-    if (
-        newIndex < 0 ||
-        newIndex >= selectedExercises.length
-    ) {
-        return;
-    }
-
-    const temp =
-        selectedExercises[index];
-
-    selectedExercises[index] =
-        selectedExercises[newIndex];
-
-    selectedExercises[newIndex] =
-        temp;
-
-    renderSelectedExercises();
-}
-
-
-function removeSelectedExercise(id) {
-
-    selectedExercises =
-        selectedExercises.filter(
-            x => x.id !== id
-        );
-
-    renderSelectedExercises();
-}
-
-
-/* =========================================================
-   TRAINING SPEICHERN
-   ========================================================= */
-
-function saveTraining() {
-
-    const name =
-        document.getElementById(
-            "training-name"
-        ).value.trim();
-
-    if (!name) {
-
-        alert(
-            "Bitte gib dem Training einen Namen."
-        );
-
-        return;
-    }
-
-    if (!selectedExercises.length) {
-
-        alert(
-            "Bitte füge mindestens eine Übung hinzu."
-        );
-
-        return;
-    }
-
-    const training = {
-
-        id:
-            currentTrainingId ||
-            createId(),
-
-        name,
-
-        date:
-            document.getElementById(
-                "training-date"
-            ).value,
-
-        team:
-            document.getElementById(
-                "training-team"
-            ).value.trim(),
-
-        totalDuration:
-            Number(
-                document.getElementById(
-                    "training-total-duration"
-                ).value
-            ) || 0,
-
-        notes:
-            document.getElementById(
-                "training-notes"
-            ).value.trim(),
-
-        exercises:
-            JSON.parse(
-                JSON.stringify(
-                    selectedExercises
-                )
-            ),
-
-        updatedAt:
-            new Date().toISOString()
-    };
-
-    const existingIndex =
-        state.trainings.findIndex(
-            t => t.id === training.id
-        );
-
-    if (existingIndex >= 0) {
-
-        state.trainings[
-            existingIndex
-        ] = training;
-
-    } else {
-
-        state.trainings.push(
-            training
-        );
-    }
-
-    saveData();
-
-    currentTrainingId =
-        training.id;
-
-    showToast(
-        "Training wurde gespeichert."
-    );
-
-    openTraining(training.id);
-}
-
-
-/* =========================================================
-   TRAININGSPLÄNE
-   ========================================================= */
-
-function renderTrainings() {
-
-    const container =
-        document.getElementById(
-            "training-list"
-        );
-
-    const search =
-        (
-            document.getElementById(
-                "training-search"
-            ).value || ""
-        )
-        .toLowerCase()
-        .trim();
-
-    let trainings =
-        [...state.trainings];
-
-    if (search) {
-
-        trainings =
-            trainings.filter(t =>
-                (
-                    t.name +
-                    " " +
-                    t.team +
-                    " " +
-                    t.notes
-                )
-                .toLowerCase()
-                .includes(search)
-            );
-    }
-
-    trainings.sort(
-        (a,b) =>
-            (b.date || "")
-            .localeCompare(
-                a.date || ""
-            )
-    );
-
-    if (!trainings.length) {
-
-        container.innerHTML = `
-            <div class="card">
-                <div class="empty">
-                    <div class="empty-icon">📋</div>
-                    Noch keine Trainingspläne.
-                </div>
-            </div>
-        `;
-
-        return;
-    }
-
-    container.innerHTML =
-        trainings.map(
-            training => `
-                <div class="card">
-
-                    <div class="section-header">
-
-                        <div>
-
-                            <h2>
-                                ${escapeHtml(
-                                    training.name
-                                )}
-                            </h2>
-
-                            <div
-                                class="page-subtitle"
-                                style="margin:4px 0 0;">
-                                ${formatDate(training.date)}
-                                ${
-                                    training.team
-                                    ? " · " +
-                                      escapeHtml(
-                                          training.team
-                                      )
-                                    : ""
-                                }
-                                ·
-                                ${training.exercises.length}
-                                Übungen
-                            </div>
-
-                        </div>
-
-                        <div class="button-row">
-
-                            <button
-                                class="button"
-                                onclick="openTraining(
-                                    '${training.id}'
-                                )">
-                                Öffnen
-                            </button>
-
-                            <button
-                                class="button secondary"
-                                onclick="editTraining(
-                                    '${training.id}'
-                                )">
-                                ✏️ Bearbeiten
-                            </button>
-
-                            <button
-                                class="button danger"
-                                onclick="deleteTraining(
-                                    '${training.id}'
-                                )">
-                                🗑️
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </div>
-            `
-        ).join("");
-}
-
-
-/* =========================================================
-   TRAINING ÖFFNEN
-   ========================================================= */
-
-function openTraining(id) {
-
-    const training =
-        state.trainings.find(
-            t => t.id === id
-        );
-
-    if (!training) return;
-
-    currentTrainingId =
-        id;
-
-    document.getElementById(
-        "detail-title"
-    ).textContent =
-        training.name;
-
-    let meta =
-        formatDate(training.date);
-
-    if (training.team) {
-
-        meta +=
-            " · " +
-            escapeHtml(training.team);
-    }
-
-    if (training.totalDuration) {
-
-        meta +=
-            " · " +
-            training.totalDuration +
-            " Minuten";
-    }
-
-    document.getElementById(
-        "detail-meta"
-    ).innerHTML =
-        meta;
-
-    document.getElementById(
-        "detail-notes"
-    ).innerHTML =
-        training.notes
-        ? `
-            <strong>Notizen:</strong><br>
-            ${escapeHtml(
-                training.notes
-            )}
-          `
-        : "";
-
-    const container =
-        document.getElementById(
-            "detail-exercises"
-        );
-
-    container.innerHTML =
-        training.exercises.map(
-            (item,index) => {
-
-                const exercise =
-                    state.exercises.find(
-                        e =>
-                            e.id ===
-                            item.exerciseId
-                    );
-
-                if (!exercise) {
-
-                    return `
-                        <div class="card">
-                            Übung nicht mehr vorhanden.
-                        </div>
-                    `;
-                }
-
-                return `
-
-                    <div class="card">
-
-                        <h2>
-                            ${index + 1}.
-                            ${escapeHtml(
-                                exercise.name
-                            )}
-                        </h2>
-
-                        ${
-                            exercise.image
-                            ? `
-                                <img
-                                    src="${exercise.image}"
-                                    style="
-                                        width:100%;
-                                        max-height:420px;
-                                        object-fit:contain;
-                                        border-radius:12px;
-                                        background:#f1f3f5;
-                                        margin:10px 0;">
-                              `
-                            : ""
-                        }
-
-                        ${
-                            exercise.category
-                            ? `
-                                <p>
-                                    <strong>
-                                        Kategorie:
-                                    </strong>
-                                    ${escapeHtml(
-                                        exercise.category
-                                    )}
-                                </p>
-                              `
-                            : ""
-                        }
-
-                        ${
-                            item.duration
-                            ? `
-                                <p>
-                                    ⏱️
-                                    <strong>
-                                        ${item.duration}
-                                        Minuten
-                                    </strong>
-                                </p>
-                              `
-                            : ""
-                        }
-
-                        ${
-                            exercise.description
-                            ? `
-                                <p>
-                                    <strong>
-                                        Ablauf
-                                    </strong>
-                                    <br>
-                                    ${escapeHtml(
-                                        exercise.description
-                                    )}
-                                </p>
-                              `
-                            : ""
-                        }
-
-                        ${
-                            exercise.coaching
-                            ? `
-                                <p>
-                                    <strong>
-                                        Trainerhinweise
-                                    </strong>
-                                    <br>
-                                    ${escapeHtml(
-                                        exercise.coaching
-                                    )}
-                                </p>
-                              `
-                            : ""
-                        }
-
-                    </div>
-
-                `;
-            }
-        ).join("");
-
-    showPage("training-detail");
-}
-
-
-/* =========================================================
-   TRAINING BEARBEITEN
-   ========================================================= */
-
-function editTraining(id) {
-
-    const training =
-        state.trainings.find(
-            t => t.id === id
-        );
-
-    if (!training) return;
-
-    currentTrainingId =
-        id;
-
-    selectedExercises =
-        JSON.parse(
-            JSON.stringify(
-                training.exercises
-            )
-        );
-
-    document.getElementById(
-        "training-name"
-    ).value =
-        training.name || "";
-
-    document.getElementById(
-        "training-date"
-    ).value =
-        training.date || "";
-
-    document.getElementById(
-        "training-team"
-    ).value =
-        training.team || "";
-
-    document.getElementById(
-        "training-total-duration"
-    ).value =
-        training.totalDuration || "";
-
-    document.getElementById(
-        "training-notes"
-    ).value =
-        training.notes || "";
-
-    renderSelectedExercises();
-
-    showPage(
-        "new-training"
-    );
-}
-
-
-/* =========================================================
-   TRAINING LÖSCHEN
-   ========================================================= */
-
-function deleteTraining(id) {
-
-    const training =
-        state.trainings.find(
-            t => t.id === id
-        );
-
-    if (!training) return;
-
-    if (
-        !confirm(
-            `Training "${training.name}" wirklich löschen?`
-        )
-    ) {
-        return;
-    }
-
-    state.trainings =
-        state.trainings.filter(
-            t => t.id !== id
-        );
-
-    saveData();
-
-    renderAll();
-
-    showPage(
-        "trainings"
-    );
-
-    showToast(
-        "Training wurde gelöscht."
-    );
-}
-
-
-function deleteCurrentTraining() {
-
-    if (currentTrainingId) {
-
-        deleteTraining(
-            currentTrainingId
-        );
-    }
-}
-
-
-/* =========================================================
-   IMPORT
-   ========================================================= */
-
-function importData(input) {
-
-    const file =
-        input.files &&
-        input.files[0];
-
-    if (!file) return;
-
-    const reader =
-        new FileReader();
-
-    reader.onload = function(event) {
-
-        try {
-
-            const imported =
-                JSON.parse(
-                    event.target.result
-                );
-
-            if (
-                !Array.isArray(
-                    imported.exercises
-                ) ||
-                !Array.isArray(
-                    imported.trainings
-                )
-            ) {
-
-                throw new Error(
-                    "Ungültiges Format"
-                );
-            }
-
-            const confirmed =
-                confirm(
-                    "Beim Import werden die aktuellen Daten ersetzt. Fortfahren?"
-                );
-
-            if (!confirmed) {
-
-                input.value = "";
-
-                return;
-            }
-
-            state = {
-
-                exercises:
-                    imported.exercises,
-
-                trainings:
-                    imported.trainings
-            };
-
-            saveData();
-
-            renderAll();
-
-            input.value = "";
-
-            showToast(
-                "Import erfolgreich."
-            );
-
-        } catch(error) {
-
-            console.error(error);
-
-            alert(
-                "Die Datei konnte nicht importiert werden."
-            );
-        }
-    };
-
-    reader.readAsText(file);
-}
-
-
-/* =========================================================
-   EXPORT
-   ========================================================= */
-
-function exportData() {
-
-    const data = {
-
-        app:
-            "Mein Trainingsplan V3",
-
-        exportedAt:
-            new Date().toISOString(),
-
-        exercises:
-            state.exercises,
-
-        trainings:
-            state.trainings
-    };
-
-    const json =
-        JSON.stringify(
-            data,
-            null,
-            2
-        );
-
-    const blob =
-        new Blob(
-            [json],
-            {
-                type:
-                    "application/json"
-            }
-        );
-
-    const url =
-        URL.createObjectURL(
-            blob
-        );
-
-    const a =
-        document.createElement(
-            "a"
-        );
-
-    const date =
-        new Date()
-            .toISOString()
-            .slice(0,10);
-
-    a.href = url;
-
-    a.download =
-        `trainingsplan-backup-${date}.json`;
-
-    document.body.appendChild(a);
-
-    a.click();
-
-    a.remove();
-
-    URL.revokeObjectURL(url);
-
-    showToast(
-        "Export wurde erstellt."
-    );
-}
-
-
-/* =========================================================
-   ALLE DATEN LÖSCHEN
-   ========================================================= */
-
-function clearAllData() {
-
-    const confirmed =
-        confirm(
-            "ACHTUNG!\n\n" +
-            "Alle Übungen und Trainingspläne " +
-            "werden von diesem Gerät gelöscht.\n\n" +
-            "Hast du vorher exportiert?"
-        );
-
-    if (!confirmed) return;
-
-    localStorage.removeItem(
-        STORAGE_KEY
-    );
-
-    state = {
-
-        exercises: [],
-
-        trainings: []
-    };
-
-    selectedExercises = [];
-
-    renderAll();
-
-    showPage(
-        "dashboard"
-    );
-
-    showToast(
-        "Alle Daten wurden gelöscht."
-    );
+      .getElementById("navTraining")
+      .classList.add("active");
+
+    renderTraining();
+  }
+
+  if (view === "data") {
+
+    document
+      .getElementById("dataView")
+      .classList.add("active");
+
+    document
+      .getElementById("navData")
+      .classList.add("active");
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
 
 
@@ -3506,17 +1139,1146 @@ function clearAllData() {
 
 function renderAll() {
 
-    updateStats();
+  renderLibrary();
 
-    renderCategories();
+  renderCategories();
 
-    renderExercises();
+  renderTraining();
 
-    renderTrainings();
+  updateStats();
+}
 
-    renderDashboard();
 
-    renderSelectedExercises();
+function updateStats() {
+
+  document.getElementById("exerciseCount").textContent =
+    state.exercises.length;
+
+  const categories = [
+    ...new Set(
+      state.exercises
+        .map(e => e.category)
+        .filter(Boolean)
+    )
+  ];
+
+  document.getElementById("categoryCount").textContent =
+    categories.length;
+
+  document.getElementById("trainingCount").textContent =
+    state.trainings.length;
+}
+
+
+/* =========================================================
+   CATEGORIES
+   ========================================================= */
+
+function renderCategories() {
+
+  const container =
+    document.getElementById("categoryFilters");
+
+  const categories = [
+    "Alle",
+    ...new Set(
+      state.exercises
+        .map(e => e.category)
+        .filter(Boolean)
+    )
+  ];
+
+  container.innerHTML = "";
+
+  categories.forEach(category => {
+
+    const button = document.createElement("button");
+
+    button.className =
+      "filter-chip " +
+      (selectedCategory === category ? "active" : "");
+
+    button.textContent = category;
+
+    button.onclick = () => {
+
+      selectedCategory = category;
+
+      renderCategories();
+
+      renderLibrary();
+    };
+
+    container.appendChild(button);
+  });
+}
+
+
+/* =========================================================
+   LIBRARY
+   ========================================================= */
+
+function renderLibrary() {
+
+  const grid =
+    document.getElementById("exerciseGrid");
+
+  const search =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase()
+      .trim();
+
+  let exercises = [...state.exercises];
+
+  if (selectedCategory !== "Alle") {
+
+    exercises =
+      exercises.filter(
+        e => e.category === selectedCategory
+      );
+  }
+
+  if (search) {
+
+    exercises =
+      exercises.filter(e => {
+
+        const text = [
+          e.name,
+          e.category,
+          e.tags,
+          e.description
+        ]
+        .join(" ")
+        .toLowerCase();
+
+        return text.includes(search);
+      });
+  }
+
+  if (!exercises.length) {
+
+    grid.innerHTML = `
+      <div class="empty" style="grid-column:1/-1">
+        <div style="font-size:42px">📚</div>
+        <h3>Noch keine Übungen</h3>
+        <p>Erstelle deine erste Übung.</p>
+        <button
+          class="btn primary"
+          onclick="openExerciseModal()"
+        >
+          + Erste Übung erstellen
+        </button>
+      </div>
+    `;
+
+    return;
+  }
+
+  grid.innerHTML = "";
+
+  exercises.forEach(exercise => {
+
+    const card =
+      document.createElement("article");
+
+    card.className = "exercise-card";
+
+    const image =
+      exercise.image
+        ? `<img class="exercise-image"
+                src="${escapeAttribute(exercise.image)}"
+                alt="">`
+        : `<div class="exercise-placeholder">🏑</div>`;
+
+    const tags =
+      (exercise.tags || "")
+        .split(",")
+        .map(tag => tag.trim())
+        .filter(Boolean)
+        .map(tag =>
+          `<span class="tag">${escapeHTML(tag)}</span>`
+        )
+        .join("");
+
+    card.innerHTML = `
+
+      ${image}
+
+      <div class="exercise-body">
+
+        <div class="exercise-title">
+          ${escapeHTML(exercise.name)}
+        </div>
+
+        <div class="muted">
+          ${escapeHTML(exercise.category || "")}
+        </div>
+
+        <div class="tags">
+          ${tags}
+        </div>
+
+        <div class="card-actions">
+
+          <button class="btn"
+            onclick="showExerciseDetails('${exercise.id}')">
+            Details
+          </button>
+
+          <button class="btn primary"
+            onclick="addExerciseToTraining('${exercise.id}')">
+            + Training
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+
+/* =========================================================
+   ÜBUNG ERSTELLEN / BEARBEITEN
+   ========================================================= */
+
+function openExerciseModal(id = null) {
+
+  document
+    .getElementById("exerciseModal")
+    .classList.add("show");
+
+  document
+    .getElementById("exerciseForm")
+    .reset();
+
+  document
+    .getElementById("exerciseId")
+    .value = "";
+
+  document
+    .getElementById("imagePreview")
+    .style.display = "none";
+
+  document
+    .getElementById("exerciseModalTitle")
+    .textContent = "Neue Übung";
+
+  if (id) {
+
+    const exercise =
+      state.exercises.find(e => e.id === id);
+
+    if (!exercise) return;
+
+    document
+      .getElementById("exerciseModalTitle")
+      .textContent = "Übung bearbeiten";
+
+    document
+      .getElementById("exerciseId")
+      .value = exercise.id;
+
+    document
+      .getElementById("exerciseName")
+      .value = exercise.name || "";
+
+    document
+      .getElementById("exerciseCategory")
+      .value = exercise.category || "Sonstiges";
+
+    document
+      .getElementById("exerciseTags")
+      .value = exercise.tags || "";
+
+    document
+      .getElementById("exerciseDescription")
+      .value = exercise.description || "";
+
+    document
+      .getElementById("exerciseDuration")
+      .value = exercise.duration || 10;
+
+    if (exercise.image) {
+
+      const preview =
+        document.getElementById("imagePreview");
+
+      preview.src = exercise.image;
+
+      preview.style.display = "block";
+    }
+  }
+}
+
+
+function closeExerciseModal() {
+
+  document
+    .getElementById("exerciseModal")
+    .classList.remove("show");
+}
+
+
+async function handleImage(event) {
+
+  const file =
+    event.target.files &&
+    event.target.files[0];
+
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+
+    alert("Bitte ein Bild auswählen.");
+
+    return;
+  }
+
+  try {
+
+    const image =
+      await resizeImage(file, 1600, 0.82);
+
+    const preview =
+      document.getElementById("imagePreview");
+
+    preview.src = image;
+
+    preview.style.display = "block";
+
+    preview.dataset.image = image;
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("Das Bild konnte nicht verarbeitet werden.");
+  }
+}
+
+
+function resizeImage(file, maxSize, quality) {
+
+  return new Promise((resolve, reject) => {
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+
+      const img = new Image();
+
+      img.onload = () => {
+
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+
+          if (width > maxSize) {
+
+            height =
+              height * maxSize / width;
+
+            width = maxSize;
+          }
+
+        } else {
+
+          if (height > maxSize) {
+
+            width =
+              width * maxSize / height;
+
+            height = maxSize;
+          }
+        }
+
+        const canvas =
+          document.createElement("canvas");
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const context =
+          canvas.getContext("2d");
+
+        context.drawImage(
+          img,
+          0,
+          0,
+          width,
+          height
+        );
+
+        resolve(
+          canvas.toDataURL(
+            "image/jpeg",
+            quality
+          )
+        );
+      };
+
+      img.onerror = reject;
+
+      img.src = reader.result;
+    };
+
+    reader.onerror = reject;
+
+    reader.readAsDataURL(file);
+  });
+}
+
+
+document
+  .getElementById("exerciseForm")
+  .addEventListener("submit", async event => {
+
+    event.preventDefault();
+
+    const id =
+      document.getElementById("exerciseId").value;
+
+    const name =
+      document.getElementById("exerciseName").value.trim();
+
+    if (!name) {
+
+      alert("Bitte einen Übungsnamen eingeben.");
+
+      return;
+    }
+
+    const existing =
+      state.exercises.find(e => e.id === id);
+
+    const preview =
+      document.getElementById("imagePreview");
+
+    let image =
+      preview.dataset.image || "";
+
+    if (!image && existing) {
+      image = existing.image || "";
+    }
+
+    const exercise = {
+
+      id: id || createId(),
+
+      name,
+
+      category:
+        document.getElementById("exerciseCategory").value,
+
+      tags:
+        document.getElementById("exerciseTags").value,
+
+      description:
+        document.getElementById("exerciseDescription").value,
+
+      duration:
+        Number(
+          document.getElementById("exerciseDuration").value
+        ) || 10,
+
+      image,
+
+      updated:
+        new Date().toISOString()
+    };
+
+    if (existing) {
+
+      const index =
+        state.exercises.findIndex(e => e.id === id);
+
+      state.exercises[index] = exercise;
+
+    } else {
+
+      state.exercises.unshift(exercise);
+    }
+
+    await saveState();
+
+    closeExerciseModal();
+
+    renderAll();
+  });
+
+
+/* =========================================================
+   DETAILS
+   ========================================================= */
+
+function showExerciseDetails(id) {
+
+  const exercise =
+    state.exercises.find(e => e.id === id);
+
+  if (!exercise) return;
+
+  detailExerciseId = id;
+
+  document
+    .getElementById("detailTitle")
+    .textContent = exercise.name;
+
+  const image =
+    exercise.image
+      ? `<img src="${escapeAttribute(exercise.image)}"
+              style="width:100%;max-height:330px;object-fit:contain;border-radius:14px;background:#f3f4f6;margin-bottom:14px">`
+      : "";
+
+  const tags =
+    (exercise.tags || "")
+      .split(",")
+      .map(t => t.trim())
+      .filter(Boolean)
+      .map(t =>
+        `<span class="tag">${escapeHTML(t)}</span>`
+      )
+      .join("");
+
+  document
+    .getElementById("detailContent")
+    .innerHTML = `
+
+      ${image}
+
+      <p>
+        <strong>Kategorie:</strong>
+        ${escapeHTML(exercise.category || "-")}
+      </p>
+
+      <p>
+        <strong>Dauer:</strong>
+        ${exercise.duration || 10} Minuten
+      </p>
+
+      <div class="tags">${tags}</div>
+
+      <p>
+        ${escapeHTML(exercise.description || "Keine Beschreibung.")}
+      </p>
+
+      <div class="toolbar no-print">
+
+        <button
+          class="btn danger"
+          onclick="deleteExercise('${exercise.id}')">
+          Übung löschen
+        </button>
+
+      </div>
+    `;
+
+  document
+    .getElementById("detailModal")
+    .classList.add("show");
+}
+
+
+function closeDetailModal() {
+
+  document
+    .getElementById("detailModal")
+    .classList.remove("show");
+}
+
+
+function editDetailExercise() {
+
+  const id = detailExerciseId;
+
+  closeDetailModal();
+
+  openExerciseModal(id);
+}
+
+
+async function deleteExercise(id) {
+
+  const exercise =
+    state.exercises.find(e => e.id === id);
+
+  if (!exercise) return;
+
+  if (
+    !confirm(
+      `„${exercise.name}“ wirklich löschen?`
+    )
+  ) return;
+
+  state.exercises =
+    state.exercises.filter(
+      e => e.id !== id
+    );
+
+  state.trainings =
+    state.trainings.map(training => ({
+      ...training,
+      exercises:
+        training.exercises.filter(
+          item => item.exerciseId !== id
+        )
+    }));
+
+  state.currentTraining.exercises =
+    state.currentTraining.exercises.filter(
+      item => item.exerciseId !== id
+    );
+
+  await saveState();
+
+  closeDetailModal();
+
+  renderAll();
+}
+
+
+/* =========================================================
+   TRAINING
+   ========================================================= */
+
+function createNewTrainingIfNeeded() {
+
+  if (!state.currentTraining) {
+
+    state.currentTraining = {
+      id: createId(),
+      title: "Neues Training",
+      date: today(),
+      goal: "",
+      exercises: []
+    };
+  }
+}
+
+
+function loadCurrentTraining() {
+
+  createNewTrainingIfNeeded();
+
+  document.getElementById("trainingTitle").value =
+    state.currentTraining.title || "";
+
+  document.getElementById("trainingDate").value =
+    state.currentTraining.date || today();
+
+  document.getElementById("trainingGoal").value =
+    state.currentTraining.goal || "";
+}
+
+
+async function saveCurrentTraining() {
+
+  createNewTrainingIfNeeded();
+
+  state.currentTraining.title =
+    document.getElementById("trainingTitle").value;
+
+  state.currentTraining.date =
+    document.getElementById("trainingDate").value;
+
+  state.currentTraining.goal =
+    document.getElementById("trainingGoal").value;
+
+  await saveState();
+}
+
+
+async function addExerciseToTraining(id) {
+
+  const exercise =
+    state.exercises.find(e => e.id === id);
+
+  if (!exercise) return;
+
+  createNewTrainingIfNeeded();
+
+  state.currentTraining.exercises.push({
+
+    id: createId(),
+
+    exerciseId: id,
+
+    duration: exercise.duration || 10,
+
+    note: ""
+
+  });
+
+  await saveCurrentTraining();
+
+  renderTraining();
+
+  showView("training");
+}
+
+
+function addDetailExerciseToTraining() {
+
+  if (!detailExerciseId) return;
+
+  closeDetailModal();
+
+  addExerciseToTraining(detailExerciseId);
+}
+
+
+function renderTraining() {
+
+  const list =
+    document.getElementById("trainingList");
+
+  createNewTrainingIfNeeded();
+
+  const items =
+    state.currentTraining.exercises || [];
+
+  if (!items.length) {
+
+    list.innerHTML = `
+      <div class="empty">
+        <div style="font-size:42px">📋</div>
+        <h3>Training ist noch leer</h3>
+        <p>
+          Gehe zur Bibliothek und füge Übungen hinzu.
+        </p>
+        <button
+          class="btn primary"
+          onclick="showView('library')">
+          Übungen auswählen
+        </button>
+      </div>
+    `;
+
+    return;
+  }
+
+  list.innerHTML = "";
+
+  items.forEach((item, index) => {
+
+    const exercise =
+      state.exercises.find(
+        e => e.id === item.exerciseId
+      );
+
+    if (!exercise) return;
+
+    const element =
+      document.createElement("div");
+
+    element.className = "training-item";
+
+    const image =
+      exercise.image
+        ? `<img class="training-thumb"
+                src="${escapeAttribute(exercise.image)}">`
+        : `<div class="training-thumb"
+                style="display:flex;align-items:center;justify-content:center;font-size:30px">
+             🏑
+           </div>`;
+
+    element.innerHTML = `
+
+      ${image}
+
+      <div class="training-number">
+        ${index + 1}
+      </div>
+
+      <div class="training-content">
+
+        <strong>${escapeHTML(exercise.name)}</strong>
+
+        <span class="muted">
+          ${escapeHTML(exercise.category || "")}
+        </span>
+
+        <div style="margin-top:7px">
+
+          <input
+            class="form-control"
+            style="min-height:40px"
+            type="number"
+            min="1"
+            value="${item.duration || exercise.duration || 10}"
+            onchange="changeDuration('${item.id}', this.value)"
+            aria-label="Dauer"
+          >
+
+        </div>
+
+        <div style="margin-top:6px">
+
+          <input
+            class="form-control"
+            style="min-height:40px"
+            placeholder="Trainerhinweis..."
+            value="${escapeAttribute(item.note || "")}"
+            onchange="changeNote('${item.id}', this.value)"
+          >
+
+        </div>
+
+        <div class="training-actions" style="margin-top:7px">
+
+          <button onclick="moveTrainingItem('${item.id}', -1)">
+            ↑
+          </button>
+
+          <button onclick="moveTrainingItem('${item.id}', 1)">
+            ↓
+          </button>
+
+          <button onclick="removeTrainingItem('${item.id}')">
+            🗑️
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+    list.appendChild(element);
+  });
+}
+
+
+async function changeDuration(id, value) {
+
+  const item =
+    state.currentTraining.exercises
+      .find(e => e.id === id);
+
+  if (!item) return;
+
+  item.duration =
+    Math.max(1, Number(value) || 1);
+
+  await saveState();
+}
+
+
+async function changeNote(id, value) {
+
+  const item =
+    state.currentTraining.exercises
+      .find(e => e.id === id);
+
+  if (!item) return;
+
+  item.note = value;
+
+  await saveState();
+}
+
+
+async function moveTrainingItem(id, direction) {
+
+  const list =
+    state.currentTraining.exercises;
+
+  const index =
+    list.findIndex(e => e.id === id);
+
+  if (index === -1) return;
+
+  const newIndex =
+    index + direction;
+
+  if (
+    newIndex < 0 ||
+    newIndex >= list.length
+  ) return;
+
+  const temp = list[index];
+
+  list[index] = list[newIndex];
+
+  list[newIndex] = temp;
+
+  await saveState();
+
+  renderTraining();
+}
+
+
+async function removeTrainingItem(id) {
+
+  state.currentTraining.exercises =
+    state.currentTraining.exercises
+      .filter(e => e.id !== id);
+
+  await saveState();
+
+  renderTraining();
+}
+
+
+async function clearTraining() {
+
+  if (
+    !confirm(
+      "Alle Übungen aus diesem Training entfernen?"
+    )
+  ) return;
+
+  state.currentTraining.exercises = [];
+
+  await saveState();
+
+  renderTraining();
+}
+
+
+/* =========================================================
+   TRAINING SPEICHERN
+   ========================================================= */
+
+async function saveTrainingAsFinished() {
+
+  createNewTrainingIfNeeded();
+
+  const copy =
+    JSON.parse(
+      JSON.stringify(state.currentTraining)
+    );
+
+  copy.id = createId();
+
+  state.trainings.unshift(copy);
+
+  state.currentTraining = {
+    id: createId(),
+    title: "",
+    date: today(),
+    goal: "",
+    exercises: []
+  };
+
+  await saveState();
+
+  loadCurrentTraining();
+
+  renderAll();
+}
+
+
+/* =========================================================
+   PDF
+   ========================================================= */
+
+function printTraining() {
+
+  saveCurrentTraining();
+
+  window.print();
+}
+
+
+/* =========================================================
+   EXPORT
+   ========================================================= */
+
+async function exportData() {
+
+  const exportObject = {
+
+    app: "Trainingsplan",
+
+    version: 4,
+
+    exportedAt:
+      new Date().toISOString(),
+
+    exercises:
+      state.exercises,
+
+    trainings:
+      state.trainings,
+
+    currentTraining:
+      state.currentTraining
+  };
+
+  const json =
+    JSON.stringify(
+      exportObject,
+      null,
+      2
+    );
+
+  const blob =
+    new Blob(
+      [json],
+      {
+        type: "application/json"
+      }
+    );
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const a =
+    document.createElement("a");
+
+  a.href = url;
+
+  a.download =
+    "trainingsplan-backup-" +
+    formatDateFile(new Date()) +
+    ".json";
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  a.remove();
+
+  setTimeout(
+    () => URL.revokeObjectURL(url),
+    1000
+  );
+}
+
+
+/* =========================================================
+   IMPORT
+   ========================================================= */
+
+async function importData(event) {
+
+  const file =
+    event.target.files &&
+    event.target.files[0];
+
+  if (!file) return;
+
+  try {
+
+    const text =
+      await file.text();
+
+    const imported =
+      JSON.parse(text);
+
+    if (
+      !imported ||
+      !Array.isArray(imported.exercises)
+    ) {
+
+      throw new Error(
+        "Ungültiges Dateiformat."
+      );
+    }
+
+    const replace =
+      confirm(
+        "OK = vorhandene Daten ersetzen\n\n" +
+        "Abbrechen = importierte Daten hinzufügen"
+      );
+
+    if (replace) {
+
+      state.exercises =
+        imported.exercises || [];
+
+      state.trainings =
+        imported.trainings || [];
+
+      state.currentTraining =
+        imported.currentTraining || {
+          id: createId(),
+          title: "",
+          date: today(),
+          goal: "",
+          exercises: []
+        };
+
+    } else {
+
+      state.exercises = [
+        ...state.exercises,
+        ...imported.exercises
+      ];
+
+      state.trainings = [
+        ...state.trainings,
+        ...(imported.trainings || [])
+      ];
+    }
+
+    await saveState();
+
+    loadCurrentTraining();
+
+    renderAll();
+
+    alert("Import erfolgreich.");
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "Die Datei konnte nicht importiert werden."
+    );
+  }
+
+  event.target.value = "";
+}
+
+
+/* =========================================================
+   ALLE DATEN LÖSCHEN
+   ========================================================= */
+
+async function deleteAllData() {
+
+  if (
+    !confirm(
+      "Wirklich ALLE Übungen und Trainings löschen?"
+    )
+  ) return;
+
+  state = {
+
+    exercises: [],
+
+    trainings: [],
+
+    currentTraining: {
+
+      id: createId(),
+
+      title: "",
+
+      date: today(),
+
+      goal: "",
+
+      exercises: []
+    }
+  };
+
+  await saveState();
+
+  loadCurrentTraining();
+
+  renderAll();
+
+  alert("Alle Daten wurden gelöscht.");
 }
 
 
@@ -3526,115 +2288,70 @@ function renderAll() {
 
 function createId() {
 
-    return (
-        Date.now().toString(36) +
-        Math.random()
-            .toString(36)
-            .substring(2,10)
-    );
+  if (
+    window.crypto &&
+    crypto.randomUUID
+  ) {
+    return crypto.randomUUID();
+  }
+
+  return (
+    Date.now().toString(36) +
+    Math.random()
+      .toString(36)
+      .substring(2)
+  );
 }
 
 
-function formatDate(dateString) {
+function today() {
 
-    if (!dateString) {
+  const date =
+    new Date();
 
-        return "Kein Datum";
-    }
+  const year =
+    date.getFullYear();
 
-    try {
+  const month =
+    String(date.getMonth() + 1)
+      .padStart(2, "0");
 
-        return new Intl.DateTimeFormat(
-            "de-DE",
-            {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric"
-            }
-        ).format(
-            new Date(
-                dateString +
-                "T12:00:00"
-            )
-        );
+  const day =
+    String(date.getDate())
+      .padStart(2, "0");
 
-    } catch {
-
-        return dateString;
-    }
+  return `${year}-${month}-${day}`;
 }
 
 
-function truncate(text,length) {
+function formatDateFile(date) {
 
-    if (!text) return "";
+  return [
+    date.getFullYear(),
 
-    if (text.length <= length) {
+    String(date.getMonth() + 1)
+      .padStart(2, "0"),
 
-        return text;
-    }
-
-    return (
-        text.substring(
-            0,
-            length
-        ) +
-        "…"
-    );
+    String(date.getDate())
+      .padStart(2, "0")
+  ].join("-");
 }
 
 
-function escapeHtml(value) {
+function escapeHTML(value) {
 
-    if (
-        value === null ||
-        value === undefined
-    ) {
-        return "";
-    }
-
-    return String(value)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 
 function escapeAttribute(value) {
 
-    return escapeHtml(value);
-}
-
-
-function showToast(message) {
-
-    const toast =
-        document.getElementById(
-            "toast"
-        );
-
-    toast.textContent =
-        message;
-
-    toast.classList.add(
-        "show"
-    );
-
-    clearTimeout(
-        showToast.timer
-    );
-
-    showToast.timer =
-        setTimeout(
-            () => {
-                toast.classList.remove(
-                    "show"
-                );
-            },
-            2500
-        );
+  return escapeHTML(value);
 }
 
 
@@ -3643,55 +2360,37 @@ function showToast(message) {
    ========================================================= */
 
 document
-    .getElementById("exercise-modal")
-    .addEventListener(
-        "click",
-        function(event) {
+  .getElementById("exerciseModal")
+  .addEventListener("click", event => {
 
-            if (
-                event.target ===
-                this
-            ) {
-                closeExerciseModal();
-            }
-        }
-    );
-
-
-/* =========================================================
-   TASTATUR
-   ========================================================= */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            closeExerciseModal();
-        }
+    if (
+      event.target ===
+      document.getElementById("exerciseModal")
+    ) {
+      closeExerciseModal();
     }
-);
+  });
+
+
+document
+  .getElementById("detailModal")
+  .addEventListener("click", event => {
+
+    if (
+      event.target ===
+      document.getElementById("detailModal")
+    ) {
+      closeDetailModal();
+    }
+  });
 
 
 /* =========================================================
-   SERVICE WORKER / OFFLINE
-   =========================================================
-
-   Bewusst kein Service Worker in dieser Version.
-
-   Dadurch kann die Datei problemlos über einen lokalen
-   Webserver in Kodex/Safari laufen, ohne dass ein alter
-   Service Worker eine vorherige Version zwischenspeichert.
-
+   START
    ========================================================= */
 
+init();
 
-/* =========================================================
-   ENDE
-   ========================================================= */
 </script>
 
 </body>
