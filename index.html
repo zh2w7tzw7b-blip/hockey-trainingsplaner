@@ -2,40 +2,74 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#123b5d">
-<title>Hockey Trainingsplaner V3</title>
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1,
+               maximum-scale=1,
+               viewport-fit=cover">
+
+<meta name="apple-mobile-web-app-capable"
+      content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style"
+      content="default">
+
+<meta name="theme-color"
+      content="#123b5d">
+
+<title>Hockey Trainingsplaner V4</title>
 
 <style>
+
 :root{
   --nav:#123b5d;
+  --nav2:#0d2d47;
   --blue:#1976d2;
   --green:#198754;
   --red:#d64545;
   --orange:#e67e22;
   --bg:#eef2f5;
-  --card:#fff;
-  --text:#18242d;
+  --card:#ffffff;
+  --text:#17242d;
   --muted:#71808c;
   --line:#d9e1e7;
-  --shadow:0 3px 15px rgba(0,0,0,.09);
+  --light:#edf3f7;
+  --shadow:0 3px 14px rgba(0,0,0,.09);
+  --radius:16px;
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
-html,body{
+html{
+  margin:0;
+  padding:0;
+  background:var(--bg);
+}
+
+body{
   margin:0;
   padding:0;
   background:var(--bg);
   color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
   -webkit-tap-highlight-color:transparent;
+  min-height:100vh;
 }
 
-body{min-height:100vh}
-
-button,input,select,textarea{
+button,
+input,
+select,
+textarea{
   font:inherit;
 }
 
@@ -51,34 +85,58 @@ button:active{
   transform:scale(.98);
 }
 
-.primary{background:var(--blue);color:white}
-.green{background:var(--green);color:white}
-.danger{background:var(--red);color:white}
-.orange{background:var(--orange);color:white}
+.primary{
+  background:var(--blue);
+  color:white;
+}
+
+.green{
+  background:var(--green);
+  color:white;
+}
+
+.danger{
+  background:var(--red);
+  color:white;
+}
+
+.orange{
+  background:var(--orange);
+  color:white;
+}
+
+.light-btn{
+  background:var(--light);
+  color:var(--text);
+}
 
 header{
   position:sticky;
   top:0;
-  z-index:30;
+  z-index:100;
+
   background:var(--nav);
   color:white;
+
   padding:
     max(10px,env(safe-area-inset-top))
-    12px 10px;
+    12px
+    10px;
 }
 
 .header{
   max-width:1500px;
   margin:auto;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:8px;
+  gap:10px;
 }
 
 .logo{
-  font-weight:800;
   font-size:18px;
+  font-weight:800;
 }
 
 .header-actions{
@@ -89,19 +147,31 @@ header{
 main{
   max-width:1500px;
   margin:auto;
-  padding:12px;
-  padding-bottom:90px;
+
+  padding:
+    12px
+    12px
+    100px;
 }
 
-.view{display:none}
-.view.active{display:block}
+.view{
+  display:none;
+}
+
+.view.active{
+  display:block;
+}
 
 .page-title{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
-  margin:5px 0 15px;
+
+  margin:
+    5px
+    0
+    15px;
 }
 
 .page-title h1{
@@ -111,19 +181,24 @@ main{
 
 .card{
   background:var(--card);
-  border-radius:16px;
+  border-radius:var(--radius);
   box-shadow:var(--shadow);
 }
 
+/* HOME */
+
 .home-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:
+    repeat(4,1fr);
+
   gap:12px;
 }
 
 .home-card{
   padding:20px;
-  min-height:140px;
+  min-height:145px;
+  cursor:pointer;
 }
 
 .home-card .emoji{
@@ -131,31 +206,52 @@ main{
 }
 
 .home-card h2{
-  margin:8px 0 4px;
+  margin:
+    8px
+    0
+    4px;
 }
 
 .home-card p{
-  color:var(--muted);
   margin:0;
+  color:var(--muted);
 }
+
+/* TOOLBAR */
 
 .toolbar{
   display:flex;
   gap:8px;
-  overflow-x:auto;
+
   margin-bottom:12px;
+
+  overflow-x:auto;
+  padding-bottom:3px;
 }
 
 .toolbar>*{
   flex:0 0 auto;
 }
 
-input,select,textarea{
+.toolbar input{
+  min-width:220px;
+}
+
+input,
+select,
+textarea{
   width:100%;
+
   background:white;
-  border:1px solid var(--line);
+
+  border:
+    1px solid
+    var(--line);
+
   border-radius:11px;
+
   padding:11px;
+
   outline:none;
 }
 
@@ -164,9 +260,17 @@ textarea{
   resize:vertical;
 }
 
-.exercise-grid{
+/* GALLERY */
+
+.gallery{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(220px,1fr)
+    );
+
   gap:13px;
 }
 
@@ -175,23 +279,59 @@ textarea{
   border-radius:16px;
   overflow:hidden;
   box-shadow:var(--shadow);
+
+  position:relative;
+}
+
+.exercise-image-wrap{
+  position:relative;
 }
 
 .exercise-photo{
-  width:100%;
-  aspect-ratio:4/3;
-  object-fit:cover;
   display:block;
+
+  width:100%;
+
+  aspect-ratio:4/3;
+
+  object-fit:cover;
+
+  background:#dfe6eb;
 }
 
 .no-photo{
   width:100%;
   aspect-ratio:4/3;
-  background:#dfe5e9;
+
+  background:#dfe6eb;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:55px;
+
+  font-size:60px;
+}
+
+.favorite{
+  position:absolute;
+  top:8px;
+  right:8px;
+
+  width:42px;
+  height:42px;
+  min-height:42px;
+
+  padding:0;
+
+  border-radius:50%;
+
+  background:white;
+
+  box-shadow:
+    0 2px 10px
+    rgba(0,0,0,.18);
+
+  font-size:20px;
 }
 
 .exercise-body{
@@ -199,8 +339,8 @@ textarea{
 }
 
 .exercise-name{
-  font-weight:800;
   font-size:17px;
+  font-weight:800;
 }
 
 .meta{
@@ -217,7 +357,7 @@ textarea{
 }
 
 .tag{
-  background:#edf2f6;
+  background:var(--light);
   padding:4px 8px;
   border-radius:20px;
   font-size:11px;
@@ -233,9 +373,15 @@ textarea{
   flex:1;
 }
 
+/* TRAINING */
+
 .training-layout{
   display:grid;
-  grid-template-columns:320px 1fr;
+
+  grid-template-columns:
+    340px
+    1fr;
+
   gap:14px;
 }
 
@@ -244,31 +390,49 @@ textarea{
   border-radius:16px;
   padding:12px;
   box-shadow:var(--shadow);
-  height:calc(100vh - 145px);
+
+  height:
+    calc(100vh - 150px);
+
   overflow:auto;
+
   position:sticky;
-  top:85px;
+  top:90px;
+}
+
+.library-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:10px;
 }
 
 .mini{
-  display:grid;
-  grid-template-columns:72px 1fr;
-  gap:9px;
-  padding:7px;
-  margin-bottom:8px;
-  border:1px solid var(--line);
+  border:
+    1px solid
+    var(--line);
+
   border-radius:12px;
+
+  overflow:hidden;
+
   background:white;
+
   cursor:pointer;
 }
 
 .mini img,
 .mini-photo{
-  width:72px;
-  height:60px;
+  width:100%;
+  aspect-ratio:1.2;
   object-fit:cover;
-  border-radius:9px;
   background:#e3e8ec;
+}
+
+.mini-name{
+  padding:7px;
+  font-size:12px;
+  font-weight:700;
 }
 
 .training-header{
@@ -281,14 +445,22 @@ textarea{
 
 .fields{
   display:grid;
-  grid-template-columns:1fr 150px 130px;
+  grid-template-columns:
+    1fr
+    150px
+    130px;
+
   gap:8px;
 }
 
 .fields2{
   display:grid;
-  grid-template-columns:1fr 150px;
+  grid-template-columns:
+    1fr
+    150px;
+
   gap:8px;
+
   margin-top:8px;
 }
 
@@ -302,18 +474,33 @@ textarea{
 
 .training-item{
   display:grid;
-  grid-template-columns:38px 85px 1fr auto;
+
+  grid-template-columns:
+    38px
+    90px
+    1fr
+    auto;
+
   gap:9px;
+
   align-items:center;
+
   padding:9px;
-  border:1px solid var(--line);
+
+  border:
+    1px solid
+    var(--line);
+
   border-radius:14px;
+
   margin-bottom:9px;
+
+  background:white;
 }
 
 .training-item img{
-  width:85px;
-  height:65px;
+  width:90px;
+  height:68px;
   object-fit:cover;
   border-radius:9px;
 }
@@ -321,12 +508,16 @@ textarea{
 .number{
   width:36px;
   height:36px;
+
   border-radius:50%;
+
   background:var(--nav);
   color:white;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   font-weight:800;
 }
 
@@ -336,7 +527,8 @@ textarea{
 }
 
 .item-actions button{
-  width:40px;
+  width:42px;
+  min-height:42px;
   padding:0;
 }
 
@@ -344,24 +536,37 @@ textarea{
   background:white;
   border-radius:14px;
   padding:14px;
+
   box-shadow:var(--shadow);
+
   margin-top:10px;
+
   display:flex;
   justify-content:space-between;
+
   font-weight:800;
 }
 
+/* WEEK */
+
 .week{
   display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:7px;
+
+  grid-template-columns:
+    repeat(7,1fr);
+
+  gap:8px;
 }
 
 .day{
   background:white;
+
   border-radius:13px;
-  padding:9px;
-  min-height:130px;
+
+  padding:10px;
+
+  min-height:150px;
+
   box-shadow:var(--shadow);
 }
 
@@ -377,26 +582,35 @@ textarea{
 
 .daytraining{
   background:#e9f5ff;
+
   border-radius:9px;
+
   padding:8px;
+
   margin-top:8px;
+
   font-size:12px;
+
+  cursor:pointer;
 }
 
-.empty{
-  color:var(--muted);
-  text-align:center;
-  padding:45px 20px;
-}
+/* MODAL */
 
 .modal{
   position:fixed;
+
   inset:0;
-  z-index:100;
+
+  z-index:300;
+
   display:none;
+
   align-items:center;
   justify-content:center;
-  background:rgba(0,0,0,.55);
+
+  background:
+    rgba(0,0,0,.55);
+
   padding:10px;
 }
 
@@ -405,22 +619,39 @@ textarea{
 }
 
 .modal-box{
-  width:min(760px,100%);
+  width:min(
+    760px,
+    100%
+  );
+
   max-height:94vh;
+
   overflow:auto;
+
   background:white;
+
   border-radius:18px;
 }
 
 .modal-head{
   position:sticky;
+
   top:0;
+
   z-index:2;
+
   background:white;
+
   padding:13px;
-  border-bottom:1px solid var(--line);
+
+  border-bottom:
+    1px solid
+    var(--line);
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
 }
 
@@ -430,7 +661,11 @@ textarea{
 
 .form-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
   gap:10px;
 }
 
@@ -440,16 +675,22 @@ textarea{
 
 label{
   display:block;
+
   font-size:12px;
+
   font-weight:800;
+
   margin-bottom:5px;
 }
 
 .preview{
   max-width:100%;
   max-height:260px;
+
   object-fit:contain;
+
   border-radius:12px;
+
   margin-top:8px;
 }
 
@@ -460,27 +701,7 @@ label{
   margin-top:15px;
 }
 
-.saved{
-  padding:15px;
-  margin-bottom:10px;
-}
-
-.bottom{
-  display:none;
-}
-
-.toast{
-  position:fixed;
-  z-index:300;
-  bottom:25px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#17232d;
-  color:white;
-  border-radius:30px;
-  padding:11px 18px;
-  display:none;
-}
+/* TIMER */
 
 .timer{
   text-align:center;
@@ -503,44 +724,200 @@ label{
 .mode-photo{
   width:100%;
   max-height:50vh;
+
   object-fit:contain;
+
   border-radius:14px;
+
   background:#e7ecef;
 }
 
-@media(max-width:900px){
+/* EMPTY */
+
+.empty{
+  color:var(--muted);
+
+  text-align:center;
+
+  padding:45px 20px;
+}
+
+/* SAVED */
+
+.saved{
+  padding:15px;
+  margin-bottom:10px;
+}
+
+/* BOTTOM NAVIGATION */
+
+.bottom{
+  position:fixed;
+
+  left:0;
+  right:0;
+  bottom:0;
+
+  z-index:250;
+
+  display:flex;
+
+  background:white;
+
+  border-top:
+    1px solid
+    var(--line);
+
+  box-shadow:
+    0 -3px 14px
+    rgba(0,0,0,.10);
+
+  padding:
+    4px
+    4px
+    max(
+      4px,
+      env(safe-area-inset-bottom)
+    );
+}
+
+.bottom button{
+  flex:1;
+
+  min-height:56px;
+
+  background:transparent;
+
+  color:var(--text);
+
+  font-size:11px;
+
+  padding:4px;
+
+  border-radius:10px;
+}
+
+.bottom button.active{
+  background:#e9f3fa;
+  color:var(--blue);
+  font-weight:800;
+}
+
+.bottom span{
+  display:block;
+
+  font-size:21px;
+
+  line-height:25px;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+
+  z-index:500;
+
+  bottom:82px;
+
+  left:50%;
+
+  transform:
+    translateX(-50%);
+
+  background:#17232d;
+
+  color:white;
+
+  border-radius:30px;
+
+  padding:11px 18px;
+
+  display:none;
+
+  white-space:nowrap;
+}
+
+/* DESKTOP */
+
+@media(min-width:1101px){
+
+  .bottom{
+    display:none;
+  }
+
+}
+
+/* TABLET / IPAD */
+
+@media(max-width:1100px){
+
+  main{
+    padding-bottom:90px;
+  }
+
+  .home-grid{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
   .training-layout{
     grid-template-columns:1fr;
   }
 
   .library-panel{
     position:static;
+
     height:auto;
+
+    max-height:360px;
+  }
+
+  .library-grid{
+    grid-template-columns:
+      repeat(4,1fr);
   }
 
   .week{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:
+      repeat(4,1fr);
   }
+
+  .bottom{
+    display:flex;
+  }
+
+  .desktop{
+    display:none!important;
+  }
+
 }
 
-@media(max-width:1100px){
+/* IPHONE */
+
+@media(max-width:650px){
 
   main{
-    padding:9px;
-    padding-bottom:85px;
+    padding:9px 9px 90px;
+  }
+
+  .logo{
+    font-size:16px;
   }
 
   .home-grid{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:1fr;
   }
 
-  .exercise-grid{
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
+  .gallery{
+    grid-template-columns:
+      repeat(2,1fr);
+
+    gap:8px;
   }
 
   .exercise-body{
-    padding:10px;
+    padding:9px;
   }
 
   .exercise-name{
@@ -550,94 +927,6 @@ label{
   .fields,
   .fields2,
   .form-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .full{
-    grid-column:1/-1;
-  }
-
-  .training-layout{
-    grid-template-columns:1fr;
-  }
-
-  .library-panel{
-    position:static;
-    height:auto;
-    max-height:350px;
-  }
-
-  .training-item{
-    grid-template-columns:38px 85px 1fr auto;
-  }
-
-  .training-item img{
-    width:85px;
-    height:65px;
-  }
-
-  .item-actions{
-    display:flex;
-    grid-column:auto;
-  }
-
-  .bottom{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    z-index:50;
-
-    display:flex;
-
-    background:white;
-
-    border-top:1px solid var(--line);
-
-    padding:
-      4px
-      4px
-      max(4px,env(safe-area-inset-bottom));
-
-    box-shadow:
-      0 -3px 12px rgba(0,0,0,.08);
-  }
-
-  .bottom button{
-    flex:1;
-    background:transparent;
-    min-height:52px;
-    font-size:11px;
-    padding:4px;
-  }
-
-  .bottom span{
-    display:block;
-    font-size:21px;
-    line-height:24px;
-  }
-
-  .desktop{
-    display:none!important;
-  }
-
-}
-
-
-@media(max-width:650px){
-
-  .home-grid{
-    grid-template-columns:1fr;
-  }
-
-  .exercise-grid{
-    grid-template-columns:repeat(2,1fr);
-    gap:8px;
-  }
-
-  .fields,
-  .fields2,
-  .form-grid{
     grid-template-columns:1fr;
   }
 
@@ -645,8 +934,16 @@ label{
     grid-column:auto;
   }
 
+  .library-grid{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
   .training-item{
-    grid-template-columns:35px 68px 1fr;
+    grid-template-columns:
+      35px
+      68px
+      1fr;
   }
 
   .training-item img{
@@ -658,7 +955,23 @@ label{
     grid-column:3;
   }
 
+  .week{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+  .bottom button{
+    min-height:53px;
+    font-size:10px;
+  }
+
+  .bottom span{
+    font-size:20px;
+  }
+
 }
+
+/* PRINT */
 
 @media print{
 
@@ -690,13 +1003,16 @@ label{
   .item-actions{
     display:none;
   }
+
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
+
   <div class="header">
 
     <div class="logo">
@@ -706,31 +1022,43 @@ label{
     <div class="header-actions">
 
       <button
-        class="primary desktop"
+        class="primary"
         onclick="newExercise()">
+
         ＋ Übung
+
       </button>
 
       <button
+        class="green"
         onclick="newTraining()">
+
         ＋ Training
+
       </button>
 
     </div>
 
   </div>
+
 </header>
 
 
 <main>
 
-<!-- HOME -->
 
-<section id="view-home" class="view active">
+<!-- START -->
+
+<section
+  id="view-home"
+  class="view active">
 
   <div class="page-title">
+
     <h1>Übersicht</h1>
+
   </div>
+
 
   <div class="home-grid">
 
@@ -739,8 +1067,12 @@ label{
       onclick="showView('library')">
 
       <div class="emoji">📚</div>
+
       <h2>Übungsbibliothek</h2>
-      <p id="exerciseCount">0 Übungen</p>
+
+      <p id="exerciseCount">
+        0 Übungen
+      </p>
 
     </div>
 
@@ -750,8 +1082,12 @@ label{
       onclick="newTraining()">
 
       <div class="emoji">📋</div>
+
       <h2>Neues Training</h2>
-      <p>Training zusammenstellen</p>
+
+      <p>
+        Training zusammenstellen
+      </p>
 
     </div>
 
@@ -761,8 +1097,12 @@ label{
       onclick="showView('week')">
 
       <div class="emoji">📅</div>
+
       <h2>Wochenplanung</h2>
-      <p>Trainings der Woche</p>
+
+      <p>
+        Trainings der Woche
+      </p>
 
     </div>
 
@@ -772,8 +1112,12 @@ label{
       onclick="showView('saved')">
 
       <div class="emoji">🗂️</div>
+
       <h2>Meine Trainings</h2>
-      <p>Gespeicherte Trainings</p>
+
+      <p>
+        Gespeicherte Trainings
+      </p>
 
     </div>
 
@@ -783,15 +1127,23 @@ label{
   <div style="margin-top:18px">
 
     <div class="page-title">
+
       <h2>⭐ Favoriten</h2>
-      <button onclick="showView('library')">
+
+      <button
+        onclick="showView('library')">
+
         Alle Übungen
+
       </button>
+
     </div>
+
 
     <div
       id="favorites"
-      class="exercise-grid">
+      class="gallery">
+
     </div>
 
   </div>
@@ -801,16 +1153,20 @@ label{
 
 <!-- BIBLIOTHEK -->
 
-<section id="view-library" class="view">
+<section
+  id="view-library"
+  class="view">
 
   <div class="page-title">
 
-    <h1>📚 Übungen</h1>
+    <h1>📚 Übungsbibliothek</h1>
 
     <button
       class="primary"
       onclick="newExercise()">
+
       ＋ Neue Übung
+
     </button>
 
   </div>
@@ -820,27 +1176,43 @@ label{
 
     <input
       id="search"
-      placeholder="🔎 Suchen..."
+      placeholder="🔎 Übung suchen..."
       oninput="renderLibrary()">
+
 
     <select
       id="categoryFilter"
       onchange="renderLibrary()">
-      <option value="">Alle Kategorien</option>
+
+      <option value="">
+        Alle Kategorien
+      </option>
+
     </select>
+
 
     <select
       id="ageFilter"
       onchange="renderLibrary()">
-      <option value="">Alle Altersgruppen</option>
+
+      <option value="">
+        Alle Altersgruppen
+      </option>
+
     </select>
+
 
     <select
       id="favoriteFilter"
       onchange="renderLibrary()">
 
-      <option value="">Alle</option>
-      <option value="yes">⭐ Favoriten</option>
+      <option value="">
+        Alle Übungen
+      </option>
+
+      <option value="yes">
+        ⭐ Favoriten
+      </option>
 
     </select>
 
@@ -849,7 +1221,8 @@ label{
 
   <div
     id="library"
-    class="exercise-grid">
+    class="gallery">
+
   </div>
 
 </section>
@@ -857,9 +1230,12 @@ label{
 
 <!-- TRAINING -->
 
-<section id="view-training" class="view">
+<section
+  id="view-training"
+  class="view">
 
   <div class="training-layout">
+
 
     <aside class="library-panel">
 
@@ -867,14 +1243,17 @@ label{
         📚 Übungen
       </h2>
 
+
       <input
         id="trainingSearch"
-        placeholder="🔎 Suchen..."
+        placeholder="🔎 Übung suchen..."
         oninput="renderTrainingLibrary()">
+
 
       <div
         id="trainingLibrary"
-        style="margin-top:10px">
+        class="library-grid">
+
       </div>
 
     </aside>
@@ -882,24 +1261,36 @@ label{
 
     <section>
 
+
       <div class="training-header">
 
         <div class="page-title">
 
-          <h1>📋 Training</h1>
+          <h1>
+            📋 Training
+          </h1>
 
-          <div class="no-print"
-               style="display:flex;gap:6px">
+
+          <div
+            class="no-print"
+            style="
+              display:flex;
+              gap:6px">
 
             <button
               class="green"
               onclick="startMode()">
+
               ▶ Start
+
             </button>
+
 
             <button
               onclick="printTraining()">
+
               🖨️ PDF
+
             </button>
 
           </div>
@@ -913,9 +1304,11 @@ label{
             id="trainingTitle"
             placeholder="Trainingstitel">
 
+
           <input
             id="trainingDate"
             type="date">
+
 
           <select id="trainingTeam">
 
@@ -939,6 +1332,7 @@ label{
             id="trainingGoal"
             placeholder="🎯 Trainingsziel">
 
+
           <input
             id="trainingTotal"
             type="number"
@@ -953,24 +1347,31 @@ label{
       <div
         id="dropzone"
         class="dropzone">
+
       </div>
 
 
       <div
         id="total"
         class="total">
+
       </div>
 
 
       <div
         class="card"
-        style="padding:13px;margin-top:10px">
+        style="
+          padding:13px;
+          margin-top:10px">
 
-        <label>📝 Trainernotizen</label>
+        <label>
+          📝 Trainernotizen
+        </label>
 
         <textarea
           id="trainingNotes"
-          placeholder="Notizen...">
+          placeholder="Notizen zum Training...">
+
         </textarea>
 
       </div>
@@ -978,17 +1379,25 @@ label{
 
       <div
         class="no-print"
-        style="display:flex;gap:7px;margin-top:10px">
+        style="
+          display:flex;
+          gap:7px;
+          margin-top:10px">
 
         <button
           class="primary"
           onclick="saveTraining()">
+
           💾 Training speichern
+
         </button>
+
 
         <button
           onclick="newTraining()">
+
           ＋ Neues Training
+
         </button>
 
       </div>
@@ -1002,23 +1411,32 @@ label{
 
 <!-- WOCHE -->
 
-<section id="view-week" class="view">
+<section
+  id="view-week"
+  class="view">
 
   <div class="page-title">
 
-    <h1>📅 Wochenplanung</h1>
+    <h1>
+      📅 Wochenplanung
+    </h1>
+
 
     <button
       class="primary"
       onclick="newTraining()">
+
       ＋ Training
+
     </button>
 
   </div>
 
+
   <div
     id="week"
     class="week">
+
   </div>
 
 </section>
@@ -1026,16 +1444,21 @@ label{
 
 <!-- GESPEICHERTE TRAININGS -->
 
-<section id="view-saved" class="view">
+<section
+  id="view-saved"
+  class="view">
 
   <div class="page-title">
 
-    <h1>🗂️ Meine Trainings</h1>
+    <h1>
+      🗂️ Meine Trainings
+    </h1>
 
   </div>
 
-  <div
-    id="saved">
+
+  <div id="saved">
+
   </div>
 
 </section>
@@ -1043,11 +1466,15 @@ label{
 
 <!-- DATEN -->
 
-<section id="view-data" class="view">
+<section
+  id="view-data"
+  class="view">
 
   <div class="page-title">
 
-    <h1>💾 Daten</h1>
+    <h1>
+      💾 Daten
+    </h1>
 
   </div>
 
@@ -1056,17 +1483,24 @@ label{
     class="card"
     style="padding:18px">
 
-    <h2>Backup</h2>
+    <h2>
+      Backup exportieren
+    </h2>
 
     <p class="meta">
-      Exportiert Übungen, Bilder und Trainings
-      in eine einzige Backup-Datei.
+
+      Übungen, Bilder und Trainings
+      werden gemeinsam exportiert.
+
     </p>
+
 
     <button
       class="primary"
       onclick="exportBackup()">
+
       💾 Komplettes Backup exportieren
+
     </button>
 
 
@@ -1077,12 +1511,10 @@ label{
         margin:20px 0">
 
 
-    <h2>Import</h2>
+    <h2>
+      Backup importieren
+    </h2>
 
-    <p class="meta">
-      Du kannst ein zuvor exportiertes Backup
-      wiederherstellen.
-    </p>
 
     <input
       id="backupInput"
@@ -1096,7 +1528,9 @@ label{
       <button
         class="orange"
         onclick="clearAllData()">
-        🗑️ Alle lokalen Daten löschen
+
+        🗑️ Alle Daten löschen
+
       </button>
 
     </div>
@@ -1106,59 +1540,99 @@ label{
 
   <div
     class="card"
-    style="padding:18px;margin-top:12px">
+    style="
+      padding:18px;
+      margin-top:12px">
 
-    <h2>Statistik</h2>
+    <h2>
+      Statistik
+    </h2>
+
 
     <p>
       📚 Übungen:
-      <strong id="statExercises">0</strong>
+      <strong id="statExercises">
+        0
+      </strong>
     </p>
+
 
     <p>
       📋 Trainings:
-      <strong id="statTrainings">0</strong>
+      <strong id="statTrainings">
+        0
+      </strong>
     </p>
+
 
     <p>
       🖼️ Bilder:
-      <strong id="statImages">0</strong>
+      <strong id="statImages">
+        0
+      </strong>
     </p>
 
   </div>
 
 </section>
 
+
 </main>
 
 
-<!-- BOTTOM NAV -->
+<!-- UNTERE NAVIGATION -->
 
-<nav class="bottom">
+<nav
+  id="bottomNav"
+  class="bottom">
 
-  <button onclick="showView('home')">
+  <button
+    data-view="home"
+    onclick="showView('home')">
+
     <span>🏠</span>
     Start
+
   </button>
 
-  <button onclick="showView('library')">
+
+  <button
+    data-view="library"
+    onclick="showView('library')">
+
     <span>📚</span>
     Übungen
+
   </button>
 
-  <button onclick="newTraining()">
+
+  <button
+    data-view="training"
+    onclick="newTraining()">
+
     <span>➕</span>
     Training
+
   </button>
 
-  <button onclick="showView('week')">
+
+  <button
+    data-view="week"
+    onclick="showView('week')">
+
     <span>📅</span>
     Woche
+
   </button>
 
-  <button onclick="showView('data')">
+
+  <button
+    data-view="data"
+    onclick="showView('data')">
+
     <span>💾</span>
     Daten
+
   </button>
 
 </nav>
@@ -1178,16 +1652,21 @@ label{
         Neue Übung
       </strong>
 
+
       <button
         onclick="closeExerciseModal()">
+
         ✕
+
       </button>
 
     </div>
 
+
     <div
       id="modalBody"
       class="modal-body">
+
     </div>
 
   </div>
@@ -1209,15 +1688,21 @@ label{
         Training
       </strong>
 
-      <button onclick="closeMode()">
+
+      <button
+        onclick="closeMode()">
+
         ✕
+
       </button>
 
     </div>
 
+
     <div
       id="modeBody"
       class="modal-body">
+
     </div>
 
   </div>
@@ -1225,19 +1710,25 @@ label{
 </div>
 
 
-<div id="toast" class="toast"></div>
+<div
+  id="toast"
+  class="toast">
+
+</div>
 
 
 <script>
 
 /* =====================================================
-   KONFIGURATION
+   DATEN
 ===================================================== */
 
 const STORAGE_KEY =
-  "hockey_trainingsplaner_v3";
+  "hockey_trainingsplaner_v4";
+
 
 const categories = [
+
   "Aufwärmen",
   "Ballgewöhnung",
   "Ballführung",
@@ -1256,9 +1747,12 @@ const categories = [
   "Torwart",
   "Abschluss",
   "Sonstiges"
+
 ];
 
+
 const ages = [
+
   "U6",
   "U8",
   "U10",
@@ -1267,23 +1761,36 @@ const ages = [
   "U16",
   "U18",
   "Alle Altersgruppen"
+
 ];
 
-let db = loadDatabase();
 
-let currentTraining = null;
+let db =
+  loadDatabase();
 
-let imageData = null;
 
-let modeIndex = 0;
+let currentTraining =
+  null;
 
-let timer = null;
 
-let timerSeconds = 0;
+let imageData =
+  null;
+
+
+let modeIndex =
+  0;
+
+
+let timer =
+  null;
+
+
+let timerSeconds =
+  0;
 
 
 /* =====================================================
-   DATENBANK
+   DATENBANK LADEN
 ===================================================== */
 
 function loadDatabase(){
@@ -1295,6 +1802,7 @@ function loadDatabase(){
         STORAGE_KEY
       );
 
+
     if(!raw){
 
       return {
@@ -1304,26 +1812,32 @@ function loadDatabase(){
 
     }
 
-    const d =
+
+    const data =
       JSON.parse(raw);
+
 
     return {
 
       exercises:
-        Array.isArray(d.exercises)
-          ? d.exercises
+        Array.isArray(
+          data.exercises
+        )
+          ? data.exercises
           : [],
 
       trainings:
-        Array.isArray(d.trainings)
-          ? d.trainings
+        Array.isArray(
+          data.trainings
+        )
+          ? data.trainings
           : []
 
     };
 
-  }catch(e){
+  }catch(error){
 
-    console.error(e);
+    console.error(error);
 
     return {
       exercises:[],
@@ -1335,6 +1849,10 @@ function loadDatabase(){
 }
 
 
+/* =====================================================
+   SPEICHERN
+===================================================== */
+
 function saveDatabase(){
 
   try{
@@ -1344,14 +1862,16 @@ function saveDatabase(){
       JSON.stringify(db)
     );
 
+
     return true;
 
-  }catch(e){
+  }catch(error){
 
     alert(
       "Speichern fehlgeschlagen. " +
       "Der lokale Speicher könnte voll sein."
     );
+
 
     return false;
 
@@ -1360,9 +1880,14 @@ function saveDatabase(){
 }
 
 
-function id(){
+/* =====================================================
+   ID
+===================================================== */
 
-  return Date.now().toString(36)
+function makeId(){
+
+  return Date.now()
+    .toString(36)
     +
     Math.random()
       .toString(36)
@@ -1370,6 +1895,10 @@ function id(){
 
 }
 
+
+/* =====================================================
+   ESCAPE
+===================================================== */
 
 function esc(value){
 
@@ -1385,27 +1914,35 @@ function esc(value){
 }
 
 
+/* =====================================================
+   TOAST
+===================================================== */
+
 function toast(message){
 
-  const el =
+  const element =
     document.getElementById(
       "toast"
     );
 
-  el.textContent =
+
+  element.textContent =
     message;
 
-  el.style.display =
+
+  element.style.display =
     "block";
+
 
   clearTimeout(
     toast.timeout
   );
 
+
   toast.timeout =
     setTimeout(
       ()=>{
-        el.style.display =
+        element.style.display =
           "none";
       },
       2200
@@ -1423,44 +1960,76 @@ function showView(name){
   document
     .querySelectorAll(".view")
     .forEach(
-      x =>
-        x.classList.remove(
+      element =>
+        element.classList.remove(
           "active"
         )
     );
+
 
   const view =
     document.getElementById(
       "view-" + name
     );
 
-  if(view)
+
+  if(view){
+
     view.classList.add(
       "active"
     );
 
-
-  if(name==="home")
-    renderHome();
-
-  if(name==="library")
-    renderLibrary();
-
-  if(name==="training"){
-    renderTrainingLibrary();
-    renderTraining();
   }
 
-  if(name==="week")
+
+  document
+    .querySelectorAll(
+      ".bottom button"
+    )
+    .forEach(
+      button => {
+
+        button.classList.toggle(
+          "active",
+          button.dataset.view === name
+        );
+
+      }
+    );
+
+
+  if(name === "home")
+    renderHome();
+
+
+  if(name === "library")
+    renderLibrary();
+
+
+  if(name === "training"){
+
+    renderTrainingLibrary();
+    renderTraining();
+
+  }
+
+
+  if(name === "week")
     renderWeek();
 
-  if(name==="saved")
+
+  if(name === "saved")
     renderSaved();
 
-  if(name==="data")
+
+  if(name === "data")
     renderStatistics();
 
-  window.scrollTo(0,0);
+
+  window.scrollTo(
+    0,
+    0
+  );
 
 }
 
@@ -1471,41 +2040,43 @@ function showView(name){
 
 function setupFilters(){
 
-  const c =
+  const category =
     document.getElementById(
       "categoryFilter"
     );
 
-  c.innerHTML =
+
+  category.innerHTML =
     `<option value="">
-      Alle Kategorien
+       Alle Kategorien
      </option>`
     +
     categories
       .map(
-        x =>
-          `<option value="${esc(x)}">
-             ${esc(x)}
+        value =>
+          `<option value="${esc(value)}">
+             ${esc(value)}
            </option>`
       )
       .join("");
 
 
-  const a =
+  const age =
     document.getElementById(
       "ageFilter"
     );
 
-  a.innerHTML =
+
+  age.innerHTML =
     `<option value="">
-      Alle Altersgruppen
+       Alle Altersgruppen
      </option>`
     +
     ages
       .map(
-        x =>
-          `<option value="${esc(x)}">
-             ${esc(x)}
+        value =>
+          `<option value="${esc(value)}">
+             ${esc(value)}
            </option>`
       )
       .join("");
@@ -1514,16 +2085,8 @@ function setupFilters(){
 
 
 /* =====================================================
-   BILDIMPORT
+   BILD AUS FOTOMEDIATHEK
 ===================================================== */
-
-/*
-   Absichtlich KEIN capture="environment".
-
-   Dadurch wird die Kamera nicht erzwungen.
-   Auf iPad/Safari kann der Nutzer damit die
-   Fotomediathek auswählen.
-*/
 
 function selectImage(event){
 
@@ -1531,11 +2094,15 @@ function selectImage(event){
     event.target.files &&
     event.target.files[0];
 
+
   if(!file)
     return;
 
+
   if(
-    !file.type.startsWith("image/")
+    !file.type.startsWith(
+      "image/"
+    )
   ){
 
     alert(
@@ -1567,49 +2134,59 @@ function selectImage(event){
     };
 
 
-  reader.readAsDataURL(file);
+  reader.readAsDataURL(
+    file
+  );
 
 }
 
 
+/* =====================================================
+   BILD VERKLEINERN
+===================================================== */
+
 function compressImage(source){
 
-  const img =
+  const image =
     new Image();
 
 
-  img.onload =
+  image.onload =
     ()=>{
 
-      const MAX =
+      const max =
         1400;
 
-      let w =
-        img.naturalWidth;
 
-      let h =
-        img.naturalHeight;
+      let width =
+        image.naturalWidth;
+
+
+      let height =
+        image.naturalHeight;
 
 
       if(
-        w > MAX ||
-        h > MAX
+        width > max ||
+        height > max
       ){
 
-        const factor =
+        const scale =
           Math.min(
-            MAX/w,
-            MAX/h
+            max / width,
+            max / height
           );
 
-        w =
+
+        width =
           Math.round(
-            w * factor
+            width * scale
           );
 
-        h =
+
+        height =
           Math.round(
-            h * factor
+            height * scale
           );
 
       }
@@ -1620,25 +2197,27 @@ function compressImage(source){
           "canvas"
         );
 
+
       canvas.width =
-        w;
+        width;
+
 
       canvas.height =
-        h;
+        height;
 
 
-      const ctx =
+      const context =
         canvas.getContext(
           "2d"
         );
 
 
-      ctx.drawImage(
-        img,
+      context.drawImage(
+        image,
         0,
         0,
-        w,
-        h
+        width,
+        height
       );
 
 
@@ -1665,6 +2244,7 @@ function compressImage(source){
 
       }
 
+
       toast(
         "🖼️ Bild übernommen"
       );
@@ -1672,28 +2252,29 @@ function compressImage(source){
     };
 
 
-  img.onerror =
+  image.onerror =
     ()=>{
       alert(
-        "Bild konnte nicht verarbeitet werden."
+        "Das Bild konnte nicht verarbeitet werden."
       );
     };
 
 
-  img.src =
+  image.src =
     source;
 
 }
 
 
 /* =====================================================
-   ÜBUNG FORMULAR
+   NEUE ÜBUNG
 ===================================================== */
 
 function newExercise(){
 
   imageData =
     null;
+
 
   document.getElementById(
     "modalTitle"
@@ -1716,6 +2297,10 @@ function newExercise(){
 }
 
 
+/* =====================================================
+   ÜBUNGSFORMULAR
+===================================================== */
+
 function exerciseForm(exercise=null){
 
   imageData =
@@ -1725,321 +2310,389 @@ function exerciseForm(exercise=null){
 
   return `
 
-  <form
-    onsubmit="submitExercise(event,'${exercise?.id || ""}')">
-
-    <div class="form-grid">
-
-
-      <div class="full">
-
-        <label>
-          Übungsname *
-        </label>
-
-        <input
-          name="name"
-          required
-          value="${esc(exercise?.name)}"
-          placeholder="z.B. Passdreieck">
-
-      </div>
+<form
+  onsubmit="
+    submitExercise(
+      event,
+      '${exercise?.id || ""}'
+    )
+  ">
 
 
-      <div>
+<div class="form-grid">
 
-        <label>
-          Kategorie
-        </label>
 
-        <select name="category">
+<div class="full">
 
+<label>
+  Übungsname *
+</label>
+
+<input
+  name="name"
+  required
+  value="${esc(exercise?.name)}"
+  placeholder="z.B. Passdreieck">
+
+</div>
+
+
+<div>
+
+<label>
+  Kategorie
+</label>
+
+<select name="category">
+
+${
+  categories
+    .map(
+      value =>
+        `<option
           ${
-            categories
-              .map(
-                x =>
-                  `<option
-                    ${
-                      x ===
-                      (exercise?.category ||
-                       "Sonstiges")
-                        ? "selected"
-                        : ""
-                    }>
-                    ${esc(x)}
-                   </option>`
-              )
-              .join("")
-          }
+            value ===
+            (
+              exercise?.category ||
+              "Sonstiges"
+            )
+              ? "selected"
+              : ""
+          }>
+          ${esc(value)}
+        </option>`
+    )
+    .join("")
+}
 
-        </select>
+</select>
 
-      </div>
+</div>
 
 
-      <div>
+<div>
 
-        <label>
-          Schwierigkeit
-        </label>
+<label>
+  Schwierigkeit
+</label>
 
-        <select name="difficulty">
+<select name="difficulty">
 
+<option
+  ${
+    exercise?.difficulty ===
+    "Einfach" ||
+    !exercise
+      ? "selected"
+      : ""
+  }>
+  Einfach
+</option>
+
+<option
+  ${
+    exercise?.difficulty ===
+    "Mittel"
+      ? "selected"
+      : ""
+  }>
+  Mittel
+</option>
+
+<option
+  ${
+    exercise?.difficulty ===
+    "Schwer"
+      ? "selected"
+      : ""
+  }>
+  Schwer
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+  Altersgruppen
+</label>
+
+<select
+  name="age"
+  multiple
+  size="6">
+
+${
+  ages
+    .map(
+      value =>
+        `<option
+          value="${esc(value)}"
           ${
-            ["Einfach","Mittel","Schwer"]
-              .map(
-                x =>
-                  `<option
-                    ${
-                      x ===
-                      (exercise?.difficulty ||
-                       "Einfach")
-                        ? "selected"
-                        : ""
-                    }>
-                    ${x}
-                   </option>`
-              )
-              .join("")
-          }
+            (
+              exercise?.age ||
+              []
+            ).includes(value)
+              ? "selected"
+              : ""
+          }>
+          ${esc(value)}
+        </option>`
+    )
+    .join("")
+}
 
-        </select>
-
-      </div>
+</select>
 
-
-      <div>
-
-        <label>
-          Altersgruppen
-        </label>
-
-        <select
-          name="age"
-          multiple
-          size="6">
-
-          ${
-            ages
-              .map(
-                x =>
-                  `<option
-                    value="${esc(x)}"
-                    ${
-                      (exercise?.age || [])
-                        .includes(x)
-                        ? "selected"
-                        : ""
-                    }>
-                    ${esc(x)}
-                   </option>`
-              )
-              .join("")
-          }
+</div>
 
-        </select>
 
-      </div>
-
-
-      <div>
-
-        <label>
-          Dauer in Minuten
-        </label>
-
-        <input
-          name="duration"
-          type="number"
-          min="0"
-          value="${exercise?.duration || 10}">
+<div>
 
-      </div>
+<label>
+  Dauer in Minuten
+</label>
 
+<input
+  name="duration"
+  type="number"
+  min="0"
+  value="${exercise?.duration || 10}">
 
-      <div>
+</div>
 
-        <label>
-          Min. Spieler
-        </label>
 
-        <input
-          name="minPlayers"
-          type="number"
-          min="0"
-          value="${exercise?.minPlayers || ""}">
+<div>
 
-      </div>
+<label>
+  Min. Spieler
+</label>
 
+<input
+  name="minPlayers"
+  type="number"
+  min="0"
+  value="${exercise?.minPlayers || ""}">
 
-      <div>
+</div>
 
-        <label>
-          Max. Spieler
-        </label>
 
-        <input
-          name="maxPlayers"
-          type="number"
-          min="0"
-          value="${exercise?.maxPlayers || ""}">
+<div>
 
-      </div>
+<label>
+  Max. Spieler
+</label>
 
+<input
+  name="maxPlayers"
+  type="number"
+  min="0"
+  value="${exercise?.maxPlayers || ""}">
 
-      <div>
+</div>
 
-        <label>
-          Favorit
-        </label>
 
-        <select name="favorite">
+<div>
 
-          <option
-            value="false"
-            ${
-              !exercise?.favorite
-                ? "selected"
-                : ""
-            }>
-            Nein
-          </option>
+<label>
+  Favorit
+</label>
 
-          <option
-            value="true"
-            ${
-              exercise?.favorite
-                ? "selected"
-                : ""
-            }>
-            ⭐ Ja
-          </option>
+<select name="favorite">
 
-        </select>
+<option
+  value="false"
+  ${
+    !exercise?.favorite
+      ? "selected"
+      : ""
+  }>
+  Nein
+</option>
 
-      </div>
+<option
+  value="true"
+  ${
+    exercise?.favorite
+      ? "selected"
+      : ""
+  }>
+  ⭐ Ja
+</option>
 
+</select>
 
-      <div class="full">
+</div>
 
-        <label>
-          🖼️ Bild aus Fotomediathek
-        </label>
 
-        <input
-          type="file"
-          accept="image/*"
-          onchange="selectImage(event)">
+<div class="full">
 
-        <div
-          id="imagePreview">
+<label>
+  🖼️ Eigenes Bild
+</label>
 
-          ${
-            exercise?.image
-              ?
-                `<img
-                   src="${exercise.image}"
-                   class="preview"
-                   alt="">`
-              :
-                ""
-          }
+<input
+  type="file"
+  accept="image/*"
+  onchange="selectImage(event)">
 
-        </div>
+<div id="imagePreview">
 
-      </div>
+${
+  exercise?.image
+    ?
+      `<img
+         src="${exercise.image}"
+         class="preview"
+         alt="">`
+    :
+      ""
+}
 
+</div>
 
-      <div class="full">
+</div>
 
-        <label>
-          🎯 Trainingsziel
-        </label>
 
-        <input
-          name="goal"
-          value="${esc(exercise?.goal)}"
-          placeholder="z.B. Passgenauigkeit">
+<div class="full">
 
-      </div>
+<label>
+  🏷️ Tags
+</label>
 
+<input
+  name="tags"
+  value="${esc(
+    exercise?.tags?.join(", ")
+  )}"
+  placeholder="
+    z.B. Passen, Bewegung, Technik
+  ">
 
-      <div class="full">
+</div>
 
-        <label>
-          Beschreibung / Ablauf
-        </label>
 
-        <textarea
-          name="description"
-          placeholder="Aufbau und Durchführung..."
-        >${esc(exercise?.description)}</textarea>
+<div class="full">
 
-      </div>
+<label>
+  🎯 Trainingsziel
+</label>
 
+<input
+  name="goal"
+  value="${esc(
+    exercise?.goal
+  )}"
+  placeholder="
+    z.B. Passgenauigkeit
+  ">
 
-      <div class="full">
+</div>
 
-        <label>
-          👀 Trainerhinweise
-        </label>
 
-        <textarea
-          name="tips"
-          placeholder="Worauf achten?"
-        >${esc(exercise?.tips)}</textarea>
+<div class="full">
 
-      </div>
+<label>
+  Beschreibung / Ablauf
+</label>
 
+<textarea
+  name="description"
+  placeholder="
+    Aufbau und Durchführung...
+  ">${esc(
+    exercise?.description
+  )}</textarea>
 
-      <div class="full">
+</div>
 
-        <label>
-          🔄 Varianten
-        </label>
 
-        <textarea
-          name="variants"
-          placeholder="Variationen der Übung..."
-        >${esc(exercise?.variants)}</textarea>
+<div class="full">
 
-      </div>
+<label>
+  👀 Trainerhinweise
+</label>
 
-    </div>
+<textarea
+  name="tips"
+  placeholder="
+    Worauf soll der Trainer achten?
+  ">${esc(
+    exercise?.tips
+  )}</textarea>
 
+</div>
 
-    <div class="form-actions">
 
-      <button
-        type="button"
-        onclick="closeExerciseModal()">
-        Abbrechen
-      </button>
+<div class="full">
 
-      <button
-        type="submit"
-        class="primary">
-        💾 Speichern
-      </button>
+<label>
+  🔄 Varianten
+</label>
 
-      ${
-        exercise
-          ?
-            `<button
-               type="button"
-               class="danger"
-               onclick="deleteExercise('${exercise.id}')">
-               🗑 Löschen
-             </button>`
-          :
-            ""
-      }
+<textarea
+  name="variants"
+  placeholder="
+    Varianten und Steigerungen...
+  ">${esc(
+    exercise?.variants
+  )}</textarea>
 
-    </div>
+</div>
 
-  </form>
 
-  `;
+</div>
+
+
+<div class="form-actions">
+
+<button
+  type="button"
+  class="light-btn"
+  onclick="closeExerciseModal()">
+
+  Abbrechen
+
+</button>
+
+
+<button
+  type="submit"
+  class="primary">
+
+  💾 Speichern
+
+</button>
+
+
+${
+  exercise
+    ?
+      `<button
+         type="button"
+         class="danger"
+         onclick="
+           deleteExercise(
+             '${exercise.id}'
+           )
+         ">
+
+         🗑 Löschen
+
+       </button>`
+    :
+      ""
+}
+
+</div>
+
+
+</form>
+
+`;
 
 }
 
@@ -2048,7 +2701,10 @@ function exerciseForm(exercise=null){
    ÜBUNG SPEICHERN
 ===================================================== */
 
-function submitExercise(event,exerciseId){
+function submitExercise(
+  event,
+  exerciseId
+){
 
   event.preventDefault();
 
@@ -2059,20 +2715,36 @@ function submitExercise(event,exerciseId){
     );
 
 
-  const agesSelected =
+  const selectedAges =
     Array.from(
       event.target.age.selectedOptions
     )
     .map(
-      x =>
-        x.value
+      option =>
+        option.value
     );
 
 
   const old =
     db.exercises.find(
-      x =>
-        x.id === exerciseId
+      exercise =>
+        exercise.id ===
+        exerciseId
+    );
+
+
+  const tags =
+    String(
+      form.get("tags") ||
+      ""
+    )
+    .split(",")
+    .map(
+      value =>
+        value.trim()
+    )
+    .filter(
+      Boolean
     );
 
 
@@ -2080,7 +2752,7 @@ function submitExercise(event,exerciseId){
 
     id:
       exerciseId ||
-      id(),
+      makeId(),
 
     name:
       form.get("name"),
@@ -2092,25 +2764,32 @@ function submitExercise(event,exerciseId){
       form.get("difficulty"),
 
     age:
-      agesSelected,
+      selectedAges,
+
+    tags:
+      tags,
 
     duration:
       Number(
-        form.get("duration") || 0
+        form.get("duration") ||
+        0
       ),
 
     minPlayers:
       Number(
-        form.get("minPlayers") || 0
+        form.get("minPlayers") ||
+        0
       ),
 
     maxPlayers:
       Number(
-        form.get("maxPlayers") || 0
+        form.get("maxPlayers") ||
+        0
       ),
 
     favorite:
-      form.get("favorite") === "true",
+      form.get("favorite") ===
+      "true",
 
     image:
       imageData ||
@@ -2141,8 +2820,8 @@ function submitExercise(event,exerciseId){
 
   const index =
     db.exercises.findIndex(
-      x =>
-        x.id ===
+      value =>
+        value.id ===
         exercise.id
     );
 
@@ -2180,12 +2859,14 @@ function submitExercise(event,exerciseId){
    ÜBUNG BEARBEITEN
 ===================================================== */
 
-function editExercise(exerciseId){
+function editExercise(
+  exerciseId
+){
 
   const exercise =
     db.exercises.find(
-      x =>
-        x.id ===
+      value =>
+        value.id ===
         exerciseId
     );
 
@@ -2217,7 +2898,13 @@ function editExercise(exerciseId){
 }
 
 
-function deleteExercise(exerciseId){
+/* =====================================================
+   ÜBUNG LÖSCHEN
+===================================================== */
+
+function deleteExercise(
+  exerciseId
+){
 
   if(
     !confirm(
@@ -2229,8 +2916,8 @@ function deleteExercise(exerciseId){
 
   db.exercises =
     db.exercises.filter(
-      x =>
-        x.id !==
+      value =>
+        value.id !==
         exerciseId
     );
 
@@ -2240,8 +2927,8 @@ function deleteExercise(exerciseId){
 
       training.exercises =
         training.exercises.filter(
-          x =>
-            x.exerciseId !==
+          item =>
+            item.exerciseId !==
             exerciseId
         );
 
@@ -2263,90 +2950,178 @@ function deleteExercise(exerciseId){
 
 
 /* =====================================================
-   KARTEN
+   ÜBUNGSKARTE
 ===================================================== */
 
-function exerciseCard(e){
+function exerciseCard(
+  exercise
+){
 
   return `
 
-  <article class="exercise-card">
-
-    ${
-      e.image
-        ?
-          `<img
-             class="exercise-photo"
-             src="${e.image}"
-             loading="lazy"
-             alt="">`
-        :
-          `<div class="no-photo">
-             🏑
-           </div>`
-    }
+<article class="exercise-card">
 
 
-    <div class="exercise-body">
+<div class="exercise-image-wrap">
 
-      <div class="exercise-name">
-
-        ${
-          e.favorite
-            ? "⭐ "
-            : ""
-        }
-
-        ${esc(e.name)}
-
-      </div>
-
-
-      <div class="meta">
-
-        ${esc(e.category)}
-        ·
-        ${e.duration || 0} min
-
-      </div>
+${
+  exercise.image
+    ?
+      `<img
+         class="exercise-photo"
+         src="${exercise.image}"
+         loading="lazy"
+         alt="">`
+    :
+      `<div class="no-photo">
+         🏑
+       </div>`
+}
 
 
-      <div class="tags">
+<button
+  class="favorite"
+  onclick="
+    toggleFavorite(
+      '${exercise.id}'
+    )
+  ">
 
-        ${
-          (e.age || [])
-            .map(
-              x =>
-                `<span class="tag">
-                   ${esc(x)}
-                 </span>`
-            )
-            .join("")
-        }
+${
+  exercise.favorite
+    ? "⭐"
+    : "☆"
+}
 
-      </div>
+</button>
 
 
-      <div class="actions">
+</div>
 
-        <button
-          class="primary"
-          onclick="addToTraining('${e.id}')">
-          ＋ Training
-        </button>
 
-        <button
-          onclick="editExercise('${e.id}')">
-          ✏️
-        </button>
+<div class="exercise-body">
 
-      </div>
 
-    </div>
+<div class="exercise-name">
 
-  </article>
+${esc(
+  exercise.name
+)}
 
-  `;
+</div>
+
+
+<div class="meta">
+
+${esc(
+  exercise.category
+)}
+
+·
+
+${exercise.duration || 0}
+min
+
+</div>
+
+
+<div class="tags">
+
+${
+  (exercise.age || [])
+    .map(
+      value =>
+        `<span class="tag">
+           ${esc(value)}
+         </span>`
+    )
+    .join("")
+}
+
+
+${
+  (exercise.tags || [])
+    .map(
+      value =>
+        `<span class="tag">
+           #${esc(value)}
+         </span>`
+    )
+    .join("")
+}
+
+</div>
+
+
+<div class="actions">
+
+
+<button
+  class="primary"
+  onclick="
+    addToTraining(
+      '${exercise.id}'
+    )
+  ">
+
+＋ Training
+
+</button>
+
+
+<button
+  class="light-btn"
+  onclick="
+    editExercise(
+      '${exercise.id}'
+    )
+  ">
+
+✏️
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</article>
+
+`;
+
+}
+
+
+/* =====================================================
+   FAVORIT
+===================================================== */
+
+function toggleFavorite(
+  exerciseId
+){
+
+  const exercise =
+    db.exercises.find(
+      value =>
+        value.id ===
+        exerciseId
+    );
+
+
+  if(!exercise)
+    return;
+
+
+  exercise.favorite =
+    !exercise.favorite;
+
+
+  saveDatabase();
+
+  renderAll();
 
 }
 
@@ -2389,41 +3164,57 @@ function renderLibrary(){
 
   const list =
     db.exercises.filter(
-      e => {
+      exercise => {
 
         const text =
           (
-            e.name +
+            exercise.name +
             " " +
-            e.category +
+            exercise.category +
             " " +
-            e.goal +
+            exercise.goal +
             " " +
-            e.description
+            exercise.description +
+            " " +
+            (
+              exercise.tags ||
+              []
+            ).join(" ")
           )
           .toLowerCase();
 
 
         return (
 
-          (!search ||
-           text.includes(search))
+          (
+            !search ||
+            text.includes(search)
+          )
 
           &&
 
-          (!category ||
-           e.category === category)
+          (
+            !category ||
+            exercise.category ===
+            category
+          )
 
           &&
 
-          (!age ||
-           (e.age || [])
-             .includes(age))
+          (
+            !age ||
+            (
+              exercise.age ||
+              []
+            ).includes(age)
+          )
 
           &&
 
-          (!favorite ||
-           e.favorite)
+          (
+            !favorite ||
+            exercise.favorite
+          )
 
         );
 
@@ -2436,32 +3227,48 @@ function renderLibrary(){
   ).innerHTML =
 
     list.length
+
       ?
-        list.map(
-          exerciseCard
-        ).join("")
+
+        list
+          .map(
+            exerciseCard
+          )
+          .join("")
+
       :
-        `<div
-           class="empty"
-           style="grid-column:1/-1">
 
-           Keine passenden Übungen.
+        `
 
-           <br><br>
+<div
+  class="empty"
+  style="grid-column:1/-1">
 
-           <button
-             class="primary"
-             onclick="newExercise()">
-             ＋ Übung erstellen
-           </button>
+  <div style="font-size:45px">
+    🏑
+  </div>
 
-         </div>`;
+  Keine passenden Übungen.
+
+  <br><br>
+
+  <button
+    class="primary"
+    onclick="newExercise()">
+
+    ＋ Übung erstellen
+
+  </button>
+
+</div>
+
+`;
 
 }
 
 
 /* =====================================================
-   TRAINING
+   NEUES TRAINING
 ===================================================== */
 
 function newTraining(){
@@ -2495,7 +3302,8 @@ function newTraining(){
 
   document.getElementById(
     "trainingTitle"
-  ).value = "";
+  ).value =
+    "";
 
 
   document.getElementById(
@@ -2512,18 +3320,24 @@ function newTraining(){
 
   document.getElementById(
     "trainingGoal"
-  ).value = "";
+  ).value =
+    "";
 
 
   document.getElementById(
     "trainingNotes"
-  ).value = "";
+  ).value =
+    "";
 
 
   renderTraining();
 
 }
 
+
+/* =====================================================
+   TRAINING SYNCHRONISIEREN
+===================================================== */
 
 function syncTraining(){
 
@@ -2563,34 +3377,43 @@ function syncTraining(){
 }
 
 
-function addToTraining(exerciseId){
+/* =====================================================
+   ÜBUNG ZU TRAINING
+===================================================== */
 
-  if(!currentTraining)
+function addToTraining(
+  exerciseId
+){
+
+  if(!currentTraining){
+
     newTraining();
 
+  }
 
-  const e =
+
+  const exercise =
     db.exercises.find(
-      x =>
-        x.id ===
+      value =>
+        value.id ===
         exerciseId
     );
 
 
-  if(!e)
+  if(!exercise)
     return;
 
 
   currentTraining.exercises.push({
 
-    id:id(),
+    id:
+      makeId(),
 
     exerciseId:
-
       exerciseId,
 
     duration:
-      e.duration ||
+      exercise.duration ||
       10
 
   });
@@ -2604,11 +3427,15 @@ function addToTraining(exerciseId){
   renderTraining();
 
   toast(
-    "Übung hinzugefügt"
+    "Übung zum Training hinzugefügt"
   );
 
 }
 
+
+/* =====================================================
+   TRAINING BIBLIOTHEK
+===================================================== */
 
 function renderTrainingLibrary(){
 
@@ -2623,15 +3450,28 @@ function renderTrainingLibrary(){
 
   const list =
     db.exercises.filter(
-      e =>
-        !search ||
-        (
-          e.name +
-          " " +
-          e.category
-        )
-        .toLowerCase()
-        .includes(search)
+      exercise => {
+
+        const text =
+          (
+            exercise.name +
+            " " +
+            exercise.category +
+            " " +
+            (
+              exercise.tags ||
+              []
+            ).join(" ")
+          )
+          .toLowerCase();
+
+
+        return (
+          !search ||
+          text.includes(search)
+        );
+
+      }
     );
 
 
@@ -2640,61 +3480,87 @@ function renderTrainingLibrary(){
   ).innerHTML =
 
     list.length
+
       ?
-        list.map(
-          e =>
-            `
 
-            <div
-              class="mini"
-              onclick="addToTraining('${e.id}')">
+        list
+          .map(
+            exercise =>
+              `
 
-              ${
-                e.image
-                  ?
-                    `<img
-                       src="${e.image}"
-                       alt="">`
-                  :
-                    `<div
-                       class="mini-photo"
-                       style="
-                         display:flex;
-                         align-items:center;
-                         justify-content:center;
-                         font-size:27px">
-                       🏑
-                     </div>`
-              }
+<div
+  class="mini"
+  onclick="
+    addToTraining(
+      '${exercise.id}'
+    )
+  ">
+
+${
+  exercise.image
+
+    ?
+
+      `<img
+         src="${exercise.image}"
+         alt="">`
+
+    :
+
+      `<div
+         class="mini-photo"
+         style="
+           display:flex;
+           align-items:center;
+           justify-content:center;
+           font-size:30px">
+
+         🏑
+
+       </div>`
+}
 
 
-              <div>
+<div class="mini-name">
 
-                <strong>
-                  ${esc(e.name)}
-                </strong>
+${esc(
+  exercise.name
+)}
 
-                <div class="meta">
-                  ${esc(e.category)}
-                </div>
+<br>
 
-                <div class="meta">
-                  ${e.duration || 0} min
-                </div>
+<span
+  class="meta">
 
-              </div>
+${exercise.duration || 0}
+min
 
-            </div>
+</span>
 
-            `
-        ).join("")
+</div>
+
+</div>
+
+`
+          )
+          .join("")
+
       :
-        `<div class="empty">
+
+        `<div
+           class="empty"
+           style="grid-column:1/-1">
+
            Keine Übungen.
+
          </div>`;
 
 }
 
+
+/* =====================================================
+   TRAINING RENDERN
+===================================================== */
 
 function renderTraining(){
 
@@ -2712,26 +3578,26 @@ function renderTraining(){
     !currentTraining.exercises.length
   ){
 
-    zone.innerHTML =
-      `
+    zone.innerHTML = `
 
-      <div class="empty">
+<div class="empty">
 
-        <div style="font-size:45px">
-          👆
-        </div>
+<div style="font-size:55px">
+  👆
+</div>
 
-        <strong>
-          Übungen hinzufügen
-        </strong>
+<strong>
+  Übungen hinzufügen
+</strong>
 
-        <br><br>
+<br><br>
 
-        Tippe links auf eine Übung.
+Tippe links auf eine Übung.
 
-      </div>
+</div>
 
-      `;
+`;
+
 
     updateTotal();
 
@@ -2743,101 +3609,146 @@ function renderTraining(){
   zone.innerHTML =
     currentTraining.exercises
       .map(
-        (item,index)=>{
+        (
+          item,
+          index
+        ) => {
 
-          const e =
+          const exercise =
             db.exercises.find(
-              x =>
-                x.id ===
+              value =>
+                value.id ===
                 item.exerciseId
             );
 
 
-          if(!e)
+          if(!exercise)
             return "";
 
 
           return `
 
-          <div class="training-item">
-
-            <div class="number">
-              ${index+1}
-            </div>
+<div class="training-item">
 
 
-            ${
-              e.image
-                ?
-                  `<img
-                     src="${e.image}"
-                     alt="">`
-                :
-                  `<div
-                     style="
-                       width:85px;
-                       height:65px;
-                       border-radius:9px;
-                       background:#e3e8ec;
-                       display:flex;
-                       align-items:center;
-                       justify-content:center;
-                       font-size:30px">
-                     🏑
-                   </div>`
-            }
+<div class="number">
+  ${index+1}
+</div>
 
 
-            <div>
+${
+  exercise.image
 
-              <strong>
-                ${esc(e.name)}
-              </strong>
+    ?
 
-              <div class="meta">
-                ${esc(e.category)}
-              </div>
+      `<img
+         src="${exercise.image}"
+         alt="">`
 
-              <div style="margin-top:7px">
+    :
 
-                <input
-                  type="number"
-                  min="0"
-                  value="${item.duration}"
-                  style="width:90px;padding:7px"
-                  onchange="changeDuration(${index},this.value)">
+      `<div
+         style="
+           width:90px;
+           height:68px;
+           border-radius:9px;
+           background:#e3e8ec;
+           display:flex;
+           align-items:center;
+           justify-content:center;
+           font-size:30px">
 
-                <span class="meta">
-                  Minuten
-                </span>
+         🏑
 
-              </div>
-
-            </div>
+       </div>`
+}
 
 
-            <div class="item-actions">
+<div>
 
-              <button
-                onclick="moveItem(${index},-1)">
-                ↑
-              </button>
+<strong>
+  ${esc(exercise.name)}
+</strong>
 
-              <button
-                onclick="moveItem(${index},1)">
-                ↓
-              </button>
 
-              <button
-                onclick="removeItem(${index})">
-                ✕
-              </button>
+<div class="meta">
+  ${esc(exercise.category)}
+</div>
 
-            </div>
 
-          </div>
+<div
+  style="margin-top:7px">
 
-          `;
+<input
+  type="number"
+  min="0"
+  value="${item.duration}"
+  style="
+    width:90px;
+    padding:7px"
+  onchange="
+    changeDuration(
+      ${index},
+      this.value
+    )
+  ">
+
+<span class="meta">
+  Minuten
+</span>
+
+</div>
+
+</div>
+
+
+<div class="item-actions">
+
+
+<button
+  onclick="
+    moveItem(
+      ${index},
+      -1
+    )
+  ">
+
+↑
+
+</button>
+
+
+<button
+  onclick="
+    moveItem(
+      ${index},
+      1
+    )
+  ">
+
+↓
+
+</button>
+
+
+<button
+  onclick="
+    removeItem(
+      ${index}
+    )
+  ">
+
+✕
+
+</button>
+
+
+</div>
+
+
+</div>
+
+`;
 
         }
       )
@@ -2849,7 +3760,14 @@ function renderTraining(){
 }
 
 
-function changeDuration(index,value){
+/* =====================================================
+   DAUER
+===================================================== */
+
+function changeDuration(
+  index,
+  value
+){
 
   currentTraining
     .exercises[index]
@@ -2858,10 +3776,15 @@ function changeDuration(index,value){
         value || 0
       );
 
+
   updateTotal();
 
 }
 
+
+/* =====================================================
+   GESAMTZEIT
+===================================================== */
 
 function updateTotal(){
 
@@ -2872,10 +3795,14 @@ function updateTotal(){
   const total =
     currentTraining.exercises
       .reduce(
-        (sum,x)=>
+        (
+          sum,
+          item
+        ) =>
           sum +
           Number(
-            x.duration || 0
+            item.duration ||
+            0
           ),
         0
       );
@@ -2889,19 +3816,33 @@ function updateTotal(){
 
   document.getElementById(
     "total"
-  ).innerHTML =
-    `
-      <span>⏱ Gesamtzeit</span>
-      <span>${total} Minuten</span>
-    `;
+  ).innerHTML = `
+
+<span>
+  ⏱ Gesamtzeit
+</span>
+
+<span>
+  ${total} Minuten
+</span>
+
+`;
 
 }
 
 
-function moveItem(index,direction){
+/* =====================================================
+   REIHENFOLGE
+===================================================== */
+
+function moveItem(
+  index,
+  direction
+){
 
   const target =
-    index + direction;
+    index +
+    direction;
 
 
   if(
@@ -2927,6 +3868,10 @@ function moveItem(index,direction){
 }
 
 
+/* =====================================================
+   ENTFERNEN
+===================================================== */
+
 function removeItem(index){
 
   currentTraining.exercises
@@ -2934,6 +3879,7 @@ function removeItem(index){
       index,
       1
     );
+
 
   renderTraining();
 
@@ -2964,7 +3910,7 @@ function saveTraining(){
   ){
 
     currentTraining.id =
-      id();
+      makeId();
 
   }
 
@@ -2979,8 +3925,8 @@ function saveTraining(){
 
   const index =
     db.trainings.findIndex(
-      x =>
-        x.id ===
+      value =>
+        value.id ===
         copy.id
     );
 
@@ -3024,12 +3970,19 @@ function renderSaved(){
     );
 
 
-  if(!db.trainings.length){
+  if(
+    !db.trainings.length
+  ){
 
-    container.innerHTML =
-      `<div class="empty">
-         Noch keine Trainings gespeichert.
-       </div>`;
+    container.innerHTML = `
+
+<div class="empty">
+
+Noch keine Trainings gespeichert.
+
+</div>
+
+`;
 
     return;
 
@@ -3040,110 +3993,155 @@ function renderSaved(){
     db.trainings
       .slice()
       .sort(
-        (a,b)=>
+        (
+          a,
+          b
+        ) =>
           (
-            b.date || ""
+            b.date ||
+            ""
           )
           .localeCompare(
-            a.date || ""
+            a.date ||
+            ""
           )
       )
       .map(
-        t =>
-          `
+        training => `
 
-          <div
-            class="card saved">
-
-            <div
-              style="
-                display:flex;
-                justify-content:space-between;
-                gap:10px;
-                align-items:center">
-
-              <div>
-
-                <div class="meta">
-                  ${esc(t.date)}
-                  ·
-                  ${esc(t.team)}
-                </div>
-
-                <h2 style="margin:5px 0">
-                  ${esc(t.title)}
-                </h2>
-
-                <div class="meta">
-
-                  ${t.exercises.length}
-                  Übungen
-
-                  ·
-
-                  ${
-                    t.exercises.reduce(
-                      (s,x)=>
-                        s +
-                        Number(
-                          x.duration || 0
-                        ),
-                      0
-                    )
-                  }
-                  Minuten
-
-                </div>
-
-              </div>
+<div class="card saved">
 
 
-              <div
-                style="display:flex;gap:6px">
+<div
+  style="
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    align-items:center">
 
-                <button
-                  class="primary"
-                  onclick="openTraining('${t.id}')">
-                  Öffnen
-                </button>
 
-                <button
-                  class="danger"
-                  onclick="deleteTraining('${t.id}')">
-                  🗑
-                </button>
+<div>
 
-              </div>
+<div class="meta">
 
-            </div>
+${esc(
+  training.date
+)}
 
-          </div>
+·
 
-          `
+${esc(
+  training.team
+)}
+
+</div>
+
+
+<h2
+  style="margin:5px 0">
+
+${esc(
+  training.title
+)}
+
+</h2>
+
+
+<div class="meta">
+
+${training.exercises.length}
+Übungen
+
+·
+
+${training.exercises.reduce(
+  (
+    sum,
+    item
+  ) =>
+    sum +
+    Number(
+      item.duration ||
+      0
+    ),
+  0
+)}
+Minuten
+
+</div>
+
+</div>
+
+
+<div
+  style="
+    display:flex;
+    gap:6px">
+
+<button
+  class="primary"
+  onclick="
+    openTraining(
+      '${training.id}'
+    )
+  ">
+
+Öffnen
+
+</button>
+
+
+<button
+  class="danger"
+  onclick="
+    deleteTraining(
+      '${training.id}'
+    )
+  ">
+
+🗑
+
+</button>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+`
       )
       .join("");
 
 }
 
 
-function openTraining(trainingId){
+/* =====================================================
+   TRAINING ÖFFNEN
+===================================================== */
 
-  const t =
+function openTraining(
+  trainingId
+){
+
+  const training =
     db.trainings.find(
-      x =>
-        x.id ===
+      value =>
+        value.id ===
         trainingId
     );
 
 
-  if(!t)
+  if(!training)
     return;
 
 
   currentTraining =
     JSON.parse(
       JSON.stringify(
-        t
+        training
       )
     );
 
@@ -3188,7 +4186,13 @@ function openTraining(trainingId){
 }
 
 
-function deleteTraining(trainingId){
+/* =====================================================
+   TRAINING LÖSCHEN
+===================================================== */
+
+function deleteTraining(
+  trainingId
+){
 
   if(
     !confirm(
@@ -3200,8 +4204,8 @@ function deleteTraining(trainingId){
 
   db.trainings =
     db.trainings.filter(
-      x =>
-        x.id !==
+      value =>
+        value.id !==
         trainingId
     );
 
@@ -3217,29 +4221,38 @@ function deleteTraining(trainingId){
    WOCHENPLAN
 ===================================================== */
 
-function mondayOfWeek(date){
+function mondayOfWeek(
+  date
+){
 
-  const d =
+  const result =
     new Date(date);
 
-  const day =
-    d.getDay();
 
-  const diff =
+  const day =
+    result.getDay();
+
+
+  const difference =
     day === 0
       ? -6
-      : 1-day;
+      : 1 - day;
 
-  d.setDate(
-    d.getDate()+diff
+
+  result.setDate(
+    result.getDate() +
+    difference
   );
 
-  return d;
+
+  return result;
 
 }
 
 
-function dateKey(date){
+function dateKey(
+  date
+){
 
   return date
     .toISOString()
@@ -3263,6 +4276,7 @@ function renderWeek(){
 
 
   const names = [
+
     "Montag",
     "Dienstag",
     "Mittwoch",
@@ -3270,86 +4284,116 @@ function renderWeek(){
     "Freitag",
     "Samstag",
     "Sonntag"
+
   ];
 
 
-  let html = "";
+  let html =
+    "";
 
 
-  for(let i=0;i<7;i++){
+  for(
+    let i=0;
+    i<7;
+    i++
+  ){
 
-    const d =
+    const date =
       new Date(
         monday
       );
 
-    d.setDate(
-      monday.getDate()+i
+
+    date.setDate(
+      monday.getDate() +
+      i
     );
 
 
     const key =
-      dateKey(d);
+      dateKey(
+        date
+      );
 
 
     const trainings =
       db.trainings.filter(
-        t =>
-          t.date ===
+        training =>
+          training.date ===
           key
       );
 
 
     html += `
 
-      <div class="day">
+<div class="day">
 
-        <div class="dayname">
-          ${names[i]}
-        </div>
 
-        <div class="daydate">
-          ${d.toLocaleDateString(
-            "de-DE",
-            {
-              day:"2-digit",
-              month:"2-digit"
-            }
-          )}
-        </div>
+<div class="dayname">
+  ${names[i]}
+</div>
 
-        ${
-          trainings.length
-            ?
-              trainings
-                .map(
-                  t =>
-                    `<div
-                       class="daytraining"
-                       onclick="openTraining('${t.id}')">
 
-                       <strong>
-                         ${esc(t.team)}
-                       </strong>
+<div class="daydate">
 
-                       <br>
+${date.toLocaleDateString(
+  "de-DE",
+  {
+    day:"2-digit",
+    month:"2-digit"
+  }
+)}
 
-                       ${esc(t.title)}
+</div>
 
-                     </div>`
-                )
-                .join("")
-            :
-              `<div
-                 class="meta"
-                 style="margin-top:15px">
-                 —
-               </div>`
-        }
 
-      </div>
+${
+  trainings.length
 
-    `;
+    ?
+
+      trainings
+        .map(
+          training => `
+
+<div
+  class="daytraining"
+  onclick="
+    openTraining(
+      '${training.id}'
+    )
+  ">
+
+<strong>
+  ${esc(training.team)}
+</strong>
+
+<br>
+
+${esc(training.title)}
+
+</div>
+
+`
+        )
+        .join("")
+
+    :
+
+      `<div
+         class="meta"
+         style="margin-top:15px">
+
+         —
+
+       </div>`
+
+}
+
+
+</div>
+
+`;
 
   }
 
@@ -3375,7 +4419,7 @@ function startMode(){
   ){
 
     toast(
-      "Bitte Übungen hinzufügen."
+      "Bitte zuerst Übungen hinzufügen."
     );
 
     return;
@@ -3386,10 +4430,13 @@ function startMode(){
   modeIndex =
     0;
 
+
   timerSeconds =
     0;
 
+
   renderMode();
+
 
   document.getElementById(
     "modeModal"
@@ -3400,174 +4447,273 @@ function startMode(){
 }
 
 
+/* =====================================================
+   MODUS RENDERN
+===================================================== */
+
 function renderMode(){
 
   const item =
     currentTraining
-      .exercises[modeIndex];
+      .exercises[
+        modeIndex
+      ];
 
 
-  const e =
+  const exercise =
     db.exercises.find(
-      x =>
-        x.id ===
+      value =>
+        value.id ===
         item.exerciseId
     );
 
 
-  if(!e)
+  if(!exercise)
     return;
 
 
   document.getElementById(
     "modeTitle"
   ).textContent =
-    `${modeIndex+1} / ${currentTraining.exercises.length}
-     · ${e.name}`;
+    `${modeIndex+1} / ${
+      currentTraining.exercises.length
+    } · ${exercise.name}`;
 
 
   document.getElementById(
     "modeBody"
-  ).innerHTML =
+  ).innerHTML = `
 
-    `
+${
+  exercise.image
 
-    ${
-      e.image
-        ?
-          `<img
-             src="${e.image}"
-             class="mode-photo"
-             alt="">`
-        :
-          `<div
-             class="mode-photo"
-             style="
-               height:280px;
-               display:flex;
-               align-items:center;
-               justify-content:center;
-               font-size:80px">
-             🏑
-           </div>`
-    }
+    ?
 
+      `<img
+         src="${exercise.image}"
+         class="mode-photo"
+         alt="">`
 
-    <h2>
-      ${esc(e.name)}
-    </h2>
+    :
 
+      `<div
+         class="mode-photo"
+         style="
+           height:280px;
+           display:flex;
+           align-items:center;
+           justify-content:center;
+           font-size:80px">
 
-    <div class="meta">
-      ${esc(e.category)}
-      ·
-      ${item.duration} Minuten
-    </div>
+         🏑
+
+       </div>`
+}
 
 
-    ${
-      e.description
-        ?
-          `<div>
-             <h3>Ablauf</h3>
-             <p>${esc(e.description)}</p>
-           </div>`
-        :
-        ""
-    }
+<h2>
+
+${esc(
+  exercise.name
+)}
+
+</h2>
 
 
-    ${
-      e.tips
-        ?
-          `<div>
-             <h3>👀 Trainerhinweise</h3>
-             <p>${esc(e.tips)}</p>
-           </div>`
-        :
-        ""
-    }
+<div class="meta">
+
+${esc(
+  exercise.category
+)}
+
+·
+
+${item.duration}
+Minuten
+
+</div>
 
 
-    <div class="timer">
+${
+  exercise.description
 
-      <div
-        id="timerNumber"
-        class="timer-number">
-        ${formatTime(timerSeconds)}
-      </div>
+    ?
 
+      `<div>
 
-      <div class="timer-buttons">
+         <h3>
+           Ablauf
+         </h3>
 
-        <button
-          class="primary"
-          onclick="startTimer(${item.duration})">
-          ▶ Start
-        </button>
+         <p>
+           ${esc(
+             exercise.description
+           )}
+         </p>
 
-        <button
-          onclick="stopTimer()">
-          ■ Stop
-        </button>
+       </div>`
 
-        <button
-          onclick="resetTimer(${item.duration})">
-          ↻ Reset
-        </button>
+    :
 
-      </div>
-
-    </div>
+      ""
+}
 
 
-    <div
-      style="
-        display:flex;
-        gap:7px">
+${
+  exercise.tips
 
-      <button
-        style="flex:1"
-        onclick="previousExercise()">
-        ← Zurück
-      </button>
+    ?
 
-      <button
-        class="primary"
-        style="flex:1"
-        onclick="nextExercise()">
-        Weiter →
-      </button>
+      `<div>
 
-    </div>
+         <h3>
+           👀 Trainerhinweise
+         </h3>
 
-    `;
+         <p>
+           ${esc(
+             exercise.tips
+           )}
+         </p>
+
+       </div>`
+
+    :
+
+      ""
+}
+
+
+<div class="timer">
+
+
+<div
+  id="timerNumber"
+  class="timer-number">
+
+${formatTime(
+  timerSeconds
+)}
+
+</div>
+
+
+<div class="timer-buttons">
+
+
+<button
+  class="primary"
+  onclick="
+    startTimer(
+      ${item.duration}
+    )
+  ">
+
+▶ Start
+
+</button>
+
+
+<button
+  onclick="stopTimer()">
+
+■ Stop
+
+</button>
+
+
+<button
+  onclick="
+    resetTimer(
+      ${item.duration}
+    )
+  ">
+
+↻ Reset
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+<div
+  style="
+    display:flex;
+    gap:7px">
+
+
+<button
+  style="flex:1"
+  onclick="previousExercise()">
+
+← Zurück
+
+</button>
+
+
+<button
+  class="primary"
+  style="flex:1"
+  onclick="nextExercise()">
+
+Weiter →
+
+</button>
+
+
+</div>
+
+`;
 
 }
 
 
-function formatTime(seconds){
+/* =====================================================
+   TIMER
+===================================================== */
 
-  const m =
+function formatTime(
+  seconds
+){
+
+  const minutes =
     Math.floor(
-      seconds/60
+      seconds / 60
     );
 
-  const s =
-    seconds%60;
+
+  const remaining =
+    seconds % 60;
+
 
   return (
-    String(m).padStart(2,"0")
+    String(
+      minutes
+    ).padStart(
+      2,
+      "0"
+    )
     +
     ":"
     +
-    String(s).padStart(2,"0")
+    String(
+      remaining
+    ).padStart(
+      2,
+      "0"
+    )
   );
 
 }
 
 
-function startTimer(minutes){
+function startTimer(
+  minutes
+){
 
   stopTimer();
 
@@ -3577,7 +4723,10 @@ function startTimer(minutes){
   ){
 
     timerSeconds =
-      Number(minutes || 10) *
+      Number(
+        minutes ||
+        10
+      ) *
       60;
 
   }
@@ -3605,17 +4754,20 @@ function startTimer(minutes){
         timerSeconds--;
 
 
-        const el =
+        const element =
           document.getElementById(
             "timerNumber"
           );
 
 
-        if(el)
-          el.textContent =
+        if(element){
+
+          element.textContent =
             formatTime(
               timerSeconds
             );
+
+        }
 
       },
       1000
@@ -3640,26 +4792,35 @@ function stopTimer(){
 }
 
 
-function resetTimer(minutes){
+function resetTimer(
+  minutes
+){
 
   stopTimer();
 
+
   timerSeconds =
-    Number(minutes || 10) *
+    Number(
+      minutes ||
+      10
+    ) *
     60;
 
 
-  const el =
+  const element =
     document.getElementById(
       "timerNumber"
     );
 
 
-  if(el)
-    el.textContent =
+  if(element){
+
+    element.textContent =
       formatTime(
         timerSeconds
       );
+
+  }
 
 }
 
@@ -3668,7 +4829,7 @@ function nextExercise(){
 
   if(
     modeIndex <
-    currentTraining.exercises.length-1
+    currentTraining.exercises.length - 1
   ){
 
     modeIndex++;
@@ -3685,7 +4846,9 @@ function nextExercise(){
 
 function previousExercise(){
 
-  if(modeIndex > 0){
+  if(
+    modeIndex > 0
+  ){
 
     modeIndex--;
 
@@ -3702,6 +4865,7 @@ function previousExercise(){
 function closeMode(){
 
   stopTimer();
+
 
   document.getElementById(
     "modeModal"
@@ -3721,7 +4885,9 @@ function printTraining(){
   if(!currentTraining)
     return;
 
+
   syncTraining();
+
 
   window.print();
 
@@ -3729,26 +4895,18 @@ function printTraining(){
 
 
 /* =====================================================
-   IMPORT / EXPORT
+   EXPORT
 ===================================================== */
-
-/*
-   Das komplette Datenobjekt wird als JSON exportiert.
-
-   Bilder liegen bereits als verkleinerte JPEG-Data-URLs
-   in den Übungen und werden deshalb automatisch
-   mit exportiert.
-*/
 
 function exportBackup(){
 
   const backup = {
 
-    format:
-      "Hockey Trainingsplaner Backup",
+    application:
+      "Hockey Trainingsplaner",
 
     version:
-      3,
+      4,
 
     exportedAt:
       new Date().toISOString(),
@@ -3786,16 +4944,17 @@ function exportBackup(){
     );
 
 
-  const a =
+  const link =
     document.createElement(
       "a"
     );
 
 
-  a.href =
+  link.href =
     url;
 
-  a.download =
+
+  link.download =
     "hockey-trainer-backup-" +
     new Date()
       .toISOString()
@@ -3803,11 +4962,15 @@ function exportBackup(){
     ".json";
 
 
-  document.body.appendChild(a);
+  document.body.appendChild(
+    link
+  );
 
-  a.click();
 
-  a.remove();
+  link.click();
+
+
+  link.remove();
 
 
   setTimeout(
@@ -3827,7 +4990,13 @@ function exportBackup(){
 }
 
 
-function importBackup(event){
+/* =====================================================
+   IMPORT
+===================================================== */
+
+function importBackup(
+  event
+){
 
   const file =
     event.target.files &&
@@ -3865,7 +5034,13 @@ function importBackup(event){
 }
 
 
-function processImport(text){
+/* =====================================================
+   IMPORT VERARBEITEN
+===================================================== */
+
+function processImport(
+  text
+){
 
   let backup;
 
@@ -3873,12 +5048,14 @@ function processImport(text){
   try{
 
     backup =
-      JSON.parse(text);
+      JSON.parse(
+        text
+      );
 
-  }catch(e){
+  }catch(error){
 
     alert(
-      "Die Datei ist keine gültige JSON-Backup-Datei."
+      "Die Datei ist keine gültige JSON-Datei."
     );
 
     return;
@@ -3896,7 +5073,7 @@ function processImport(text){
   ){
 
     alert(
-      "Diese Datei scheint kein gültiges Hockey-Trainingsplaner-Backup zu sein."
+      "Ungültiges Hockey-Trainingsplaner-Backup."
     );
 
     return;
@@ -3906,20 +5083,24 @@ function processImport(text){
 
   const choice =
     prompt(
-      "Import auswählen:\n\n" +
+      "Import:\n\n" +
       "1 = Zusammenführen\n" +
       "2 = Bestehende Daten ersetzen\n\n" +
       "Bitte 1 oder 2 eingeben."
     );
 
 
-  if(choice === "1"){
+  if(
+    choice === "1"
+  ){
 
     mergeBackup(
       backup
     );
 
-  }else if(choice === "2"){
+  }else if(
+    choice === "2"
+  ){
 
     if(
       !confirm(
@@ -3963,22 +5144,28 @@ function processImport(text){
 }
 
 
-function mergeBackup(backup){
+/* =====================================================
+   BACKUP ZUSAMMENFÜHREN
+===================================================== */
 
-  const existingExerciseIds =
+function mergeBackup(
+  backup
+){
+
+  const exerciseIds =
     new Set(
       db.exercises.map(
-        x =>
-          x.id
+        exercise =>
+          exercise.id
       )
     );
 
 
-  const existingTrainingIds =
+  const trainingIds =
     new Set(
       db.trainings.map(
-        x =>
-          x.id
+        training =>
+          training.id
       )
     );
 
@@ -3992,33 +5179,30 @@ function mergeBackup(backup){
 
 
   backup.exercises.forEach(
-    e => {
+    exercise => {
 
       if(
-        existingExerciseIds.has(
-          e.id
+        exerciseIds.has(
+          exercise.id
         )
       ){
 
-        /*
-          Bei gleicher ID ersetzen wir
-          die vorhandene Übung durch
-          die importierte Version.
-        */
-
         const index =
           db.exercises.findIndex(
-            x =>
-              x.id ===
-              e.id
+            value =>
+              value.id ===
+              exercise.id
           );
 
+
         db.exercises[index] =
-          e;
+          exercise;
 
       }else{
 
-        db.exercises.push(e);
+        db.exercises.push(
+          exercise
+        );
 
         addedExercises++;
 
@@ -4029,27 +5213,30 @@ function mergeBackup(backup){
 
 
   backup.trainings.forEach(
-    t => {
+    training => {
 
       if(
-        existingTrainingIds.has(
-          t.id
+        trainingIds.has(
+          training.id
         )
       ){
 
         const index =
           db.trainings.findIndex(
-            x =>
-              x.id ===
-              t.id
+            value =>
+              value.id ===
+              training.id
           );
 
+
         db.trainings[index] =
-          t;
+          training;
 
       }else{
 
-        db.trainings.push(t);
+        db.trainings.push(
+          training
+        );
 
         addedTrainings++;
 
@@ -4063,6 +5250,7 @@ function mergeBackup(backup){
 
   renderAll();
 
+
   toast(
     `📥 ${addedExercises} Übungen und ${addedTrainings} Trainings importiert`
   );
@@ -4071,7 +5259,7 @@ function mergeBackup(backup){
 
 
 /* =====================================================
-   DATEN LÖSCHEN
+   ALLE DATEN LÖSCHEN
 ===================================================== */
 
 function clearAllData(){
@@ -4111,6 +5299,7 @@ function clearAllData(){
 
   renderAll();
 
+
   toast(
     "Alle Daten gelöscht"
   );
@@ -4140,8 +5329,10 @@ function renderStatistics(){
     "statImages"
   ).textContent =
     db.exercises.filter(
-      x =>
-        !!x.image
+      exercise =>
+        Boolean(
+          exercise.image
+        )
     ).length;
 
 }
@@ -4162,8 +5353,8 @@ function renderHome(){
   const favorites =
     db.exercises
       .filter(
-        x =>
-          x.favorite
+        exercise =>
+          exercise.favorite
       )
       .slice(
         0,
@@ -4174,23 +5365,32 @@ function renderHome(){
   document.getElementById(
     "favorites"
   ).innerHTML =
+
     favorites.length
+
       ?
-        favorites.map(
-          exerciseCard
-        ).join("")
+
+        favorites
+          .map(
+            exerciseCard
+          )
+          .join("")
+
       :
+
         `<div
            class="empty"
            style="grid-column:1/-1">
+
            Noch keine Favoriten.
+
          </div>`;
 
 }
 
 
 /* =====================================================
-   MODAL
+   MODAL SCHLIESSEN
 ===================================================== */
 
 function closeExerciseModal(){
@@ -4201,6 +5401,7 @@ function closeExerciseModal(){
     "show"
   );
 
+
   imageData =
     null;
 
@@ -4208,7 +5409,7 @@ function closeExerciseModal(){
 
 
 /* =====================================================
-   ALLES AKTUALISIEREN
+   ALLES RENDERN
 ===================================================== */
 
 function renderAll(){
@@ -4225,8 +5426,12 @@ function renderAll(){
 
   renderStatistics();
 
-  if(currentTraining)
+
+  if(currentTraining){
+
     renderTraining();
+
+  }
 
 }
 
@@ -4239,6 +5444,14 @@ setupFilters();
 
 renderAll();
 
+showView(
+  "home"
+);
+
+
+/* =====================================================
+   MODAL KLICK AUSSEN
+===================================================== */
 
 document
   .getElementById(
@@ -4246,7 +5459,7 @@ document
   )
   .addEventListener(
     "click",
-    event=>{
+    event => {
 
       if(
         event.target.id ===
@@ -4267,7 +5480,7 @@ document
   )
   .addEventListener(
     "click",
-    event=>{
+    event => {
 
       if(
         event.target.id ===
