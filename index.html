@@ -523,11 +523,108 @@ label{
   }
 }
 
-@media(max-width:650px){
+@media(max-width:1100px){
 
   main{
     padding:9px;
+    padding-bottom:85px;
   }
+
+  .home-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .exercise-grid{
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+  }
+
+  .exercise-body{
+    padding:10px;
+  }
+
+  .exercise-name{
+    font-size:15px;
+  }
+
+  .fields,
+  .fields2,
+  .form-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .full{
+    grid-column:1/-1;
+  }
+
+  .training-layout{
+    grid-template-columns:1fr;
+  }
+
+  .library-panel{
+    position:static;
+    height:auto;
+    max-height:350px;
+  }
+
+  .training-item{
+    grid-template-columns:38px 85px 1fr auto;
+  }
+
+  .training-item img{
+    width:85px;
+    height:65px;
+  }
+
+  .item-actions{
+    display:flex;
+    grid-column:auto;
+  }
+
+  .bottom{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:50;
+
+    display:flex;
+
+    background:white;
+
+    border-top:1px solid var(--line);
+
+    padding:
+      4px
+      4px
+      max(4px,env(safe-area-inset-bottom));
+
+    box-shadow:
+      0 -3px 12px rgba(0,0,0,.08);
+  }
+
+  .bottom button{
+    flex:1;
+    background:transparent;
+    min-height:52px;
+    font-size:11px;
+    padding:4px;
+  }
+
+  .bottom span{
+    display:block;
+    font-size:21px;
+    line-height:24px;
+  }
+
+  .desktop{
+    display:none!important;
+  }
+
+}
+
+
+@media(max-width:650px){
 
   .home-grid{
     grid-template-columns:1fr;
@@ -536,14 +633,6 @@ label{
   .exercise-grid{
     grid-template-columns:repeat(2,1fr);
     gap:8px;
-  }
-
-  .exercise-body{
-    padding:9px;
-  }
-
-  .exercise-name{
-    font-size:15px;
   }
 
   .fields,
@@ -569,33 +658,6 @@ label{
     grid-column:3;
   }
 
-  .bottom{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    z-index:50;
-    display:flex;
-    background:white;
-    border-top:1px solid var(--line);
-    padding:4px 4px max(4px,env(safe-area-inset-bottom));
-  }
-
-  .bottom button{
-    flex:1;
-    background:transparent;
-    min-height:50px;
-    font-size:10px;
-  }
-
-  .bottom span{
-    display:block;
-    font-size:20px;
-  }
-
-  .desktop{
-    display:none!important;
-  }
 }
 
 @media print{
