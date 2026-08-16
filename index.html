@@ -2,874 +2,671 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#111827">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2563eb">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Trainingsplan">
 
-<title>Trainingsplan</title>
+<title>Hockey Trainingsplan</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
 
-:root {
-  --bg: #f3f4f6;
-  --card: #ffffff;
-  --text: #111827;
-  --muted: #6b7280;
-  --border: #e5e7eb;
-  --primary: #2563eb;
-  --primary-dark: #1d4ed8;
-  --danger: #dc2626;
-  --success: #16a34a;
-  --nav-height: 76px;
+:root{
+  --blue:#2563eb;
+  --blue-light:#eff6ff;
+  --bg:#f3f4f6;
+  --card:#fff;
+  --text:#111827;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --red:#dc2626;
+  --green:#059669;
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Helvetica,
-    Arial,
-    sans-serif;
-  min-height: 100%;
+html,body{
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
 
-body {
-  padding-bottom:
-    calc(
-      var(--nav-height) +
-      env(safe-area-inset-bottom) +
-      20px
-    );
+body{
+  padding-bottom:calc(84px + env(safe-area-inset-bottom));
 }
 
-button,
-input,
-textarea,
-select {
-  font: inherit;
+button,input,textarea,select{
+  font:inherit;
 }
 
-button {
-  cursor: pointer;
+button{
+  cursor:pointer;
+  touch-action:manipulation;
 }
 
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: rgba(255,255,255,.96);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-
-  padding:
-    max(12px, env(safe-area-inset-top))
-    16px
-    12px;
+.top{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  padding:max(12px,env(safe-area-inset-top)) 16px 12px;
 }
-
-.topbar-inner {
-  max-width: 1100px;
-  margin: auto;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  gap: 12px;
+.topin{
+  max-width:1100px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
 }
 
-.logo {
-  font-size: 21px;
-  font-weight: 800;
+.logo{
+  font-size:20px;
+  font-weight:800;
 }
 
-.subtitle {
-  font-size: 12px;
-  color: var(--muted);
+.sub{
+  font-size:12px;
+  color:var(--muted);
 }
 
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 18px 16px 30px;
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:18px 16px 30px;
 }
 
-.view {
-  display: none;
+.view{
+  display:none;
 }
 
-.view.active {
-  display: block;
+.view.active{
+  display:block;
 }
 
-h1 {
-  margin: 4px 0 6px;
-  font-size: 28px;
+h1{
+  font-size:28px;
+  margin:5px 0;
 }
 
-h2 {
-  margin: 0 0 12px;
+h2{
+  margin-top:0;
 }
 
-h3 {
-  margin: 0 0 6px;
+h3{
+  margin-top:0;
 }
 
-p {
-  line-height: 1.5;
+.muted{
+  color:var(--muted);
 }
 
-.muted {
-  color: var(--muted);
+.btn{
+  border:0;
+  border-radius:12px;
+  background:#e5e7eb;
+  padding:11px 14px;
+  min-height:44px;
+  font-weight:700;
+  color:#111827;
+  touch-action:manipulation;
 }
-
-/* BUTTONS */
-
-.btn {
-  border: 0;
-  border-radius: 12px;
-  padding: 12px 16px;
-  min-height: 46px;
 
-  font-weight: 700;
-
-  background: #e5e7eb;
-  color: #111827;
+.btn.primary{
+  background:var(--blue);
+  color:#fff;
 }
 
-.btn.primary {
-  background: var(--primary);
-  color: white;
+.btn.danger{
+  background:#fee2e2;
+  color:var(--red);
 }
 
-.btn.primary:active {
-  background: var(--primary-dark);
+.btn.green{
+  background:#d1fae5;
+  color:#047857;
 }
 
-.btn.danger {
-  background: #fee2e2;
-  color: var(--danger);
+.btn.full{
+  width:100%;
 }
 
-.btn.success {
-  background: #dcfce7;
-  color: var(--success);
+.btn.small{
+  min-height:38px;
+  padding:8px 11px;
 }
 
-.btn.small {
-  min-height: 38px;
-  padding: 8px 12px;
-  font-size: 14px;
+.toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:14px 0;
 }
 
-.btn.full {
-  width: 100%;
+.search{
+  width:100%;
+  height:48px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:0 14px;
+  background:#fff;
 }
 
-/* TOOLBAR */
-
-.toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 16px 0;
+.filters{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:10px 0;
+  scrollbar-width:none;
 }
-
-/* SEARCH */
-
-.search {
-  width: 100%;
-  min-height: 48px;
-
-  border: 1px solid var(--border);
-  border-radius: 13px;
-
-  padding: 0 14px;
 
-  background: white;
+.filters::-webkit-scrollbar{
+  display:none;
 }
 
-/* FILTERS */
-
-.filters {
-  display: flex;
-  gap: 8px;
-
-  overflow-x: auto;
-
-  padding: 8px 0 4px;
-
-  scrollbar-width: none;
+.chip{
+  flex:0 0 auto;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:999px;
+  padding:9px 13px;
 }
 
-.filters::-webkit-scrollbar {
-  display: none;
+.chip.active{
+  background:var(--blue);
+  border-color:var(--blue);
+  color:#fff;
 }
-
-.filter-chip {
-  flex: 0 0 auto;
 
-  border: 1px solid var(--border);
-  background: white;
-
-  border-radius: 999px;
-
-  padding: 9px 14px;
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  margin:14px 0;
 }
 
-.filter-chip.active {
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
+.stat{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:12px;
 }
-
-/* STATISTICS */
-
-.stats {
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  gap: 10px;
 
-  margin: 16px 0;
+.stat b{
+  font-size:24px;
+  display:block;
 }
 
-.stat {
-  background: white;
-
-  border: 1px solid var(--border);
-  border-radius: 14px;
-
-  padding: 14px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
 }
 
-.stat-number {
-  font-size: 25px;
-  font-weight: 800;
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
 }
-
-/* EXERCISE GRID */
-
-.exercise-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
 
-  gap: 12px;
+.cardimg,
+.placeholder{
+  width:100%;
+  aspect-ratio:1.25;
+  object-fit:cover;
+  background:#e5e7eb;
 }
 
-.exercise-card {
-  background: var(--card);
-
-  border: 1px solid var(--border);
-  border-radius: 16px;
-
-  overflow: hidden;
-
-  box-shadow:
-    0 2px 8px rgba(0,0,0,.04);
+.placeholder{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:42px;
 }
-
-.exercise-image {
-  width: 100%;
-  aspect-ratio: 1.25 / 1;
-
-  object-fit: cover;
-
-  background: #e5e7eb;
 
-  display: block;
+.cardbody{
+  padding:11px;
 }
 
-.exercise-placeholder {
-  width: 100%;
-  aspect-ratio: 1.25 / 1;
-
-  background: #e5e7eb;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 42px;
+.title{
+  font-weight:800;
+  font-size:16px;
 }
 
-.exercise-body {
-  padding: 12px;
+.category{
+  display:inline-block;
+  margin-top:5px;
+  background:var(--blue-light);
+  color:#1d4ed8;
+  padding:5px 8px;
+  border-radius:7px;
+  font-size:12px;
+  font-weight:700;
 }
 
-.exercise-title {
-  font-weight: 800;
-  font-size: 16px;
-
-  margin-bottom: 5px;
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  margin:8px 0;
 }
-
-.category-label {
-  display: inline-block;
-
-  font-size: 12px;
-  font-weight: 700;
 
-  padding: 5px 8px;
-
-  border-radius: 7px;
-
-  background: #eff6ff;
-  color: #1d4ed8;
-
-  margin-top: 4px;
+.tag{
+  font-size:11px;
+  padding:5px 8px;
+  border-radius:999px;
+  background:#eef2ff;
+  color:#3730a3;
 }
 
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-
-  gap: 5px;
-
-  margin: 8px 0;
+.age{
+  background:#ecfdf5;
+  color:#047857;
 }
-
-.tag {
-  font-size: 11px;
 
-  padding: 5px 8px;
-
-  border-radius: 999px;
-
-  background: #eef2ff;
-  color: #3730a3;
+.materialtag{
+  background:#fff7ed;
+  color:#c2410c;
 }
 
-.age-tag {
-  background: #ecfdf5;
-  color: #047857;
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin-top:9px;
 }
-
-.card-actions {
-  display: grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap: 7px;
 
-  margin-top: 10px;
+.actions .btn{
+  min-height:39px;
+  padding:7px;
+  font-size:13px;
 }
 
-.card-actions .btn {
-  min-height: 40px;
-
-  padding: 8px;
-
-  font-size: 13px;
+.empty{
+  text-align:center;
+  background:#fff;
+  border:1px dashed var(--border);
+  border-radius:16px;
+  padding:40px 18px;
+  grid-column:1/-1;
 }
-
-/* EMPTY */
-
-.empty {
-  text-align: center;
-
-  padding: 45px 20px;
-
-  color: var(--muted);
 
-  background: white;
-
-  border: 1px dashed var(--border);
-
-  border-radius: 16px;
+.form{
+  display:grid;
+  gap:13px;
 }
-
-/* TRAINING */
-
-.training-header {
-  background: white;
-
-  border: 1px solid var(--border);
-  border-radius: 16px;
-
-  padding: 16px;
 
-  margin-bottom: 14px;
+.group{
+  display:grid;
+  gap:6px;
 }
 
-.training-list {
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 10px;
+.group label{
+  font-weight:700;
+  font-size:14px;
 }
-
-.training-item {
-  background: white;
-
-  border: 1px solid var(--border);
-  border-radius: 14px;
-
-  padding: 12px;
-
-  display: flex;
 
-  gap: 10px;
-
-  align-items: flex-start;
+.control{
+  width:100%;
+  min-height:46px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:10px 12px;
+  background:#fff;
 }
-
-.training-thumb {
-  width: 72px;
-  height: 72px;
-
-  border-radius: 10px;
-
-  object-fit: cover;
-
-  background: #e5e7eb;
 
-  flex: 0 0 72px;
+textarea.control{
+  min-height:100px;
+  resize:vertical;
 }
 
-.training-number {
-  width: 28px;
-  height: 28px;
-
-  border-radius: 50%;
-
-  background: #eff6ff;
-  color: var(--primary);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-weight: 800;
-
-  flex: 0 0 28px;
+.selector{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
 }
 
-.training-content {
-  flex: 1;
-  min-width: 0;
+.selectchip{
+  border:1px solid #d1d5db;
+  background:#fff;
+  border-radius:999px;
+  padding:9px 12px;
+  min-height:40px;
+  font-weight:600;
+  font-size:13px;
 }
-
-.training-content strong {
-  display: block;
 
-  margin-bottom: 3px;
+.selectchip.sel{
+  background:var(--blue);
+  border-color:var(--blue);
+  color:#fff;
 }
 
-.training-actions {
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: 5px;
+.selectchip.sel:before{
+  content:"✓ ";
 }
-
-.training-actions button {
-  border: 0;
-
-  background: #f3f4f6;
-
-  border-radius: 9px;
-
-  padding: 8px 10px;
 
-  min-height: 36px;
+.custom{
+  display:flex;
+  gap:8px;
+  margin-top:8px;
 }
 
-/* FORMS */
-
-.form {
-  display: grid;
-
-  gap: 13px;
+.custom input{
+  flex:1;
+  min-width:0;
 }
-
-.form-group {
-  display: grid;
 
-  gap: 6px;
+.filelabel{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  min-height:52px;
+  border:2px dashed #cbd5e1;
+  border-radius:12px;
+  background:#f8fafc;
+  padding:10px;
+  font-weight:700;
 }
 
-.form-group label {
-  font-weight: 700;
-
-  font-size: 14px;
+.filelabel input{
+  display:none;
 }
-
-.form-control {
-  width: 100%;
-
-  min-height: 46px;
 
-  border: 1px solid var(--border);
-
-  border-radius: 11px;
-
-  padding: 10px 12px;
-
-  background: white;
+.preview{
+  display:none;
+  width:100%;
+  max-height:280px;
+  object-fit:contain;
+  border-radius:12px;
+  background:#f3f4f6;
+  margin-top:8px;
 }
 
-textarea.form-control {
-  min-height: 110px;
-
-  resize: vertical;
+.trainingbox,
+.item,
+.settings,
+.packlist{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:12px;
 }
-
-/* TAG SELECTOR */
 
-.selection-title {
-  font-size: 13px;
-
-  font-weight: 700;
-
-  margin-bottom: 8px;
+.list{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
 }
-
-.selection-grid {
-  display: flex;
 
-  flex-wrap: wrap;
-
-  gap: 8px;
+.item{
+  display:flex;
+  gap:9px;
+  align-items:flex-start;
+  margin:0;
 }
-
-.select-chip {
-  border: 1px solid #d1d5db;
-
-  background: white;
 
-  color: #374151;
-
-  border-radius: 999px;
-
-  padding: 9px 12px;
-
-  min-height: 40px;
-
-  font-size: 13px;
-
-  font-weight: 600;
-
-  transition: .15s;
+.thumb{
+  width:72px;
+  height:72px;
+  object-fit:cover;
+  border-radius:10px;
+  background:#e5e7eb;
+  flex:0 0 72px;
 }
 
-.select-chip.selected {
-  background: var(--primary);
-
-  color: white;
-
-  border-color: var(--primary);
-
-  box-shadow:
-    0 1px 4px rgba(37,99,235,.25);
+.num{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:var(--blue-light);
+  color:var(--blue);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  flex:0 0 28px;
 }
 
-.select-chip.selected::before {
-  content: "✓ ";
-
-  font-weight: 900;
+.itemmain{
+  flex:1;
+  min-width:0;
 }
-
-.custom-tag-row {
-  display: flex;
-
-  gap: 8px;
 
-  margin-top: 10px;
+.itemmain strong{
+  display:block;
+  margin-bottom:3px;
 }
 
-.custom-tag-row input {
-  flex: 1;
-
-  min-width: 0;
+.itembuttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  margin-top:6px;
 }
-
-/* MODAL */
-
-.modal {
-  position: fixed;
-
-  inset: 0;
-
-  z-index: 100;
 
-  display: none;
-
-  background: rgba(0,0,0,.55);
-
-  padding: 15px;
-
-  overflow-y: auto;
+.itembuttons button{
+  border:0;
+  background:#f3f4f6;
+  border-radius:8px;
+  padding:7px 9px;
 }
 
-.modal.show {
-  display: flex;
-
-  align-items: flex-end;
-
-  justify-content: center;
+.material-row{
+  display:grid;
+  grid-template-columns:1fr 75px 42px;
+  gap:7px;
+  align-items:center;
+  margin-bottom:7px;
 }
-
-.modal-card {
-  width: min(700px, 100%);
 
-  max-height: 92vh;
-
-  overflow-y: auto;
-
-  background: white;
-
-  border-radius:
-    20px
-    20px
-    12px
-    12px;
-
-  padding: 18px;
-
-  margin-bottom:
-    env(safe-area-inset-bottom);
+.material-name{
+  min-height:44px;
+  display:flex;
+  align-items:center;
+  padding:8px 11px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#fff;
 }
-
-.modal-header {
-  display: flex;
 
-  justify-content: space-between;
-
-  align-items: center;
-
-  gap: 10px;
-
-  margin-bottom: 15px;
+.material-quantity{
+  width:75px;
+  min-height:44px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:8px;
+  text-align:center;
 }
-
-.close {
-  border: 0;
-
-  background: #f3f4f6;
-
-  width: 42px;
-  height: 42px;
 
-  border-radius: 50%;
-
-  font-size: 22px;
+.remove-material{
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:10px;
+  background:#fee2e2;
+  color:var(--red);
+  font-size:18px;
 }
-
-.image-preview {
-  width: 100%;
-
-  max-height: 280px;
-
-  object-fit: contain;
-
-  border-radius: 12px;
 
-  background: #f3f4f6;
-
-  display: none;
+.material-add{
+  display:flex;
+  gap:8px;
 }
-
-/* FILE INPUT */
-
-.file-label {
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  min-height: 52px;
 
-  border: 2px dashed #cbd5e1;
-
-  border-radius: 12px;
-
-  background: #f8fafc;
-
-  font-weight: 700;
-
-  color: #475569;
-
-  cursor: pointer;
-
-  text-align: center;
-
-  padding: 10px;
+.material-add input{
+  flex:1;
 }
 
-.file-label input {
-  display: none;
+.pack-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:11px 0;
+  border-bottom:1px solid var(--border);
 }
-
-/* BOTTOM NAV */
-
-.bottom-nav {
-  position: fixed;
-
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  z-index: 50;
-
-  background: rgba(255,255,255,.98);
 
-  backdrop-filter: blur(15px);
-
-  border-top: 1px solid var(--border);
-
-  padding:
-    7px
-    max(7px, env(safe-area-inset-right))
-    max(7px, env(safe-area-inset-bottom))
-    max(7px, env(safe-area-inset-left));
+.pack-item:last-child{
+  border-bottom:0;
 }
-
-.bottom-nav-inner {
-  max-width: 700px;
-
-  margin: auto;
-
-  display: grid;
 
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  gap: 5px;
+.pack-check{
+  width:23px;
+  height:23px;
+  flex:0 0 23px;
 }
-
-.nav-btn {
-  border: 0;
-
-  background: transparent;
-
-  border-radius: 12px;
-
-  padding: 8px 4px;
-
-  min-height: 58px;
 
-  color: #6b7280;
-
-  font-weight: 700;
-
-  font-size: 12px;
+.pack-quantity{
+  margin-left:auto;
+  font-weight:800;
+  background:#f3f4f6;
+  padding:6px 10px;
+  border-radius:8px;
 }
-
-.nav-btn .icon {
-  display: block;
 
-  font-size: 22px;
-
-  margin-bottom: 2px;
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  background:rgba(0,0,0,.55);
+  padding:12px;
+  overflow:auto;
 }
 
-.nav-btn.active {
-  color: var(--primary);
-
-  background: #eff6ff;
+.modal.show{
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
 }
 
-/* SETTINGS */
+.modalbox{
+  width:min(700px,100%);
+  max-height:94vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:20px;
+  padding:17px;
+  margin-bottom:env(safe-area-inset-bottom);
+}
 
-.settings-box {
-  background: white;
+.modalhead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
 
-  border: 1px solid var(--border);
+.close{
+  border:0;
+  background:#f3f4f6;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  font-size:22px;
+}
 
-  border-radius: 16px;
+.nav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:50;
+  background:rgba(255,255,255,.98);
+  border-top:1px solid var(--border);
+  padding:6px 6px max(6px,env(safe-area-inset-bottom));
+}
 
-  padding: 16px;
+.navin{
+  max-width:700px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:4px;
+}
 
-  margin-bottom: 12px;
+.navbtn{
+  border:0;
+  background:transparent;
+  border-radius:12px;
+  min-height:58px;
+  color:#6b7280;
+  font-weight:700;
+  font-size:12px;
 }
 
-/* RESPONSIVE */
+.navbtn span{
+  display:block;
+  font-size:22px;
+}
 
-@media (min-width: 700px) {
+.navbtn.active{
+  color:var(--blue);
+  background:var(--blue-light);
+}
 
-  .exercise-grid {
-    grid-template-columns:
-      repeat(3, minmax(0, 1fr));
+@media(min-width:700px){
+  .grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
   }
 
-  .modal.show {
-    align-items: center;
+  .modal.show{
+    align-items:center;
   }
 
-  .modal-card {
-    border-radius: 20px;
+  .modalbox{
+    border-radius:20px;
   }
 }
 
-@media (min-width: 1000px) {
-
-  .exercise-grid {
-    grid-template-columns:
-      repeat(4, minmax(0, 1fr));
+@media(min-width:1000px){
+  .grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
   }
 }
 
-/* PRINT */
-
-@media print {
-
-  body {
-    padding: 0;
-
-    background: white;
+@media print{
+  body{
+    padding:0;
+    background:#fff;
   }
 
-  .topbar,
-  .bottom-nav,
-  .toolbar,
-  .filters,
-  .no-print,
-  .card-actions,
-  .training-actions {
-    display: none !important;
+  .top,
+  .nav,
+  .no-print{
+    display:none!important;
   }
 
-  .container {
-    max-width: none;
-
-    padding: 0;
+  .view{
+    display:none!important;
   }
 
-  .view {
-    display: none !important;
+  #trainingView{
+    display:block!important;
   }
 
-  #trainingView {
-    display: block !important;
+  main{
+    padding:0;
   }
 
-  .training-header,
-  .training-item {
-    box-shadow: none;
+  .trainingbox,
+  .item,
+  .packlist{
+    box-shadow:none;
+    break-inside:avoid;
+  }
 
-    break-inside: avoid;
+  .packlist{
+    margin-top:20px;
   }
 }
 </style>
@@ -877,201 +674,111 @@ textarea.form-control {
 
 <body>
 
-<!-- =====================================================
-     KOPF
-===================================================== -->
-
-<header class="topbar">
-
-  <div class="topbar-inner">
+<header class="top">
+  <div class="topin">
 
     <div>
-
-      <div class="logo">
-        🏑 Trainingsplan
-      </div>
-
-      <div class="subtitle">
-        Übungen verwalten & Training planen
-      </div>
-
+      <div class="logo">🏑 Trainingsplan</div>
+      <div class="sub">Übungsbibliothek & Trainingsplanung</div>
     </div>
 
-    <button
-      class="btn primary small"
-      onclick="openExerciseModal()"
-    >
+    <button class="btn primary small" id="addExerciseTop">
       + Übung
     </button>
 
   </div>
-
 </header>
 
 
-<main class="container">
+<main>
 
-<!-- =====================================================
+<!-- =========================
      BIBLIOTHEK
-===================================================== -->
+========================= -->
 
-<section
-  id="libraryView"
-  class="view active"
->
+<section id="libraryView" class="view active">
 
-  <h1>
-    Übungsbibliothek
-  </h1>
+  <h1>Übungsbibliothek</h1>
 
   <p class="muted">
-    Deine Übungen als Bildkarten.
-    Tippe auf eine Übung für Details oder füge sie direkt zum Training hinzu.
+    Übungen als Bildkarten speichern, filtern und direkt ins Training übernehmen.
   </p>
-
 
   <div class="stats">
 
     <div class="stat">
-
-      <div
-        class="stat-number"
-        id="exerciseCount"
-      >
-        0
-      </div>
-
-      <div class="muted">
-        Übungen
-      </div>
-
+      <b id="countExercises">0</b>
+      <span class="muted">Übungen</span>
     </div>
 
-
     <div class="stat">
-
-      <div
-        class="stat-number"
-        id="categoryCount"
-      >
-        0
-      </div>
-
-      <div class="muted">
-        Kategorien
-      </div>
-
+      <b id="countCategories">0</b>
+      <span class="muted">Kategorien</span>
     </div>
 
-
     <div class="stat">
-
-      <div
-        class="stat-number"
-        id="trainingCount"
-      >
-        0
-      </div>
-
-      <div class="muted">
-        Trainings
-      </div>
-
+      <b id="countTrainings">0</b>
+      <span class="muted">Trainings</span>
     </div>
 
   </div>
 
-
   <input
-    id="searchInput"
+    id="search"
     class="search"
     type="search"
     placeholder="🔎 Übung suchen..."
-    oninput="renderLibrary()"
   >
 
+  <div id="filters" class="filters"></div>
 
-  <div
-    class="filters"
-    id="categoryFilters"
-  ></div>
-
-
-  <div style="height:14px"></div>
-
-
-  <div
-    id="exerciseGrid"
-    class="exercise-grid"
-  ></div>
+  <div id="grid" class="grid"></div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      TRAINING
-===================================================== -->
+========================= -->
 
-<section
-  id="trainingView"
-  class="view"
->
+<section id="trainingView" class="view">
 
-  <h1>
-    Mein Training
-  </h1>
+  <h1>Mein Training</h1>
 
-
-  <div class="training-header">
+  <div class="trainingbox">
 
     <div class="form">
 
-
-      <div class="form-group">
-
-        <label>
-          Trainingstitel
-        </label>
+      <div class="group">
+        <label>Trainingstitel</label>
 
         <input
           id="trainingTitle"
-          class="form-control"
+          class="control"
           placeholder="z. B. Techniktraining U8"
-          oninput="saveCurrentTraining()"
         >
-
       </div>
 
 
-      <div class="form-group">
-
-        <label>
-          Datum
-        </label>
+      <div class="group">
+        <label>Datum</label>
 
         <input
           id="trainingDate"
-          class="form-control"
+          class="control"
           type="date"
-          onchange="saveCurrentTraining()"
         >
-
       </div>
 
 
-      <div class="form-group">
-
-        <label>
-          Trainingsziel
-        </label>
+      <div class="group">
+        <label>Trainingsziel</label>
 
         <textarea
           id="trainingGoal"
-          class="form-control"
+          class="control"
           placeholder="Was soll heute trainiert werden?"
-          oninput="saveCurrentTraining()"
         ></textarea>
-
       </div>
 
 
@@ -1079,33 +786,30 @@ textarea.form-control {
 
         <button
           class="btn primary"
-          onclick="showView('library')"
+          id="addTrainingExercise"
         >
           + Übungen hinzufügen
         </button>
 
-
         <button
           class="btn"
-          onclick="printTraining()"
+          id="printTraining"
         >
           📄 PDF / Drucken
         </button>
 
-
         <button
-          class="btn success"
-          onclick="saveTrainingAsFinished()"
+          class="btn"
+          id="saveTraining"
         >
           ✓ Training speichern
         </button>
 
-
         <button
           class="btn danger"
-          onclick="clearTraining()"
+          id="clearTraining"
         >
-          Training leeren
+          Leeren
         </button>
 
       </div>
@@ -1115,41 +819,73 @@ textarea.form-control {
   </div>
 
 
-  <div
-    id="trainingList"
-    class="training-list"
-  ></div>
+  <!-- TRAININGSÜBUNGEN -->
+
+  <h2>Trainingsablauf</h2>
+
+  <div id="trainingList" class="list"></div>
+
+
+  <!-- PACKLISTE -->
+
+  <div class="packlist">
+
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+    ">
+
+      <div>
+
+        <h2 style="margin:0">
+          🧳 Material / Packliste
+        </h2>
+
+        <div class="muted">
+          Benötigtes Material aller Übungen zusammengefasst
+        </div>
+
+      </div>
+
+      <button
+        class="btn small no-print"
+        id="resetPacklist"
+      >
+        Zurücksetzen
+      </button>
+
+    </div>
+
+    <div id="packlistContent"></div>
+
+  </div>
 
 </section>
 
 
-<!-- =====================================================
+<!-- =========================
      DATEN
-===================================================== -->
+========================= -->
 
-<section
-  id="dataView"
-  class="view"
->
+<section id="dataView" class="view">
 
-  <h1>
-    Daten
-  </h1>
+  <h1>Daten</h1>
 
 
-  <div class="settings-box">
+  <div class="settings">
 
-    <h3>
-      📤 Export
-    </h3>
+    <h3>📤 Export</h3>
 
     <p class="muted">
-      Speichert Übungen, Bilder und Trainingspläne als Sicherungsdatei.
+      Übungen inklusive Bilder, Material und Trainingspläne sichern.
     </p>
 
     <button
       class="btn primary full"
-      onclick="exportData()"
+      id="exportButton"
     >
       Daten exportieren
     </button>
@@ -1157,18 +893,15 @@ textarea.form-control {
   </div>
 
 
-  <div class="settings-box">
+  <div class="settings">
 
-    <h3>
-      📥 Import
-    </h3>
+    <h3>📥 Import</h3>
 
     <p class="muted">
-      Importiert eine zuvor exportierte Trainingsdatei.
+      Eine zuvor exportierte JSON-Datei einlesen.
     </p>
 
-
-    <label class="file-label">
+    <label class="filelabel">
 
       📁 Importdatei auswählen
 
@@ -1176,7 +909,6 @@ textarea.form-control {
         id="importFile"
         type="file"
         accept=".json,application/json"
-        onchange="importData(event)"
       >
 
     </label>
@@ -1184,19 +916,13 @@ textarea.form-control {
   </div>
 
 
-  <div class="settings-box">
+  <div class="settings">
 
-    <h3>
-      🗑️ Alle Daten löschen
-    </h3>
-
-    <p class="muted">
-      Achtung: Dieser Vorgang kann nicht rückgängig gemacht werden.
-    </p>
+    <h3>🗑️ Alle Daten löschen</h3>
 
     <button
       class="btn danger full"
-      onclick="deleteAllData()"
+      id="deleteAll"
     >
       Alle Daten löschen
     </button>
@@ -1204,19 +930,13 @@ textarea.form-control {
   </div>
 
 
-  <div class="settings-box">
+  <div class="settings">
 
-    <h3>
-      ℹ️ Über diese Version
-    </h3>
-
-    <p>
-      Trainingsplan – optimiert für iPad und Safari.
-    </p>
+    <h3>ℹ️ Hinweis</h3>
 
     <p class="muted">
-      Die Daten werden lokal auf diesem Gerät gespeichert.
-      Bitte regelmäßig einen Export als Sicherung erstellen.
+      Die Daten werden lokal im Browser gespeichert.
+      Für eine Sicherung regelmäßig exportieren.
     </p>
 
   </div>
@@ -1226,86 +946,61 @@ textarea.form-control {
 </main>
 
 
-<!-- =====================================================
+<!-- =========================
      NAVIGATION
-===================================================== -->
+========================= -->
 
-<nav class="bottom-nav">
+<nav class="nav">
 
-  <div class="bottom-nav-inner">
-
+  <div class="navin">
 
     <button
       id="navLibrary"
-      class="nav-btn active"
-      onclick="showView('library')"
+      class="navbtn active"
     >
-
-      <span class="icon">
-        📚
-      </span>
-
+      <span>📚</span>
       Bibliothek
-
     </button>
-
 
     <button
       id="navTraining"
-      class="nav-btn"
-      onclick="showView('training')"
+      class="navbtn"
     >
-
-      <span class="icon">
-        📋
-      </span>
-
+      <span>📋</span>
       Training
-
     </button>
-
 
     <button
       id="navData"
-      class="nav-btn"
-      onclick="showView('data')"
+      class="navbtn"
     >
-
-      <span class="icon">
-        ⚙️
-      </span>
-
+      <span>⚙️</span>
       Daten
-
     </button>
-
 
   </div>
 
 </nav>
 
 
-<!-- =====================================================
+<!-- =========================
      ÜBUNG MODAL
-===================================================== -->
+========================= -->
 
-<div
-  id="exerciseModal"
-  class="modal"
->
+<div id="exerciseModal" class="modal">
 
-  <div class="modal-card">
+  <div class="modalbox">
 
+    <div class="modalhead">
 
-    <div class="modal-header">
-
-      <h2 id="exerciseModalTitle">
+      <h2 id="modalTitle">
         Neue Übung
       </h2>
 
       <button
         class="close"
-        onclick="closeExerciseModal()"
+        id="closeExercise"
+        type="button"
       >
         ×
       </button>
@@ -1313,21 +1008,15 @@ textarea.form-control {
     </div>
 
 
-    <form
-      id="exerciseForm"
-      class="form"
-    >
-
+    <form id="exerciseForm" class="form">
 
       <input
-        type="hidden"
         id="exerciseId"
+        type="hidden"
       >
 
 
-      <!-- NAME -->
-
-      <div class="form-group">
+      <div class="group">
 
         <label>
           Übungsname *
@@ -1335,7 +1024,7 @@ textarea.form-control {
 
         <input
           id="exerciseName"
-          class="form-control"
+          class="control"
           required
           placeholder="z. B. Passdreieck"
         >
@@ -1343,9 +1032,7 @@ textarea.form-control {
       </div>
 
 
-      <!-- KATEGORIE -->
-
-      <div class="form-group">
+      <div class="group">
 
         <label>
           Kategorie *
@@ -1353,29 +1040,15 @@ textarea.form-control {
 
         <select
           id="exerciseCategory"
-          class="form-control"
+          class="control"
           required
         >
 
-          <option value="Hockeyspielform">
-            Hockeyspielform
-          </option>
-
-          <option value="Hockeyübung">
-            Hockeyübung
-          </option>
-
-          <option value="Bewegungsspiel">
-            Bewegungsspiel
-          </option>
-
-          <option value="Koordination">
-            Koordination
-          </option>
-
-          <option value="Warnung-Phase">
-            Warnung-Phase
-          </option>
+          <option>Hockeyspielform</option>
+          <option>Hockeyübung</option>
+          <option>Bewegungsspiel</option>
+          <option>Koordination</option>
+          <option>Warnung-Phase</option>
 
         </select>
 
@@ -1384,66 +1057,96 @@ textarea.form-control {
 
       <!-- TAGS -->
 
-      <div class="form-group">
+      <div class="group">
 
         <label>
-          Tags
+          Tags – mehrere anklicken
         </label>
-
-        <div class="selection-title">
-          Tags anklicken – mehrere möglich
-        </div>
-
 
         <div
           id="tagSelector"
-          class="selection-grid"
+          class="selector"
         ></div>
 
 
-        <div class="custom-tag-row">
+        <div class="custom">
 
           <input
-            id="customTagInput"
-            class="form-control"
-            placeholder="Eigenes Tag eingeben..."
+            id="customTag"
+            class="control"
+            placeholder="Eigenes Tag hinzufügen"
           >
 
           <button
             type="button"
             class="btn"
-            onclick="addCustomTag()"
+            id="addTag"
           >
             + Tag
           </button>
 
         </div>
 
-
         <div
-          id="selectedTagsDisplay"
+          id="selectedTags"
           class="tags"
         ></div>
 
       </div>
 
 
-      <!-- ALTERSKLASSE -->
+      <!-- ALTERSKLASSEN -->
 
-      <div class="form-group">
+      <div class="group">
 
         <label>
-          Altersklasse
+          Altersklasse – Mehrfachauswahl
         </label>
 
-        <div class="selection-title">
-          Mehrere Altersklassen können ausgewählt werden
+        <div
+          id="ageSelector"
+          class="selector"
+        ></div>
+
+      </div>
+
+
+      <!-- MATERIAL -->
+
+      <div class="group">
+
+        <label>
+          Material
+        </label>
+
+        <div
+          id="materialSelector"
+          class="selector"
+        ></div>
+
+
+        <div class="custom">
+
+          <input
+            id="customMaterial"
+            class="control"
+            placeholder="Eigenes Material hinzufügen"
+          >
+
+          <button
+            type="button"
+            class="btn"
+            id="addMaterial"
+          >
+            + Material
+          </button>
+
         </div>
 
 
         <div
-          id="ageSelector"
-          class="selection-grid"
+          id="materialList"
+          style="margin-top:10px"
         ></div>
 
       </div>
@@ -1451,7 +1154,7 @@ textarea.form-control {
 
       <!-- BESCHREIBUNG -->
 
-      <div class="form-group">
+      <div class="group">
 
         <label>
           Beschreibung
@@ -1459,8 +1162,8 @@ textarea.form-control {
 
         <textarea
           id="exerciseDescription"
-          class="form-control"
-          placeholder="Ablauf, Aufbau, Coachingpunkte..."
+          class="control"
+          placeholder="Aufbau, Ablauf, Coachingpunkte..."
         ></textarea>
 
       </div>
@@ -1468,7 +1171,7 @@ textarea.form-control {
 
       <!-- DAUER -->
 
-      <div class="form-group">
+      <div class="group">
 
         <label>
           Standarddauer in Minuten
@@ -1476,7 +1179,7 @@ textarea.form-control {
 
         <input
           id="exerciseDuration"
-          class="form-control"
+          class="control"
           type="number"
           min="1"
           value="10"
@@ -1487,31 +1190,28 @@ textarea.form-control {
 
       <!-- BILD -->
 
-      <div class="form-group">
+      <div class="group">
 
         <label>
           Bild
         </label>
 
+        <label class="filelabel">
 
-        <label class="file-label">
-
-          🖼️ Bild aus Fotos / Dateien auswählen
+          🖼️ Foto / Bild aus Mediathek auswählen
 
           <input
-            id="exerciseImage"
+            id="imageFile"
             type="file"
             accept="image/*"
-            onchange="handleImage(event)"
           >
 
         </label>
 
-
         <img
-          id="imagePreview"
-          class="image-preview"
-          alt="Bildvorschau"
+          id="preview"
+          class="preview"
+          alt="Vorschau"
         >
 
       </div>
@@ -1522,11 +1222,10 @@ textarea.form-control {
         <button
           type="button"
           class="btn"
-          onclick="closeExerciseModal()"
+          id="cancelExercise"
         >
           Abbrechen
         </button>
-
 
         <button
           type="submit"
@@ -1537,7 +1236,6 @@ textarea.form-control {
 
       </div>
 
-
     </form>
 
   </div>
@@ -1545,25 +1243,22 @@ textarea.form-control {
 </div>
 
 
-<!-- =====================================================
+<!-- =========================
      DETAIL MODAL
-===================================================== -->
+========================= -->
 
-<div
-  id="detailModal"
-  class="modal"
->
+<div id="detailModal" class="modal">
 
-  <div class="modal-card">
+  <div class="modalbox">
 
-
-    <div class="modal-header">
+    <div class="modalhead">
 
       <h2 id="detailTitle"></h2>
 
       <button
         class="close"
-        onclick="closeDetailModal()"
+        id="closeDetail"
+        type="button"
       >
         ×
       </button>
@@ -1571,24 +1266,23 @@ textarea.form-control {
     </div>
 
 
-    <div
-      id="detailContent"
-    ></div>
+    <div id="detailBody"></div>
 
 
     <div class="toolbar">
 
       <button
         class="btn primary"
-        onclick="addDetailExerciseToTraining()"
+        id="detailAdd"
+        type="button"
       >
-        + Zum Training hinzufügen
+        + Zum Training
       </button>
-
 
       <button
         class="btn"
-        onclick="editDetailExercise()"
+        id="detailEdit"
+        type="button"
       >
         ✏️ Bearbeiten
       </button>
@@ -1602,441 +1296,311 @@ textarea.form-control {
 
 <script>
 
-/* =========================================================
-   DATENBANK
-========================================================= */
+/* ==================================================
+   KONFIGURATION
+================================================== */
 
-const DB_NAME = "TrainingsplanDB";
-
-const DB_VERSION = 2;
-
-const STORE = "app";
+const STORAGE_KEY = "hockeyTrainingV4";
 
 
-let db = null;
+const CATEGORIES = [
+  "Hockeyspielform",
+  "Hockeyübung",
+  "Bewegungsspiel",
+  "Koordination",
+  "Warnung-Phase"
+];
+
+
+const DEFAULT_TAGS = [
+  "Ballführung",
+  "Ball Annahme",
+  "Ball An- und Abgabe",
+  "Ball Abgabe",
+  "Torschuss",
+  "Technikverbindung",
+  "Schnelligkeit",
+  "Koordination",
+  "Reaktion",
+  "Umspieltechnik",
+  "Sonstige Hockeyübung",
+  "Hockey-Spielform",
+  "Sonstiges"
+];
+
+
+const AGES = [
+  "U6",
+  "U8",
+  "Erwachsene"
+];
+
+
+/*
+  Hier kannst du die Standard-Materialien
+  jederzeit erweitern.
+*/
+
+const DEFAULT_MATERIALS = [
+  "Hockeyschläger",
+  "Hockeybälle",
+  "Tore",
+  "Minitore",
+  "Hütchen",
+  "Markierungsteller",
+  "Leibchen",
+  "Koordinationsleiter",
+  "Stangen",
+  "Markierungsscheiben",
+  "Zielscheiben",
+  "Reifen",
+  "Seile",
+  "Bänke"
+];
 
 
 let state = {
 
-  exercises: [],
+  exercises:[],
 
-  trainings: [],
+  trainings:[],
 
-  currentTraining: {
+  current:{
 
-    id: null,
+    id:null,
 
-    title: "",
+    title:"",
 
-    date: "",
+    date:"",
 
-    goal: "",
+    goal:"",
 
-    exercises: []
+    exercises:[]
 
   }
 
 };
 
 
-let selectedCategory = "Alle";
-
-let detailExerciseId = null;
+let filter = "Alle";
 
 let selectedTags = [];
 
 let selectedAges = [];
 
+let selectedMaterials = [];
 
-/* =========================================================
-   FESTE AUSWAHLEN
-========================================================= */
+let detailId = null;
 
-const CATEGORIES = [
-
-  "Hockeyspielform",
-
-  "Hockeyübung",
-
-  "Bewegungsspiel",
-
-  "Koordination",
-
-  "Warnung-Phase"
-
-];
+let imageData = "";
 
 
-const DEFAULT_TAGS = [
+/* ==================================================
+   HILFSFUNKTIONEN
+================================================== */
 
-  "Ballführung",
+function createId(){
 
-  "Ball Annahme",
-
-  "Ball An- und Abgabe",
-
-  "Ball Abgabe",
-
-  "Torschuss",
-
-  "Technikverbindung",
-
-  "Schnelligkeit",
-
-  "Koordination",
-
-  "Reaktion",
-
-  "Umspieltechnik",
-
-  "Sonstige Hockeyübung",
-
-  "Hockey-Spielform",
-
-  "Sonstiges"
-
-];
-
-
-const AGE_CLASSES = [
-
-  "U6",
-
-  "U8",
-
-  "Erwachsene"
-
-];
-
-
-/* =========================================================
-   INDEXED DB
-========================================================= */
-
-function openDB() {
-
-  return new Promise((resolve, reject) => {
-
-    const request =
-      indexedDB.open(
-        DB_NAME,
-        DB_VERSION
-      );
-
-
-    request.onupgradeneeded =
-      event => {
-
-        const database =
-          event.target.result;
-
-        if (
-          !database.objectStoreNames
-            .contains(STORE)
-        ) {
-
-          database.createObjectStore(
-            STORE
-          );
-
-        }
-
-      };
-
-
-    request.onsuccess =
-      event => {
-
-        db = event.target.result;
-
-        resolve(db);
-
-      };
-
-
-    request.onerror =
-      () => {
-
-        reject(
-          request.error
-        );
-
-      };
-
-  });
+  return Date.now().toString(36) +
+    Math.random().toString(36).slice(2,8);
 
 }
 
 
-function dbGet(key) {
+function today(){
 
-  return new Promise(
-    (resolve, reject) => {
-
-      const transaction =
-        db.transaction(
-          STORE,
-          "readonly"
-        );
-
-      const store =
-        transaction.objectStore(
-          STORE
-        );
-
-      const request =
-        store.get(key);
-
-      request.onsuccess =
-        () => resolve(
-          request.result
-        );
-
-      request.onerror =
-        () => reject(
-          request.error
-        );
-
-    }
-  );
+  return new Date()
+    .toISOString()
+    .slice(0,10);
 
 }
 
 
-function dbSet(key, value) {
+function escapeHTML(value){
 
-  return new Promise(
-    (resolve, reject) => {
+  return String(value ?? "")
+    .replace(/[&<>"']/g,function(char){
 
-      const transaction =
-        db.transaction(
-          STORE,
-          "readwrite"
-        );
+      return {
 
-      const store =
-        transaction.objectStore(
-          STORE
-        );
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
 
-      const request =
-        store.put(
-          value,
-          key
-        );
+      }[char];
 
-      request.onsuccess =
-        () => resolve();
-
-      request.onerror =
-        () => reject(
-          request.error
-        );
-
-    }
-  );
+    });
 
 }
 
 
-/* =========================================================
-   START
-========================================================= */
+function save(){
 
-async function init() {
+  try{
 
-  try {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(state)
+    );
 
-    await openDB();
+  }catch(error){
 
-    const saved =
-      await dbGet("state");
-
-
-    if (saved) {
-
-      state = saved;
-
-    }
-
-
-  } catch (error) {
-
-    console.error(error);
-
-    alert(
-      "Die lokale Datenspeicherung konnte nicht geöffnet werden. Bitte öffne die Seite direkt in Safari."
+    console.error(
+      "Speichern fehlgeschlagen:",
+      error
     );
 
   }
 
+}
 
-  normalizeState();
 
-  loadCurrentTraining();
+/* ==================================================
+   DATEN LADEN
+================================================== */
+
+function load(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(
+        STORAGE_KEY
+      );
+
+    if(saved){
+
+      const parsed =
+        JSON.parse(saved);
+
+      state = {
+        ...state,
+        ...parsed
+      };
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+  }
+
+
+  if(!Array.isArray(state.exercises))
+    state.exercises=[];
+
+
+  if(!Array.isArray(state.trainings))
+    state.trainings=[];
+
+
+  if(!state.current){
+
+    state.current={
+      id:createId(),
+      title:"",
+      date:today(),
+      goal:"",
+      exercises:[]
+    };
+
+  }
+
+
+  if(!Array.isArray(state.current.exercises))
+    state.current.exercises=[];
+
+
+  /*
+    Daten älterer Versionen werden automatisch
+    ergänzt.
+  */
+
+  state.exercises =
+    state.exercises.map(function(exercise){
+
+      return {
+
+        ...exercise,
+
+        tags:Array.isArray(exercise.tags)
+          ? exercise.tags
+          : [],
+
+        ages:Array.isArray(exercise.ages)
+          ? exercise.ages
+          : [],
+
+        material:Array.isArray(exercise.material)
+          ? exercise.material
+          : [],
+
+        duration:exercise.duration || 10,
+
+        image:exercise.image || ""
+
+      };
+
+    });
+
+
+  loadCurrent();
 
   renderAll();
 
 }
 
 
-function normalizeState() {
+/* ==================================================
+   ANSICHTEN
+================================================== */
 
-  if (!Array.isArray(state.exercises)) {
-
-    state.exercises = [];
-
-  }
-
-
-  if (!Array.isArray(state.trainings)) {
-
-    state.trainings = [];
-
-  }
-
-
-  if (!state.currentTraining) {
-
-    state.currentTraining = {
-
-      id: createId(),
-
-      title: "",
-
-      date: today(),
-
-      goal: "",
-
-      exercises: []
-
-    };
-
-  }
-
-
-  if (
-    !Array.isArray(
-      state.currentTraining.exercises
-    )
-  ) {
-
-    state.currentTraining.exercises = [];
-
-  }
-
-
-  /*
-   * Falls ältere Übungen aus der vorherigen
-   * Version vorhanden sind, werden fehlende
-   * Felder ergänzt.
-   */
-
-  state.exercises =
-    state.exercises.map(
-      exercise => ({
-
-        ...exercise,
-
-        category:
-          CATEGORIES.includes(
-            exercise.category
-          )
-            ? exercise.category
-            : "Hockeyübung",
-
-        tags:
-          Array.isArray(exercise.tags)
-            ? exercise.tags
-            : typeof exercise.tags === "string"
-              ? exercise.tags
-                  .split(",")
-                  .map(x => x.trim())
-                  .filter(Boolean)
-              : [],
-
-        ages:
-          Array.isArray(exercise.ages)
-            ? exercise.ages
-            : [],
-
-        duration:
-          exercise.duration || 10,
-
-        image:
-          exercise.image || ""
-
-      })
-    );
-
-}
-
-
-async function saveState() {
-
-  await dbSet(
-    "state",
-    state
-  );
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function showView(view) {
+function showView(view){
 
   document
     .querySelectorAll(".view")
-    .forEach(
-      element =>
-        element.classList.remove(
-          "active"
-        )
-    );
+    .forEach(function(element){
+
+      element.classList.remove("active");
+
+    });
 
 
   document
-    .querySelectorAll(".nav-btn")
-    .forEach(
-      element =>
-        element.classList.remove(
-          "active"
-        )
-    );
+    .querySelectorAll(".navbtn")
+    .forEach(function(element){
+
+      element.classList.remove("active");
+
+    });
 
 
-  if (view === "library") {
+  if(view==="library"){
 
     document
-      .getElementById(
-        "libraryView"
-      )
+      .getElementById("libraryView")
       .classList.add("active");
 
     document
-      .getElementById(
-        "navLibrary"
-      )
+      .getElementById("navLibrary")
       .classList.add("active");
+
+    renderLibrary();
 
   }
 
 
-  if (view === "training") {
+  if(view==="training"){
 
     document
-      .getElementById(
-        "trainingView"
-      )
+      .getElementById("trainingView")
       .classList.add("active");
 
     document
-      .getElementById(
-        "navTraining"
-      )
+      .getElementById("navTraining")
       .classList.add("active");
 
     renderTraining();
@@ -2044,130 +1608,82 @@ function showView(view) {
   }
 
 
-  if (view === "data") {
+  if(view==="data"){
 
     document
-      .getElementById(
-        "dataView"
-      )
+      .getElementById("dataView")
       .classList.add("active");
 
     document
-      .getElementById(
-        "navData"
-      )
+      .getElementById("navData")
       .classList.add("active");
 
   }
 
 
-  window.scrollTo({
-
-    top: 0,
-
-    behavior: "smooth"
-
-  });
+  window.scrollTo(0,0);
 
 }
 
 
-/* =========================================================
-   RENDER
-========================================================= */
+/* ==================================================
+   STATISTIK
+================================================== */
 
-function renderAll() {
-
-  renderLibrary();
-
-  renderCategories();
-
-  renderTraining();
-
-  updateStats();
-
-}
-
-
-function updateStats() {
+function updateStats(){
 
   document
-    .getElementById(
-      "exerciseCount"
-    )
+    .getElementById("countExercises")
     .textContent =
       state.exercises.length;
 
 
-  const categories =
-    [
-      ...new Set(
-        state.exercises
-          .map(
-            e => e.category
-          )
-          .filter(Boolean)
-      )
-    ];
-
-
   document
-    .getElementById(
-      "categoryCount"
-    )
+    .getElementById("countCategories")
     .textContent =
-      categories.length;
+      new Set(
+        state.exercises.map(function(exercise){
+
+          return exercise.category;
+
+        })
+      ).size;
 
 
   document
-    .getElementById(
-      "trainingCount"
-    )
+    .getElementById("countTrainings")
     .textContent =
       state.trainings.length;
 
 }
 
 
-/* =========================================================
-   KATEGORIEN
-========================================================= */
+/* ==================================================
+   FILTER
+================================================== */
 
-function renderCategories() {
+function renderFilters(){
 
   const container =
-    document.getElementById(
-      "categoryFilters"
-    );
+    document.getElementById("filters");
 
 
-  const categories = [
-
-    "Alle",
-
-    ...CATEGORIES
-
-  ];
+  container.innerHTML="";
 
 
-  container.innerHTML = "";
-
-
-  categories.forEach(
-    category => {
+  ["Alle",...CATEGORIES]
+    .forEach(function(category){
 
       const button =
-        document.createElement(
-          "button"
-        );
+        document.createElement("button");
 
 
       button.className =
-        "filter-chip " +
+        "chip " +
         (
-          selectedCategory === category
-            ? "active"
-            : ""
+          filter===category
+          ? "active"
+          : ""
         );
 
 
@@ -2175,46 +1691,40 @@ function renderCategories() {
         category;
 
 
-      button.onclick =
-        () => {
+      button.addEventListener(
+        "click",
+        function(){
 
-          selectedCategory =
-            category;
+          filter=category;
 
-          renderCategories();
+          renderFilters();
 
           renderLibrary();
 
-        };
-
-
-      container.appendChild(
-        button
+        }
       );
 
-    }
-  );
+
+      container.appendChild(button);
+
+    });
 
 }
 
 
-/* =========================================================
+/* ==================================================
    BIBLIOTHEK
-========================================================= */
+================================================== */
 
-function renderLibrary() {
+function renderLibrary(){
 
   const grid =
-    document.getElementById(
-      "exerciseGrid"
-    );
+    document.getElementById("grid");
 
 
-  const search =
+  const searchValue =
     document
-      .getElementById(
-        "searchInput"
-      )
+      .getElementById("search")
       .value
       .toLowerCase()
       .trim();
@@ -2224,47 +1734,1740 @@ function renderLibrary() {
     [...state.exercises];
 
 
-  if (
-    selectedCategory !==
-    "Alle"
-  ) {
+  if(filter!=="Alle"){
 
     exercises =
-      exercises.filter(
-        e =>
-          e.category ===
-          selectedCategory
-      );
+      exercises.filter(function(exercise){
+
+        return exercise.category===filter;
+
+      });
 
   }
 
 
-  if (search) {
+  if(searchValue){
 
     exercises =
-      exercises.filter(
-        e => {
+      exercises.filter(function(exercise){
 
-          const text = [
+        return [
 
-            e.name,
+          exercise.name,
 
-            e.category,
+          exercise.category,
 
-            ...(e.tags || []),
+          exercise.description,
 
-            ...(e.ages || []),
+          ...(exercise.tags || []),
 
-            e.description
+          ...(exercise.ages || []),
 
-          ]
-            .join(" ")
-            .toLowerCase();
+          ...(exercise.material || [])
+            .map(function(item){
+
+              return item.name;
+
+            })
+
+        ]
+        .join(" ")
+        .toLowerCase()
+        .includes(searchValue);
+
+      });
+
+  }
 
 
-          return text.includes(
-            search
+  if(!exercises.length){
+
+    grid.innerHTML=`
+
+      <div class="empty">
+
+        <div style="font-size:42px">
+          📚
+        </div>
+
+        <h3>
+          Keine Übungen gefunden
+        </h3>
+
+        <p class="muted">
+          Erstelle deine erste Übung.
+        </p>
+
+        <button
+          class="btn primary"
+          id="emptyAddExercise"
+        >
+          + Übung erstellen
+        </button>
+
+      </div>
+
+    `;
+
+
+    document
+      .getElementById("emptyAddExercise")
+      .addEventListener(
+        "click",
+        function(){
+
+          openExercise();
+
+        }
+      );
+
+
+    return;
+
+  }
+
+
+  grid.innerHTML="";
+
+
+  exercises.forEach(function(exercise){
+
+    const card =
+      document.createElement("article");
+
+
+    card.className="card";
+
+
+    let imageHTML="";
+
+
+    if(exercise.image){
+
+      imageHTML=`
+
+        <img
+          class="cardimg"
+          src="${escapeHTML(exercise.image)}"
+          alt=""
+        >
+
+      `;
+
+    }else{
+
+      imageHTML=`
+
+        <div class="placeholder">
+          🏑
+        </div>
+
+      `;
+
+    }
+
+
+    const ageHTML =
+      (exercise.ages || [])
+        .map(function(age){
+
+          return `
+
+            <span class="tag age">
+              ${escapeHTML(age)}
+            </span>
+
+          `;
+
+        })
+        .join("");
+
+
+    const tagHTML =
+      (exercise.tags || [])
+        .map(function(tag){
+
+          return `
+
+            <span class="tag">
+              ${escapeHTML(tag)}
+            </span>
+
+          `;
+
+        })
+        .join("");
+
+
+    const materialHTML =
+      (exercise.material || [])
+        .map(function(material){
+
+          return `
+
+            <span class="tag materialtag">
+              ${escapeHTML(material.name)}
+              ${material.quantity > 1
+                ? " × "+material.quantity
+                : ""}
+            </span>
+
+          `;
+
+        })
+        .join("");
+
+
+    card.innerHTML=`
+
+      ${imageHTML}
+
+      <div class="cardbody">
+
+        <div class="title">
+          ${escapeHTML(exercise.name)}
+        </div>
+
+        <span class="category">
+          ${escapeHTML(exercise.category)}
+        </span>
+
+        <div class="tags">
+          ${ageHTML}
+        </div>
+
+        <div class="tags">
+          ${tagHTML}
+        </div>
+
+        <div class="tags">
+          ${materialHTML}
+        </div>
+
+        <div class="actions">
+
+          <button
+            class="btn detailButton"
+          >
+            Details
+          </button>
+
+          <button
+            class="btn primary addButton"
+          >
+            + Training
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    card
+      .querySelector(".detailButton")
+      .addEventListener(
+        "click",
+        function(){
+
+          showDetail(exercise.id);
+
+        }
+      );
+
+
+    card
+      .querySelector(".addButton")
+      .addEventListener(
+        "click",
+        function(){
+
+          addExercise(exercise.id);
+
+        }
+      );
+
+
+    grid.appendChild(card);
+
+  });
+
+}
+
+
+/* ==================================================
+   ÜBUNG ÖFFNEN
+================================================== */
+
+function openExercise(editId){
+
+  const form =
+    document.getElementById(
+      "exerciseForm"
+    );
+
+
+  form.reset();
+
+
+  selectedTags=[];
+
+  selectedAges=[];
+
+  selectedMaterials=[];
+
+  imageData="";
+
+
+  document
+    .getElementById("exerciseId")
+    .value="";
+
+
+  document
+    .getElementById("modalTitle")
+    .textContent =
+      editId
+      ? "Übung bearbeiten"
+      : "Neue Übung";
+
+
+  const preview =
+    document.getElementById("preview");
+
+
+  preview.style.display="none";
+
+  preview.removeAttribute("src");
+
+
+  if(editId){
+
+    const exercise =
+      state.exercises.find(
+        function(e){
+
+          return e.id===editId;
+
+        }
+      );
+
+
+    if(!exercise) return;
+
+
+    document
+      .getElementById("exerciseId")
+      .value=exercise.id;
+
+
+    document
+      .getElementById("exerciseName")
+      .value=exercise.name || "";
+
+
+    document
+      .getElementById("exerciseCategory")
+      .value=
+        exercise.category ||
+        "Hockeyübung";
+
+
+    document
+      .getElementById("exerciseDescription")
+      .value=
+        exercise.description || "";
+
+
+    document
+      .getElementById("exerciseDuration")
+      .value=
+        exercise.duration || 10;
+
+
+    selectedTags =
+      [...(exercise.tags || [])];
+
+
+    selectedAges =
+      [...(exercise.ages || [])];
+
+
+    selectedMaterials =
+      (exercise.material || [])
+        .map(function(item){
+
+          return {
+
+            name:item.name,
+
+            quantity:
+              Number(item.quantity) || 1
+
+          };
+
+        });
+
+
+    imageData =
+      exercise.image || "";
+
+
+    if(imageData){
+
+      preview.src=imageData;
+
+      preview.style.display="block";
+
+    }
+
+  }
+
+
+  renderTagSelector();
+
+  renderAgeSelector();
+
+  renderMaterialSelector();
+
+  renderMaterialList();
+
+
+  document
+    .getElementById("exerciseModal")
+    .classList.add("show");
+
+}
+
+
+/* ==================================================
+   ÜBUNG MODAL SCHLIESSEN
+================================================== */
+
+function closeExercise(){
+
+  document
+    .getElementById("exerciseModal")
+    .classList.remove("show");
+
+}
+
+
+/* ==================================================
+   TAGS
+================================================== */
+
+function renderTagSelector(){
+
+  const container =
+    document.getElementById(
+      "tagSelector"
+    );
+
+
+  const customTags =
+    state.exercises
+      .flatMap(function(exercise){
+
+        return exercise.tags || [];
+
+      })
+      .filter(function(tag){
+
+        return !DEFAULT_TAGS.includes(tag);
+
+      });
+
+
+  const allTags =
+    [...new Set([
+      ...DEFAULT_TAGS,
+      ...customTags
+    ])];
+
+
+  container.innerHTML="";
+
+
+  allTags.forEach(function(tag){
+
+    const button =
+      document.createElement("button");
+
+
+    button.type="button";
+
+
+    button.className =
+      "selectchip " +
+      (
+        selectedTags.includes(tag)
+        ? "sel"
+        : ""
+      );
+
+
+    button.textContent=tag;
+
+
+    button.addEventListener(
+      "click",
+      function(){
+
+        if(selectedTags.includes(tag)){
+
+          selectedTags =
+            selectedTags.filter(
+              function(t){
+
+                return t!==tag;
+
+              }
+            );
+
+        }else{
+
+          selectedTags.push(tag);
+
+        }
+
+
+        renderTagSelector();
+
+      }
+    );
+
+
+    container.appendChild(button);
+
+  });
+
+
+  renderSelectedTags();
+
+}
+
+
+function renderSelectedTags(){
+
+  const container =
+    document.getElementById(
+      "selectedTags"
+    );
+
+
+  container.innerHTML =
+    selectedTags
+      .map(function(tag){
+
+        return `
+
+          <span class="tag">
+            ✓ ${escapeHTML(tag)}
+          </span>
+
+        `;
+
+      })
+      .join("");
+
+}
+
+
+function addCustomTag(){
+
+  const input =
+    document.getElementById(
+      "customTag"
+    );
+
+
+  const tag =
+    input.value.trim();
+
+
+  if(
+    tag &&
+    !selectedTags.includes(tag)
+  ){
+
+    selectedTags.push(tag);
+
+  }
+
+
+  input.value="";
+
+  renderTagSelector();
+
+}
+
+
+/* ==================================================
+   ALTERSKLASSEN
+================================================== */
+
+function renderAgeSelector(){
+
+  const container =
+    document.getElementById(
+      "ageSelector"
+    );
+
+
+  container.innerHTML="";
+
+
+  AGES.forEach(function(age){
+
+    const button =
+      document.createElement("button");
+
+
+    button.type="button";
+
+
+    button.className =
+      "selectchip " +
+      (
+        selectedAges.includes(age)
+        ? "sel"
+        : ""
+      );
+
+
+    button.textContent=age;
+
+
+    button.addEventListener(
+      "click",
+      function(){
+
+        if(selectedAges.includes(age)){
+
+          selectedAges =
+            selectedAges.filter(
+              function(a){
+
+                return a!==age;
+
+              }
+            );
+
+        }else{
+
+          selectedAges.push(age);
+
+        }
+
+
+        renderAgeSelector();
+
+      }
+    );
+
+
+    container.appendChild(button);
+
+  });
+
+}
+
+
+/* ==================================================
+   MATERIAL
+================================================== */
+
+function getAllMaterials(){
+
+  const customMaterials =
+    state.exercises
+      .flatMap(function(exercise){
+
+        return exercise.material || [];
+
+      })
+      .map(function(item){
+
+        return item.name;
+
+      })
+      .filter(Boolean);
+
+
+  return [
+    ...new Set([
+      ...DEFAULT_MATERIALS,
+      ...customMaterials
+    ])
+  ];
+
+}
+
+
+function getSelectedMaterial(name){
+
+  return selectedMaterials.find(
+    function(item){
+
+      return item.name===name;
+
+    }
+  );
+
+}
+
+
+function renderMaterialSelector(){
+
+  const container =
+    document.getElementById(
+      "materialSelector"
+    );
+
+
+  container.innerHTML="";
+
+
+  getAllMaterials()
+    .forEach(function(material){
+
+      const selected =
+        !!getSelectedMaterial(material);
+
+
+      const button =
+        document.createElement("button");
+
+
+      button.type="button";
+
+
+      button.className =
+        "selectchip " +
+        (
+          selected
+          ? "sel"
+          : ""
+        );
+
+
+      button.textContent=material;
+
+
+      button.addEventListener(
+        "click",
+        function(){
+
+          const existing =
+            getSelectedMaterial(material);
+
+
+          if(existing){
+
+            selectedMaterials =
+              selectedMaterials.filter(
+                function(item){
+
+                  return item.name!==material;
+
+                }
+              );
+
+          }else{
+
+            selectedMaterials.push({
+
+              name:material,
+
+              quantity:1
+
+            });
+
+          }
+
+
+          renderMaterialSelector();
+
+          renderMaterialList();
+
+        }
+      );
+
+
+      container.appendChild(button);
+
+    });
+
+}
+
+
+function renderMaterialList(){
+
+  const container =
+    document.getElementById(
+      "materialList"
+    );
+
+
+  if(!selectedMaterials.length){
+
+    container.innerHTML=`
+
+      <div class="muted">
+        Noch kein Material ausgewählt.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML="";
+
+
+  selectedMaterials.forEach(
+    function(item,index){
+
+      const row =
+        document.createElement("div");
+
+
+      row.className=
+        "material-row";
+
+
+      row.innerHTML=`
+
+        <div class="material-name">
+          ${escapeHTML(item.name)}
+        </div>
+
+        <input
+          class="material-quantity"
+          type="number"
+          min="1"
+          value="${Number(item.quantity)||1}"
+          aria-label="Menge"
+        >
+
+        <button
+          type="button"
+          class="remove-material"
+          aria-label="Material entfernen"
+        >
+          ×
+        </button>
+
+      `;
+
+
+      row
+        .querySelector(
+          ".material-quantity"
+        )
+        .addEventListener(
+          "change",
+          function(event){
+
+            let value =
+              Number(
+                event.target.value
+              );
+
+
+            if(!value || value<1)
+              value=1;
+
+
+            selectedMaterials[index]
+              .quantity=value;
+
+            renderMaterialList();
+
+          }
+        );
+
+
+      row
+        .querySelector(
+          ".remove-material"
+        )
+        .addEventListener(
+          "click",
+          function(){
+
+            selectedMaterials.splice(
+              index,
+              1
+            );
+
+
+            renderMaterialSelector();
+
+            renderMaterialList();
+
+          }
+        );
+
+
+      container.appendChild(row);
+
+    }
+  );
+
+}
+
+
+function addCustomMaterial(){
+
+  const input =
+    document.getElementById(
+      "customMaterial"
+    );
+
+
+  const name =
+    input.value.trim();
+
+
+  if(!name){
+
+    return;
+
+  }
+
+
+  const existing =
+    getSelectedMaterial(name);
+
+
+  if(existing){
+
+    existing.quantity++;
+
+  }else{
+
+    selectedMaterials.push({
+
+      name:name,
+
+      quantity:1
+
+    });
+
+  }
+
+
+  input.value="";
+
+
+  renderMaterialSelector();
+
+  renderMaterialList();
+
+}
+
+
+/* ==================================================
+   BILD
+================================================== */
+
+function handleImage(event){
+
+  const file =
+    event.target.files &&
+    event.target.files[0];
+
+
+  if(!file) return;
+
+
+  /*
+    Bilder werden auf maximal ca. 1600 px
+    reduziert, damit die lokale Speicherung
+    nicht unnötig groß wird.
+  */
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload=function(){
+
+    const image =
+      new Image();
+
+
+    image.onload=function(){
+
+      const maxSize=1600;
+
+      let width=image.width;
+
+      let height=image.height;
+
+
+      if(width>maxSize || height>maxSize){
+
+        const ratio =
+          Math.min(
+            maxSize/width,
+            maxSize/height
           );
+
+
+        width =
+          Math.round(
+            width*ratio
+          );
+
+
+        height =
+          Math.round(
+            height*ratio
+          );
+
+      }
+
+
+      const canvas =
+        document.createElement(
+          "canvas"
+        );
+
+
+      canvas.width=width;
+
+      canvas.height=height;
+
+
+      const context =
+        canvas.getContext("2d");
+
+
+      context.drawImage(
+        image,
+        0,
+        0,
+        width,
+        height
+      );
+
+
+      imageData =
+        canvas.toDataURL(
+          "image/jpeg",
+          .82
+        );
+
+
+      const preview =
+        document.getElementById(
+          "preview"
+        );
+
+
+      preview.src=imageData;
+
+      preview.style.display="block";
+
+    };
+
+
+    image.src=reader.result;
+
+  };
+
+
+  reader.readAsDataURL(file);
+
+}
+
+
+/* ==================================================
+   ÜBUNG SPEICHERN
+================================================== */
+
+function saveExercise(event){
+
+  event.preventDefault();
+
+
+  const name =
+    document
+      .getElementById(
+        "exerciseName"
+      )
+      .value
+      .trim();
+
+
+  if(!name){
+
+    alert(
+      "Bitte einen Übungsnamen eingeben."
+    );
+
+    return;
+
+  }
+
+
+  const exercise={
+
+    id:
+      document
+        .getElementById(
+          "exerciseId"
+        )
+        .value ||
+      createId(),
+
+    name:name,
+
+    category:
+      document
+        .getElementById(
+          "exerciseCategory"
+        )
+        .value,
+
+    tags:[
+      ...selectedTags
+    ],
+
+    ages:[
+      ...selectedAges
+    ],
+
+    material:
+      selectedMaterials.map(
+        function(item){
+
+          return {
+
+            name:item.name,
+
+            quantity:
+              Number(item.quantity)||1
+
+          };
+
+        }
+      ),
+
+    description:
+      document
+        .getElementById(
+          "exerciseDescription"
+        )
+        .value
+        .trim(),
+
+    duration:
+      Number(
+        document
+          .getElementById(
+            "exerciseDuration"
+          )
+          .value
+      ) || 10,
+
+    image:imageData
+
+  };
+
+
+  const index =
+    state.exercises.findIndex(
+      function(e){
+
+        return e.id===exercise.id;
+
+      }
+    );
+
+
+  if(index>=0){
+
+    state.exercises[index]=exercise;
+
+  }else{
+
+    state.exercises.push(exercise);
+
+  }
+
+
+  save();
+
+  closeExercise();
+
+  renderAll();
+
+}
+
+
+/* ==================================================
+   DETAIL
+================================================== */
+
+function showDetail(id){
+
+  detailId=id;
+
+
+  const exercise =
+    state.exercises.find(
+      function(e){
+
+        return e.id===id;
+
+      }
+    );
+
+
+  if(!exercise) return;
+
+
+  document
+    .getElementById(
+      "detailTitle"
+    )
+    .textContent=exercise.name;
+
+
+  const ages =
+    (exercise.ages || [])
+      .map(function(age){
+
+        return `
+
+          <span class="tag age">
+            ${escapeHTML(age)}
+          </span>
+
+        `;
+
+      })
+      .join("");
+
+
+  const tags =
+    (exercise.tags || [])
+      .map(function(tag){
+
+        return `
+
+          <span class="tag">
+            ${escapeHTML(tag)}
+          </span>
+
+        `;
+
+      })
+      .join("");
+
+
+  const materials =
+    (exercise.material || [])
+      .map(function(item){
+
+        return `
+
+          <span class="tag materialtag">
+            ${escapeHTML(item.name)}
+            × ${Number(item.quantity)||1}
+          </span>
+
+        `;
+
+      })
+      .join("");
+
+
+  document
+    .getElementById(
+      "detailBody"
+    )
+    .innerHTML=`
+
+      ${
+        exercise.image
+        ? `
+          <img
+            class="cardimg"
+            src="${escapeHTML(exercise.image)}"
+            alt=""
+            style="border-radius:12px"
+          >
+        `
+        : ""
+      }
+
+      <p>
+
+        <span class="category">
+          ${escapeHTML(exercise.category)}
+        </span>
+
+      </p>
+
+      <h3>Altersklassen</h3>
+
+      <div class="tags">
+        ${ages || "<span class='muted'>Keine Angabe</span>"}
+      </div>
+
+
+      <h3>Tags</h3>
+
+      <div class="tags">
+        ${tags || "<span class='muted'>Keine Tags</span>"}
+      </div>
+
+
+      <h3>Material</h3>
+
+      <div class="tags">
+        ${
+          materials ||
+          "<span class='muted'>Kein Material angegeben</span>"
+        }
+      </div>
+
+
+      <h3>Beschreibung</h3>
+
+      <p>
+        ${
+          escapeHTML(
+            exercise.description ||
+            "Keine Beschreibung."
+          )
+        }
+      </p>
+
+
+      <p class="muted">
+        Standarddauer:
+        ${exercise.duration || 10}
+        Minuten
+      </p>
+
+    `;
+
+
+  document
+    .getElementById(
+      "detailModal"
+    )
+    .classList.add("show");
+
+}
+
+
+function closeDetail(){
+
+  document
+    .getElementById(
+      "detailModal"
+    )
+    .classList.remove("show");
+
+}
+
+
+function addDetailToTraining(){
+
+  if(detailId){
+
+    addExercise(detailId);
+
+  }
+
+
+  closeDetail();
+
+}
+
+
+function editDetail(){
+
+  const id=detailId;
+
+  closeDetail();
+
+
+  if(id){
+
+    openExercise(id);
+
+  }
+
+}
+
+
+/* ==================================================
+   TRAINING ÜBUNG HINZUFÜGEN
+================================================== */
+
+function addExercise(id){
+
+  const exercise =
+    state.exercises.find(
+      function(e){
+
+        return e.id===id;
+
+      }
+    );
+
+
+  if(!exercise) return;
+
+
+  state.current.exercises.push({
+
+    id:exercise.id,
+
+    duration:
+      exercise.duration || 10
+
+  });
+
+
+  save();
+
+  renderTraining();
+
+  showView("training");
+
+}
+
+
+/* ==================================================
+   TRAINING LADEN
+================================================== */
+
+function loadCurrent(){
+
+  document
+    .getElementById(
+      "trainingTitle"
+    )
+    .value=
+      state.current.title || "";
+
+
+  document
+    .getElementById(
+      "trainingDate"
+    )
+    .value=
+      state.current.date || today();
+
+
+  document
+    .getElementById(
+      "trainingGoal"
+    )
+    .value=
+      state.current.goal || "";
+
+}
+
+
+/* ==================================================
+   TRAINING SPEICHERN
+================================================== */
+
+function saveCurrent(){
+
+  state.current.title =
+    document
+      .getElementById(
+        "trainingTitle"
+      )
+      .value;
+
+
+  state.current.date =
+    document
+      .getElementById(
+        "trainingDate"
+      )
+      .value;
+
+
+  state.current.goal =
+    document
+      .getElementById(
+        "trainingGoal"
+      )
+      .value;
+
+
+  save();
+
+}
+
+
+/* ==================================================
+   TRAINING RENDER
+================================================== */
+
+function renderTraining(){
+
+  loadCurrent();
+
+
+  const container =
+    document.getElementById(
+      "trainingList"
+    );
+
+
+  container.innerHTML="";
+
+
+  if(!state.current.exercises.length){
+
+    container.innerHTML=`
+
+      <div class="empty">
+
+        <div style="font-size:42px">
+          📋
+        </div>
+
+        <h3>
+          Noch keine Übungen im Training
+        </h3>
+
+        <p class="muted">
+          Gehe zur Bibliothek und füge Übungen hinzu.
+        </p>
+
+        <button
+          class="btn primary"
+          id="selectExercises"
+        >
+          Übungen auswählen
+        </button>
+
+      </div>
+
+    `;
+
+
+    document
+      .getElementById(
+        "selectExercises"
+      )
+      .addEventListener(
+        "click",
+        function(){
+
+          showView("library");
+
+        }
+      );
+
+
+  }else{
+
+    state.current.exercises
+      .forEach(
+        function(item,index){
+
+          const exercise =
+            state.exercises.find(
+              function(e){
+
+                return e.id===item.id;
+
+              }
+            );
+
+
+          if(!exercise) return;
+
+
+          const row =
+            document.createElement(
+              "div"
+            );
+
+
+          row.className="item";
+
+
+          const image =
+            exercise.image
+            ? `
+
+              <img
+                class="thumb"
+                src="${escapeHTML(exercise.image)}"
+                alt=""
+              >
+
+            `
+            : `
+
+              <div
+                class="thumb"
+                style="
+                  display:flex;
+                  align-items:center;
+                  justify-content:center;
+                  font-size:25px
+                "
+              >
+                🏑
+              </div>
+
+            `;
+
+
+          row.innerHTML=`
+
+            <div class="num">
+              ${index+1}
+            </div>
+
+            ${image}
+
+            <div class="itemmain">
+
+              <strong>
+                ${escapeHTML(exercise.name)}
+              </strong>
+
+              <span class="muted">
+                ${escapeHTML(exercise.category)}
+                ·
+                ${
+                  item.duration ||
+                  exercise.duration ||
+                  10
+                }
+                Min.
+              </span>
+
+              <div class="itembuttons">
+
+                <button class="upButton">
+                  ↑
+                </button>
+
+                <button class="downButton">
+                  ↓
+                </button>
+
+                <button class="durationButton">
+                  ⏱ Dauer
+                </button>
+
+                <button class="removeButton">
+                  🗑 Entfernen
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+
+          row
+            .querySelector(
+              ".upButton"
+            )
+            .addEventListener(
+              "click",
+              function(){
+
+                moveItem(index,-1);
+
+              }
+            );
+
+
+          row
+            .querySelector(
+              ".downButton"
+            )
+            .addEventListener(
+              "click",
+              function(){
+
+                moveItem(index,1);
+
+              }
+            );
+
+
+          row
+            .querySelector(
+              ".removeButton"
+            )
+            .addEventListener(
+              "click",
+              function(){
+
+                state.current.exercises
+                  .splice(index,1);
+
+                save();
+
+                renderTraining();
+
+              }
+            );
+
+
+          row
+            .querySelector(
+              ".durationButton"
+            )
+            .addEventListener(
+              "click",
+              function(){
+
+                const duration =
+                  prompt(
+                    "Dauer in Minuten:",
+                    item.duration ||
+                    exercise.duration ||
+                    10
+                  );
+
+
+                if(
+                  duration!==null &&
+                  Number(duration)>0
+                ){
+
+                  item.duration =
+                    Number(duration);
+
+                  save();
+
+                  renderTraining();
+
+                }
+
+              }
+            );
+
+
+          container.appendChild(row);
 
         }
       );
@@ -2272,33 +3475,153 @@ function renderLibrary() {
   }
 
 
-  if (!exercises.length) {
+  renderPacklist();
 
-    grid.innerHTML = `
+}
 
-      <div
-        class="empty"
-        style="grid-column:1/-1"
-      >
 
-        <div style="font-size:42px">
-          📚
-        </div>
+/* ==================================================
+   REIHENFOLGE
+================================================== */
 
-        <h3>
-          Noch keine Übungen
-        </h3>
+function moveItem(index,direction){
 
-        <p>
-          Erstelle deine erste Übung.
-        </p>
+  const newIndex =
+    index+direction;
 
-        <button
-          class="btn primary"
-          onclick="openExerciseModal()"
-        >
-          + Erste Übung erstellen
-        </button>
+
+  if(
+    newIndex<0 ||
+    newIndex>=
+      state.current.exercises.length
+  ){
+
+    return;
+
+  }
+
+
+  const list =
+    state.current.exercises;
+
+
+  [
+    list[index],
+    list[newIndex]
+  ] =
+  [
+    list[newIndex],
+    list[index]
+  ];
+
+
+  save();
+
+  renderTraining();
+
+}
+
+
+/* ==================================================
+   PACKLISTE ERSTELLEN
+================================================== */
+
+function buildPacklist(){
+
+  const totals={};
+
+
+  state.current.exercises
+    .forEach(function(item){
+
+      const exercise =
+        state.exercises.find(
+          function(e){
+
+            return e.id===item.id;
+
+          }
+        );
+
+
+      if(!exercise) return;
+
+
+      (exercise.material || [])
+        .forEach(function(material){
+
+          const name =
+            String(
+              material.name || ""
+            ).trim();
+
+
+          if(!name) return;
+
+
+          const quantity =
+            Number(
+              material.quantity
+            ) || 1;
+
+
+          if(!totals[name]){
+
+            totals[name]=0;
+
+          }
+
+
+          totals[name]+=quantity;
+
+        });
+
+    });
+
+
+  return totals;
+
+}
+
+
+/* ==================================================
+   PACKLISTE ANZEIGEN
+================================================== */
+
+function renderPacklist(){
+
+  const container =
+    document.getElementById(
+      "packlistContent"
+    );
+
+
+  const totals =
+    buildPacklist();
+
+
+  const names =
+    Object.keys(totals)
+      .sort(
+        function(a,b){
+
+          return a.localeCompare(
+            b,
+            "de"
+          );
+
+        }
+      );
+
+
+  if(!names.length){
+
+    container.innerHTML=`
+
+      <div class="muted">
+
+        Für die ausgewählten Übungen
+        wurde noch kein Material hinterlegt.
 
       </div>
 
@@ -2309,603 +3632,805 @@ function renderLibrary() {
   }
 
 
-  grid.innerHTML = "";
+  container.innerHTML="";
 
 
-  exercises.forEach(
-    exercise => {
+  names.forEach(function(name,index){
 
-      const card =
-        document.createElement(
-          "article"
-        );
+    const row =
+      document.createElement("label");
 
 
-      card.className =
-        "exercise-card";
+    row.className="pack-item";
 
 
-      const image =
-        exercise.image
+    row.innerHTML=`
 
-          ? `
-            <img
-              class="exercise-image"
-              src="${escapeAttribute(
-                exercise.image
-              )}"
-              alt=""
-            >
-          `
+      <input
+        class="pack-check"
+        type="checkbox"
+        data-pack-index="${index}"
+      >
 
-          : `
-            <div
-              class="exercise-placeholder"
-            >
-              🏑
-            </div>
-          `;
+      <span>
+        ${escapeHTML(name)}
+      </span>
+
+      <span class="pack-quantity">
+        ${totals[name]}
+      </span>
+
+    `;
 
 
-      const tags =
-        (exercise.tags || [])
-          .map(
-            tag =>
-              `<span class="tag">
-                ${escapeHTML(tag)}
-              </span>`
-          )
-          .join("");
+    container.appendChild(row);
+
+  });
 
 
-      const ages =
-        (exercise.ages || [])
-          .map(
-            age =>
-              `<span class="tag age-tag">
-                ${escapeHTML(age)}
-              </span>`
-          )
-          .join("");
+  restorePacklistChecks();
+
+}
 
 
-      card.innerHTML = `
+/* ==================================================
+   PACKLISTE ABHAKEN
+================================================== */
 
-        ${image}
+function getPackCheckKey(){
 
-
-        <div class="exercise-body">
-
-          <div class="exercise-title">
-
-            ${escapeHTML(
-              exercise.name
-            )}
-
-          </div>
-
-
-          <div class="category-label">
-
-            ${escapeHTML(
-              exercise.category
-            )}
-
-          </div>
-
-
-          <div class="tags">
-
-            ${ages}
-
-          </div>
-
-
-          <div class="tags">
-
-            ${tags}
-
-          </div>
-
-
-          <div class="card-actions">
-
-            <button
-              class="btn"
-              onclick="showExerciseDetails(
-                '${exercise.id}'
-              )"
-            >
-              Details
-            </button>
-
-
-            <button
-              class="btn primary"
-              onclick="addExerciseToTraining(
-                '${exercise.id}'
-              )"
-            >
-              + Training
-            </button>
-
-          </div>
-
-        </div>
-
-      `;
-
-
-      grid.appendChild(
-        card
-      );
-
-    }
+  return (
+    "packlist-" +
+    (
+      state.current.id ||
+      "current"
+    )
   );
 
 }
 
 
-/* =========================================================
-   TAG AUSWAHL
-========================================================= */
+function savePacklistChecks(){
 
-function renderTagSelector() {
+  const checks =
+    {};
 
-  const container =
-    document.getElementById(
-      "tagSelector"
+
+  document
+    .querySelectorAll(
+      "#packlistContent .pack-check"
+    )
+    .forEach(function(input){
+
+      const name =
+        input
+          .closest(".pack-item")
+          .querySelector("span:nth-child(2)")
+          .textContent
+          .trim();
+
+
+      checks[name]=input.checked;
+
+    });
+
+
+  try{
+
+    localStorage.setItem(
+      getPackCheckKey(),
+      JSON.stringify(checks)
     );
 
+  }catch(error){
 
-  container.innerHTML = "";
+    console.error(error);
 
-
-  /*
-   * Standardtags plus bereits vorhandene
-   * eigene Tags aus der Datenbank.
-   */
-
-  const customTags =
-    state.exercises
-      .flatMap(
-        e =>
-          Array.isArray(e.tags)
-            ? e.tags
-            : []
-      )
-      .filter(
-        tag =>
-          !DEFAULT_TAGS.includes(
-            tag
-          )
-      );
-
-
-  const allTags = [
-
-    ...DEFAULT_TAGS,
-
-    ...customTags
-
-  ];
-
-
-  [
-    ...new Set(allTags)
-  ]
-    .forEach(
-      tag => {
-
-        const button =
-          document.createElement(
-            "button"
-          );
-
-
-        button.type = "button";
-
-        button.className =
-          "select-chip " +
-          (
-            selectedTags.includes(tag)
-              ? "selected"
-              : ""
-          );
-
-
-        button.textContent =
-          tag;
-
-
-        button.onclick =
-          () => {
-
-            toggleTag(tag);
-
-          };
-
-
-        container.appendChild(
-          button
-        );
-
-      }
-    );
-
-
-  renderSelectedTags();
+  }
 
 }
 
 
-function toggleTag(tag) {
+function restorePacklistChecks(){
 
-  if (
-    selectedTags.includes(
-      tag
-    )
-  ) {
+  let checks={};
 
-    selectedTags =
-      selectedTags.filter(
-        x => x !== tag
+
+  try{
+
+    checks =
+      JSON.parse(
+        localStorage.getItem(
+          getPackCheckKey()
+        ) || "{}"
       );
 
-  } else {
+  }catch(error){
 
-    selectedTags.push(
-      tag
-    );
+    checks={};
 
   }
 
 
-  renderTagSelector();
+  document
+    .querySelectorAll(
+      "#packlistContent .pack-check"
+    )
+    .forEach(function(input){
+
+      const name =
+        input
+          .closest(".pack-item")
+          .querySelector("span:nth-child(2)")
+          .textContent
+          .trim();
+
+
+      input.checked =
+        !!checks[name];
+
+
+      input.addEventListener(
+        "change",
+        savePacklistChecks
+      );
+
+    });
 
 }
 
 
-function renderSelectedTags() {
+function resetPacklist(){
 
-  const container =
-    document.getElementById(
-      "selectedTagsDisplay"
+  try{
+
+    localStorage.removeItem(
+      getPackCheckKey()
     );
 
+  }catch(error){}
 
-  if (!selectedTags.length) {
 
-    container.innerHTML = `
-      <span class="muted">
-        Keine Tags ausgewählt
-      </span>
-    `;
+  renderPacklist();
+
+}
+
+
+/* ==================================================
+   AKTUELLES TRAINING LEEREN
+================================================== */
+
+function clearTraining(){
+
+  if(
+    !confirm(
+      "Aktuelles Training wirklich leeren?"
+    )
+  ){
 
     return;
 
   }
 
 
-  container.innerHTML =
-    selectedTags
-      .map(
-        tag =>
-          `<span class="tag">
-            ✓ ${escapeHTML(tag)}
-          </span>`
-      )
-      .join("");
+  state.current={
+
+    id:createId(),
+
+    title:"",
+
+    date:today(),
+
+    goal:"",
+
+    exercises:[]
+
+  };
+
+
+  save();
+
+  loadCurrent();
+
+  renderTraining();
 
 }
 
 
-function addCustomTag() {
+/* ==================================================
+   TRAINING SPEICHERN
+================================================== */
 
-  const input =
-    document.getElementById(
-      "customTagInput"
+function finishTraining(){
+
+  saveCurrent();
+
+
+  if(!state.current.exercises.length){
+
+    alert(
+      "Das Training enthält noch keine Übungen."
     );
 
-
-  const tag =
-    input.value.trim();
-
-
-  if (!tag) return;
-
-
-  if (
-    !selectedTags.includes(
-      tag
-    )
-  ) {
-
-    selectedTags.push(
-      tag
-    );
+    return;
 
   }
 
 
-  input.value = "";
-
-
-  renderTagSelector();
-
-}
-
-
-/* =========================================================
-   ALTERSKLASSEN
-========================================================= */
-
-function renderAgeSelector() {
-
-  const container =
-    document.getElementById(
-      "ageSelector"
+  const copy =
+    JSON.parse(
+      JSON.stringify(
+        state.current
+      )
     );
 
 
-  container.innerHTML = "";
+  copy.id=createId();
 
 
-  AGE_CLASSES.forEach(
-    age => {
-
-      const button =
-        document.createElement(
-          "button"
-        );
+  copy.savedAt =
+    new Date().toISOString();
 
 
-      button.type = "button";
+  state.trainings.push(copy);
 
 
-      button.className =
-        "select-chip " +
-        (
-          selectedAges.includes(age)
-            ? "selected"
-            : ""
-        );
+  save();
+
+  updateStats();
 
 
-      button.textContent =
-        age;
-
-
-      button.onclick =
-        () => {
-
-          toggleAge(age);
-
-        };
-
-
-      container.appendChild(
-        button
-      );
-
-    }
+  alert(
+    "Training wurde gespeichert."
   );
 
 }
 
 
-function toggleAge(age) {
+/* ==================================================
+   PDF / DRUCK
+================================================== */
 
-  if (
-    selectedAges.includes(
-      age
-    )
-  ) {
+function printTraining(){
 
-    selectedAges =
-      selectedAges.filter(
-        x => x !== age
-      );
+  saveCurrent();
 
-  } else {
 
-    selectedAges.push(
-      age
+  if(!state.current.exercises.length){
+
+    alert(
+      "Bitte zuerst Übungen hinzufügen."
     );
+
+    return;
 
   }
 
 
-  renderAgeSelector();
+  window.print();
 
 }
 
 
-/* =========================================================
-   ÜBUNG MODAL
-========================================================= */
+/* ==================================================
+   EXPORT
+================================================== */
 
-function openExerciseModal(
-  id = null
-) {
+function exportData(){
 
-  document
-    .getElementById(
-      "exerciseModal"
-    )
-    .classList.add(
-      "show"
+  saveCurrent();
+
+
+  const data={
+
+    version:4,
+
+    exportedAt:
+      new Date().toISOString(),
+
+    ...state
+
+  };
+
+
+  const blob =
+    new Blob(
+      [
+        JSON.stringify(
+          data,
+          null,
+          2
+        )
+      ],
+      {
+        type:"application/json"
+      }
     );
 
 
-  document
-    .getElementById(
-      "exerciseForm"
-    )
-    .reset();
-
-
-  document
-    .getElementById(
-      "exerciseId"
-    )
-    .value = "";
-
-
-  document
-    .getElementById(
-      "imagePreview"
-    )
-    .style.display =
-      "none";
-
-
-  document
-    .getElementById(
-      "imagePreview"
-    )
-    .removeAttribute(
-      "data-image"
+  const url =
+    URL.createObjectURL(
+      blob
     );
 
 
-  document
-    .getElementById(
-      "exerciseModalTitle"
-    )
-    .textContent =
-      "Neue Übung";
+  const link =
+    document.createElement(
+      "a"
+    );
 
 
-  selectedTags = [];
-
-  selectedAges = [];
+  link.href=url;
 
 
-  if (id) {
-
-    const exercise =
-      state.exercises.find(
-        e => e.id === id
-      );
+  link.download =
+    "hockey-trainingsplan-backup.json";
 
 
-    if (!exercise) return;
+  document.body.appendChild(link);
+
+  link.click();
+
+  link.remove();
 
 
-    document
-      .getElementById(
-        "exerciseModalTitle"
-      )
-      .textContent =
-        "Übung bearbeiten";
+  setTimeout(
+    function(){
+
+      URL.revokeObjectURL(url);
+
+    },
+    1000
+  );
+
+}
 
 
-    document
-      .getElementById(
-        "exerciseId"
-      )
-      .value =
-        exercise.id;
+/* ==================================================
+   IMPORT
+================================================== */
+
+function importData(event){
+
+  const file =
+    event.target.files &&
+    event.target.files[0];
 
 
-    document
-      .getElementById(
-        "exerciseName"
-      )
-      .value =
-        exercise.name || "";
+  if(!file) return;
 
 
-    document
-      .getElementById(
-        "exerciseCategory"
-      )
-      .value =
-        exercise.category ||
-        "Hockeyübung";
+  const reader =
+    new FileReader();
 
 
-    document
-      .getElementById(
-        "exerciseDescription"
-      )
-      .value =
-        exercise.description ||
-        "";
+  reader.onload=function(){
 
+    try{
 
-    document
-      .getElementById(
-        "exerciseDuration"
-      )
-      .value =
-        exercise.duration ||
-        10;
-
-
-    selectedTags =
-      Array.isArray(
-        exercise.tags
-      )
-        ? [...exercise.tags]
-        : [];
-
-
-    selectedAges =
-      Array.isArray(
-        exercise.ages
-      )
-        ? [...exercise.ages]
-        : [];
-
-
-    if (exercise.image) {
-
-      const preview =
-        document.getElementById(
-          "imagePreview"
+      const imported =
+        JSON.parse(
+          reader.result
         );
 
 
-      preview.src =
-        exercise.image;
+      if(
+        !Array.isArray(
+          imported.exercises
+        ) ||
+        !Array.isArray(
+          imported.trainings
+        )
+      ){
+
+        throw new Error();
+
+      }
 
 
-      preview.style.display =
-        "block";
+      if(
+        !confirm(
+          "Import ersetzt die aktuell gespeicherten Daten. Fortfahren?"
+        )
+      ){
+
+        return;
+
+      }
 
 
-      preview.dataset.image =
-        exercise.image;
+      state={
+
+        ...state,
+
+        ...imported,
+
+        current:
+          imported.current ||
+          state.current
+
+      };
+
+
+      /*
+        Importdaten kompatibel machen.
+      */
+
+      state.exercises =
+        state.exercises.map(
+          function(exercise){
+
+            return {
+
+              ...exercise,
+
+              material:
+                Array.isArray(
+                  exercise.material
+                )
+                ? exercise.material
+                : []
+
+            };
+
+          }
+        );
+
+
+      save();
+
+      load();
+
+
+      alert(
+        "Import erfolgreich."
+      );
+
+
+    }catch(error){
+
+      console.error(error);
+
+      alert(
+        "Die Datei konnte nicht importiert werden."
+      );
 
     }
+
+  };
+
+
+  reader.readAsText(file);
+
+  event.target.value="";
+
+}
+
+
+/* ==================================================
+   ALLES LÖSCHEN
+================================================== */
+
+function deleteAll(){
+
+  if(
+    !confirm(
+      "ALLE Übungen und Trainings löschen?"
+    )
+  ){
+
+    return;
 
   }
 
 
-  renderTagSelector();
+  localStorage.removeItem(
+    STORAGE_KEY
+  );
 
-  renderAgeSelector();
+
+  state={
+
+    exercises:[],
+
+    trainings:[],
+
+    current:{
+
+      id:createId(),
+
+      title:"",
+
+      date:today(),
+
+      goal:"",
+
+      exercises:[]
+
+    }
+
+  };
+
+
+  save();
+
+  load();
+
+  showView("library");
 
 }
 
 
-function closeExerciseModal() {
+/* ==================================================
+   EVENTS
+================================================== */
 
-  document
-    .getElementById(
-      "exerciseModal"
-    )
-    .classList.remove(
-      "show"
-    );
+document
+  .getElementById(
+    "addExerciseTop"
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      openExercise();
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "closeExercise"
+  )
+  .addEventListener(
+    "click",
+    closeExercise
+  );
+
+
+document
+  .getElementById(
+    "cancelExercise"
+  )
+  .addEventListener(
+    "click",
+    closeExercise
+  );
+
+
+document
+  .getElementById(
+    "exerciseForm"
+  )
+  .addEventListener(
+    "submit",
+    saveExercise
+  );
+
+
+document
+  .getElementById(
+    "imageFile"
+  )
+  .addEventListener(
+    "change",
+    handleImage
+  );
+
+
+document
+  .getElementById(
+    "addTag"
+  )
+  .addEventListener(
+    "click",
+    addCustomTag
+  );
+
+
+document
+  .getElementById(
+    "addMaterial"
+  )
+  .addEventListener(
+    "click",
+    addCustomMaterial
+  );
+
+
+document
+  .getElementById(
+    "search"
+  )
+  .addEventListener(
+    "input",
+    renderLibrary
+  );
+
+
+document
+  .getElementById(
+    "navLibrary"
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      showView("library");
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "navTraining"
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      showView("training");
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "navData"
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      showView("data");
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "addTrainingExercise"
+  )
+  .addEventListener(
+    "click",
+    function(){
+
+      showView("library");
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "printTraining"
+  )
+  .addEventListener(
+    "click",
+    printTraining
+  );
+
+
+document
+  .getElementById(
+    "saveTraining"
+  )
+  .addEventListener(
+    "click",
+    finishTraining
+  );
+
+
+document
+  .getElementById(
+    "clearTraining"
+  )
+  .addEventListener(
+    "click",
+    clearTraining
+  );
+
+
+document
+  .getElementById(
+    "resetPacklist"
+  )
+  .addEventListener(
+    "click",
+    resetPacklist
+  );
+
+
+document
+  .getElementById(
+    "exportButton"
+  )
+  .addEventListener(
+    "click",
+    exportData
+  );
+
+
+document
+  .getElementById(
+    "importFile"
+  )
+  .addEventListener(
+    "change",
+    importData
+  );
+
+
+document
+  .getElementById(
+    "deleteAll"
+  )
+  .addEventListener(
+    "click",
+    deleteAll
+  );
+
+
+document
+  .getElementById(
+    "closeDetail"
+  )
+  .addEventListener(
+    "click",
+    closeDetail
+  );
+
+
+document
+  .getElementById(
+    "detailAdd"
+  )
+  .addEventListener(
+    "click",
+    addDetailToTraining
+  );
+
+
+document
+  .getElementById(
+    "detailEdit"
+  )
+  .addEventListener(
+    "click",
+    editDetail
+  );
+
+
+/* ==================================================
+   ALLES RENDERN
+================================================== */
+
+function renderAll(){
+
+  updateStats();
+
+  renderFilters();
+
+  renderLibrary();
+
+  loadCurrent();
+
+  renderTraining();
 
 }
 
 
-/* =========================================================
-   BILDER
-========================================================= */
+/* ==================================================
+   START
+================================================== */
 
-async function handleImage(
+load();
+
+</script>
+
+</body>
+</html>
