@@ -2,9 +2,12 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#111827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Trainingsplan">
+
 <title>Trainingsplan</title>
 
 <style>
@@ -22,21 +25,34 @@
   --primary: #2563eb;
   --primary-dark: #1d4ed8;
   --danger: #dc2626;
+  --success: #16a34a;
   --nav-height: 76px;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-               Roboto, Helvetica, Arial, sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
   min-height: 100%;
 }
 
 body {
-  padding-bottom: calc(var(--nav-height) + env(safe-area-inset-bottom) + 20px);
+  padding-bottom:
+    calc(
+      var(--nav-height) +
+      env(safe-area-inset-bottom) +
+      20px
+    );
 }
 
 button,
@@ -57,6 +73,7 @@ button {
   background: rgba(255,255,255,.96);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
+
   padding:
     max(12px, env(safe-area-inset-top))
     16px
@@ -66,9 +83,11 @@ button {
 .topbar-inner {
   max-width: 1100px;
   margin: auto;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   gap: 12px;
 }
 
@@ -117,12 +136,16 @@ p {
   color: var(--muted);
 }
 
+/* BUTTONS */
+
 .btn {
   border: 0;
   border-radius: 12px;
   padding: 12px 16px;
   min-height: 46px;
+
   font-weight: 700;
+
   background: #e5e7eb;
   color: #111827;
 }
@@ -141,6 +164,11 @@ p {
   color: var(--danger);
 }
 
+.btn.success {
+  background: #dcfce7;
+  color: var(--success);
+}
+
 .btn.small {
   min-height: 38px;
   padding: 8px 12px;
@@ -151,6 +179,8 @@ p {
   width: 100%;
 }
 
+/* TOOLBAR */
+
 .toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -158,27 +188,45 @@ p {
   margin: 16px 0;
 }
 
+/* SEARCH */
+
 .search {
   width: 100%;
   min-height: 48px;
+
   border: 1px solid var(--border);
   border-radius: 13px;
+
   padding: 0 14px;
+
   background: white;
 }
+
+/* FILTERS */
 
 .filters {
   display: flex;
   gap: 8px;
+
   overflow-x: auto;
-  padding-bottom: 4px;
+
+  padding: 8px 0 4px;
+
+  scrollbar-width: none;
+}
+
+.filters::-webkit-scrollbar {
+  display: none;
 }
 
 .filter-chip {
   flex: 0 0 auto;
+
   border: 1px solid var(--border);
   background: white;
+
   border-radius: 999px;
+
   padding: 9px 14px;
 }
 
@@ -188,35 +236,77 @@ p {
   border-color: var(--primary);
 }
 
+/* STATISTICS */
+
+.stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin: 16px 0;
+}
+
+.stat {
+  background: white;
+
+  border: 1px solid var(--border);
+  border-radius: 14px;
+
+  padding: 14px;
+}
+
+.stat-number {
+  font-size: 25px;
+  font-weight: 800;
+}
+
+/* EXERCISE GRID */
+
 .exercise-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
   gap: 12px;
 }
 
 .exercise-card {
   background: var(--card);
+
   border: 1px solid var(--border);
   border-radius: 16px;
+
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,.04);
 }
 
 .exercise-image {
   width: 100%;
   aspect-ratio: 1.25 / 1;
+
   object-fit: cover;
+
   background: #e5e7eb;
+
   display: block;
 }
 
 .exercise-placeholder {
   width: 100%;
   aspect-ratio: 1.25 / 1;
+
   background: #e5e7eb;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-size: 42px;
 }
 
@@ -227,89 +317,150 @@ p {
 .exercise-title {
   font-weight: 800;
   font-size: 16px;
+
   margin-bottom: 5px;
+}
+
+.category-label {
+  display: inline-block;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  padding: 5px 8px;
+
+  border-radius: 7px;
+
+  background: #eff6ff;
+  color: #1d4ed8;
+
+  margin-top: 4px;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
+
   gap: 5px;
+
   margin: 8px 0;
 }
 
 .tag {
   font-size: 11px;
+
   padding: 5px 8px;
+
   border-radius: 999px;
+
   background: #eef2ff;
   color: #3730a3;
 }
 
+.age-tag {
+  background: #ecfdf5;
+  color: #047857;
+}
+
 .card-actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap: 7px;
+
   margin-top: 10px;
 }
 
 .card-actions .btn {
   min-height: 40px;
+
   padding: 8px;
+
   font-size: 13px;
 }
 
+/* EMPTY */
+
 .empty {
   text-align: center;
+
   padding: 45px 20px;
+
   color: var(--muted);
+
   background: white;
+
   border: 1px dashed var(--border);
+
   border-radius: 16px;
 }
 
+/* TRAINING */
+
 .training-header {
   background: white;
+
   border: 1px solid var(--border);
   border-radius: 16px;
+
   padding: 16px;
+
   margin-bottom: 14px;
 }
 
 .training-list {
   display: flex;
+
   flex-direction: column;
+
   gap: 10px;
 }
 
 .training-item {
   background: white;
+
   border: 1px solid var(--border);
   border-radius: 14px;
+
   padding: 12px;
+
   display: flex;
-  gap: 12px;
-  align-items: center;
+
+  gap: 10px;
+
+  align-items: flex-start;
 }
 
 .training-thumb {
   width: 72px;
   height: 72px;
+
   border-radius: 10px;
+
   object-fit: cover;
+
   background: #e5e7eb;
+
   flex: 0 0 72px;
 }
 
 .training-number {
   width: 28px;
   height: 28px;
+
   border-radius: 50%;
+
   background: #eff6ff;
   color: var(--primary);
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-weight: 800;
+
   flex: 0 0 28px;
 }
 
@@ -320,132 +471,274 @@ p {
 
 .training-content strong {
   display: block;
+
   margin-bottom: 3px;
 }
 
 .training-actions {
   display: flex;
+
   flex-wrap: wrap;
+
   gap: 5px;
 }
 
 .training-actions button {
   border: 0;
+
   background: #f3f4f6;
+
   border-radius: 9px;
+
   padding: 8px 10px;
+
   min-height: 36px;
 }
 
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin: 16px 0;
-}
-
-.stat {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 14px;
-}
-
-.stat-number {
-  font-size: 25px;
-  font-weight: 800;
-}
+/* FORMS */
 
 .form {
   display: grid;
+
   gap: 13px;
 }
 
 .form-group {
   display: grid;
+
   gap: 6px;
 }
 
 .form-group label {
   font-weight: 700;
+
   font-size: 14px;
 }
 
 .form-control {
   width: 100%;
+
   min-height: 46px;
+
   border: 1px solid var(--border);
+
   border-radius: 11px;
+
   padding: 10px 12px;
+
   background: white;
 }
 
 textarea.form-control {
   min-height: 110px;
+
   resize: vertical;
 }
 
+/* TAG SELECTOR */
+
+.selection-title {
+  font-size: 13px;
+
+  font-weight: 700;
+
+  margin-bottom: 8px;
+}
+
+.selection-grid {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.select-chip {
+  border: 1px solid #d1d5db;
+
+  background: white;
+
+  color: #374151;
+
+  border-radius: 999px;
+
+  padding: 9px 12px;
+
+  min-height: 40px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  transition: .15s;
+}
+
+.select-chip.selected {
+  background: var(--primary);
+
+  color: white;
+
+  border-color: var(--primary);
+
+  box-shadow:
+    0 1px 4px rgba(37,99,235,.25);
+}
+
+.select-chip.selected::before {
+  content: "✓ ";
+
+  font-weight: 900;
+}
+
+.custom-tag-row {
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 10px;
+}
+
+.custom-tag-row input {
+  flex: 1;
+
+  min-width: 0;
+}
+
+/* MODAL */
+
 .modal {
   position: fixed;
+
   inset: 0;
+
   z-index: 100;
+
   display: none;
+
   background: rgba(0,0,0,.55);
+
   padding: 15px;
+
   overflow-y: auto;
 }
 
 .modal.show {
   display: flex;
+
   align-items: flex-end;
+
   justify-content: center;
 }
 
 .modal-card {
   width: min(700px, 100%);
+
   max-height: 92vh;
+
   overflow-y: auto;
+
   background: white;
-  border-radius: 20px 20px 12px 12px;
+
+  border-radius:
+    20px
+    20px
+    12px
+    12px;
+
   padding: 18px;
-  margin-bottom: env(safe-area-inset-bottom);
+
+  margin-bottom:
+    env(safe-area-inset-bottom);
 }
 
 .modal-header {
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
+
   gap: 10px;
+
   margin-bottom: 15px;
 }
 
 .close {
   border: 0;
+
   background: #f3f4f6;
+
   width: 42px;
   height: 42px;
+
   border-radius: 50%;
+
   font-size: 22px;
 }
 
 .image-preview {
   width: 100%;
+
   max-height: 280px;
+
   object-fit: contain;
+
   border-radius: 12px;
+
   background: #f3f4f6;
+
   display: none;
 }
 
+/* FILE INPUT */
+
+.file-label {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  min-height: 52px;
+
+  border: 2px dashed #cbd5e1;
+
+  border-radius: 12px;
+
+  background: #f8fafc;
+
+  font-weight: 700;
+
+  color: #475569;
+
+  cursor: pointer;
+
+  text-align: center;
+
+  padding: 10px;
+}
+
+.file-label input {
+  display: none;
+}
+
+/* BOTTOM NAV */
+
 .bottom-nav {
   position: fixed;
+
   left: 0;
   right: 0;
   bottom: 0;
+
   z-index: 50;
+
   background: rgba(255,255,255,.98);
+
   backdrop-filter: blur(15px);
+
   border-top: 1px solid var(--border);
+
   padding:
     7px
     max(7px, env(safe-area-inset-right))
@@ -455,62 +748,70 @@ textarea.form-control {
 
 .bottom-nav-inner {
   max-width: 700px;
+
   margin: auto;
+
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
   gap: 5px;
 }
 
 .nav-btn {
   border: 0;
+
   background: transparent;
+
   border-radius: 12px;
+
   padding: 8px 4px;
+
   min-height: 58px;
+
   color: #6b7280;
+
   font-weight: 700;
+
   font-size: 12px;
 }
 
 .nav-btn .icon {
   display: block;
+
   font-size: 22px;
+
   margin-bottom: 2px;
 }
 
 .nav-btn.active {
   color: var(--primary);
+
   background: #eff6ff;
 }
 
-.file-label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 48px;
-  border: 2px dashed #cbd5e1;
-  border-radius: 12px;
-  background: #f8fafc;
-  font-weight: 700;
-  color: #475569;
-  cursor: pointer;
-}
-
-.file-label input {
-  display: none;
-}
+/* SETTINGS */
 
 .settings-box {
   background: white;
+
   border: 1px solid var(--border);
+
   border-radius: 16px;
+
   padding: 16px;
+
   margin-bottom: 12px;
 }
 
+/* RESPONSIVE */
+
 @media (min-width: 700px) {
+
   .exercise-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
   }
 
   .modal.show {
@@ -523,14 +824,20 @@ textarea.form-control {
 }
 
 @media (min-width: 1000px) {
+
   .exercise-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
   }
 }
 
+/* PRINT */
+
 @media print {
+
   body {
     padding: 0;
+
     background: white;
   }
 
@@ -546,6 +853,7 @@ textarea.form-control {
 
   .container {
     max-width: none;
+
     padding: 0;
   }
 
@@ -560,6 +868,7 @@ textarea.form-control {
   .training-header,
   .training-item {
     box-shadow: none;
+
     break-inside: avoid;
   }
 }
@@ -568,285 +877,603 @@ textarea.form-control {
 
 <body>
 
+<!-- =====================================================
+     KOPF
+===================================================== -->
+
 <header class="topbar">
+
   <div class="topbar-inner">
+
     <div>
-      <div class="logo">🏑 Trainingsplan</div>
-      <div class="subtitle">Übungen verwalten & Training planen</div>
+
+      <div class="logo">
+        🏑 Trainingsplan
+      </div>
+
+      <div class="subtitle">
+        Übungen verwalten & Training planen
+      </div>
+
     </div>
 
-    <button class="btn primary small" onclick="openExerciseModal()">
+    <button
+      class="btn primary small"
+      onclick="openExerciseModal()"
+    >
       + Übung
     </button>
+
   </div>
+
 </header>
+
 
 <main class="container">
 
-  <!-- BIBLIOTHEK -->
-  <section id="libraryView" class="view active">
+<!-- =====================================================
+     BIBLIOTHEK
+===================================================== -->
 
-    <h1>Übungsbibliothek</h1>
+<section
+  id="libraryView"
+  class="view active"
+>
+
+  <h1>
+    Übungsbibliothek
+  </h1>
+
+  <p class="muted">
+    Deine Übungen als Bildkarten.
+    Tippe auf eine Übung für Details oder füge sie direkt zum Training hinzu.
+  </p>
+
+
+  <div class="stats">
+
+    <div class="stat">
+
+      <div
+        class="stat-number"
+        id="exerciseCount"
+      >
+        0
+      </div>
+
+      <div class="muted">
+        Übungen
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div
+        class="stat-number"
+        id="categoryCount"
+      >
+        0
+      </div>
+
+      <div class="muted">
+        Kategorien
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div
+        class="stat-number"
+        id="trainingCount"
+      >
+        0
+      </div>
+
+      <div class="muted">
+        Trainings
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <input
+    id="searchInput"
+    class="search"
+    type="search"
+    placeholder="🔎 Übung suchen..."
+    oninput="renderLibrary()"
+  >
+
+
+  <div
+    class="filters"
+    id="categoryFilters"
+  ></div>
+
+
+  <div style="height:14px"></div>
+
+
+  <div
+    id="exerciseGrid"
+    class="exercise-grid"
+  ></div>
+
+</section>
+
+
+<!-- =====================================================
+     TRAINING
+===================================================== -->
+
+<section
+  id="trainingView"
+  class="view"
+>
+
+  <h1>
+    Mein Training
+  </h1>
+
+
+  <div class="training-header">
+
+    <div class="form">
+
+
+      <div class="form-group">
+
+        <label>
+          Trainingstitel
+        </label>
+
+        <input
+          id="trainingTitle"
+          class="form-control"
+          placeholder="z. B. Techniktraining U8"
+          oninput="saveCurrentTraining()"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Datum
+        </label>
+
+        <input
+          id="trainingDate"
+          class="form-control"
+          type="date"
+          onchange="saveCurrentTraining()"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Trainingsziel
+        </label>
+
+        <textarea
+          id="trainingGoal"
+          class="form-control"
+          placeholder="Was soll heute trainiert werden?"
+          oninput="saveCurrentTraining()"
+        ></textarea>
+
+      </div>
+
+
+      <div class="toolbar no-print">
+
+        <button
+          class="btn primary"
+          onclick="showView('library')"
+        >
+          + Übungen hinzufügen
+        </button>
+
+
+        <button
+          class="btn"
+          onclick="printTraining()"
+        >
+          📄 PDF / Drucken
+        </button>
+
+
+        <button
+          class="btn success"
+          onclick="saveTrainingAsFinished()"
+        >
+          ✓ Training speichern
+        </button>
+
+
+        <button
+          class="btn danger"
+          onclick="clearTraining()"
+        >
+          Training leeren
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div
+    id="trainingList"
+    class="training-list"
+  ></div>
+
+</section>
+
+
+<!-- =====================================================
+     DATEN
+===================================================== -->
+
+<section
+  id="dataView"
+  class="view"
+>
+
+  <h1>
+    Daten
+  </h1>
+
+
+  <div class="settings-box">
+
+    <h3>
+      📤 Export
+    </h3>
+
     <p class="muted">
-      Deine Übungen als Bildkarten. Tippe eine Übung an, um sie einem Training hinzuzufügen.
+      Speichert Übungen, Bilder und Trainingspläne als Sicherungsdatei.
     </p>
 
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-number" id="exerciseCount">0</div>
-        <div class="muted">Übungen</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number" id="categoryCount">0</div>
-        <div class="muted">Kategorien</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number" id="trainingCount">0</div>
-        <div class="muted">Trainings</div>
-      </div>
-    </div>
-
-    <input
-      id="searchInput"
-      class="search"
-      type="search"
-      placeholder="🔎 Übung suchen..."
-      oninput="renderLibrary()"
+    <button
+      class="btn primary full"
+      onclick="exportData()"
     >
+      Daten exportieren
+    </button>
 
-    <div class="filters" id="categoryFilters"></div>
-
-    <div style="height:14px"></div>
-
-    <div id="exerciseGrid" class="exercise-grid"></div>
-
-  </section>
+  </div>
 
 
-  <!-- TRAINING -->
-  <section id="trainingView" class="view">
+  <div class="settings-box">
 
-    <h1>Mein Training</h1>
+    <h3>
+      📥 Import
+    </h3>
 
-    <div class="training-header">
-
-      <div class="form">
-
-        <div class="form-group">
-          <label>Trainingstitel</label>
-          <input
-            id="trainingTitle"
-            class="form-control"
-            placeholder="z. B. Techniktraining U10"
-            oninput="saveCurrentTraining()"
-          >
-        </div>
-
-        <div class="form-group">
-          <label>Datum</label>
-          <input
-            id="trainingDate"
-            class="form-control"
-            type="date"
-            onchange="saveCurrentTraining()"
-          >
-        </div>
-
-        <div class="form-group">
-          <label>Trainingsziel</label>
-          <textarea
-            id="trainingGoal"
-            class="form-control"
-            placeholder="Was soll heute trainiert werden?"
-            oninput="saveCurrentTraining()"
-          ></textarea>
-        </div>
-
-        <div class="toolbar no-print">
-          <button class="btn primary" onclick="showView('library')">
-            + Übungen hinzufügen
-          </button>
-
-          <button class="btn" onclick="printTraining()">
-            📄 PDF / Drucken
-          </button>
-
-          <button class="btn danger" onclick="clearTraining()">
-            Training leeren
-          </button>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div id="trainingList" class="training-list"></div>
-
-  </section>
+    <p class="muted">
+      Importiert eine zuvor exportierte Trainingsdatei.
+    </p>
 
 
-  <!-- DATEN -->
-  <section id="dataView" class="view">
+    <label class="file-label">
 
-    <h1>Daten</h1>
+      📁 Importdatei auswählen
 
-    <div class="settings-box">
-      <h3>📤 Export</h3>
-      <p class="muted">
-        Speichert Übungen und Trainingspläne als Datei.
-      </p>
-      <button class="btn primary full" onclick="exportData()">
-        Daten exportieren
-      </button>
-    </div>
+      <input
+        id="importFile"
+        type="file"
+        accept=".json,application/json"
+        onchange="importData(event)"
+      >
 
-    <div class="settings-box">
-      <h3>📥 Import</h3>
-      <p class="muted">
-        Importiert eine zuvor exportierte Trainingsdatei.
-      </p>
+    </label>
 
-      <label class="file-label">
-        Datei auswählen
-        <input
-          id="importFile"
-          type="file"
-          accept=".json,application/json"
-          onchange="importData(event)"
-        >
-      </label>
-    </div>
+  </div>
 
-    <div class="settings-box">
-      <h3>🗑️ Alle Daten löschen</h3>
-      <p class="muted">
-        Achtung: Dieser Vorgang kann nicht rückgängig gemacht werden.
-      </p>
-      <button class="btn danger full" onclick="deleteAllData()">
-        Alle Daten löschen
-      </button>
-    </div>
 
-    <div class="settings-box">
-      <h3>ℹ️ Über diese Version</h3>
-      <p>
-        Trainingsplan – lokale Version für iPad und Safari.
-      </p>
-      <p class="muted">
-        Die Daten werden auf diesem Gerät gespeichert.
-        Nutze regelmäßig den Export als Sicherung.
-      </p>
-    </div>
+  <div class="settings-box">
 
-  </section>
+    <h3>
+      🗑️ Alle Daten löschen
+    </h3>
+
+    <p class="muted">
+      Achtung: Dieser Vorgang kann nicht rückgängig gemacht werden.
+    </p>
+
+    <button
+      class="btn danger full"
+      onclick="deleteAllData()"
+    >
+      Alle Daten löschen
+    </button>
+
+  </div>
+
+
+  <div class="settings-box">
+
+    <h3>
+      ℹ️ Über diese Version
+    </h3>
+
+    <p>
+      Trainingsplan – optimiert für iPad und Safari.
+    </p>
+
+    <p class="muted">
+      Die Daten werden lokal auf diesem Gerät gespeichert.
+      Bitte regelmäßig einen Export als Sicherung erstellen.
+    </p>
+
+  </div>
+
+</section>
 
 </main>
 
 
-<!-- NAVIGATION -->
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
 
 <nav class="bottom-nav">
+
   <div class="bottom-nav-inner">
+
 
     <button
       id="navLibrary"
       class="nav-btn active"
       onclick="showView('library')"
     >
-      <span class="icon">📚</span>
+
+      <span class="icon">
+        📚
+      </span>
+
       Bibliothek
+
     </button>
+
 
     <button
       id="navTraining"
       class="nav-btn"
       onclick="showView('training')"
     >
-      <span class="icon">📋</span>
+
+      <span class="icon">
+        📋
+      </span>
+
       Training
+
     </button>
+
 
     <button
       id="navData"
       class="nav-btn"
       onclick="showView('data')"
     >
-      <span class="icon">⚙️</span>
+
+      <span class="icon">
+        ⚙️
+      </span>
+
       Daten
+
     </button>
 
+
   </div>
+
 </nav>
 
 
-<!-- ÜBUNG MODAL -->
+<!-- =====================================================
+     ÜBUNG MODAL
+===================================================== -->
 
-<div id="exerciseModal" class="modal">
+<div
+  id="exerciseModal"
+  class="modal"
+>
 
   <div class="modal-card">
 
-    <div class="modal-header">
-      <h2 id="exerciseModalTitle">Neue Übung</h2>
 
-      <button class="close" onclick="closeExerciseModal()">
+    <div class="modal-header">
+
+      <h2 id="exerciseModalTitle">
+        Neue Übung
+      </h2>
+
+      <button
+        class="close"
+        onclick="closeExerciseModal()"
+      >
         ×
       </button>
+
     </div>
 
-    <form id="exerciseForm" class="form">
 
-      <input type="hidden" id="exerciseId">
+    <form
+      id="exerciseForm"
+      class="form"
+    >
+
+
+      <input
+        type="hidden"
+        id="exerciseId"
+      >
+
+
+      <!-- NAME -->
 
       <div class="form-group">
-        <label>Übungsname *</label>
+
+        <label>
+          Übungsname *
+        </label>
+
         <input
           id="exerciseName"
           class="form-control"
           required
           placeholder="z. B. Passdreieck"
         >
+
       </div>
 
-      <div class="form-group">
-        <label>Kategorie</label>
 
-        <select id="exerciseCategory" class="form-control">
-          <option>Technik</option>
-          <option>Taktik</option>
-          <option>Passspiel</option>
-          <option>Dribbling</option>
-          <option>Schuss</option>
-          <option>Koordination</option>
-          <option>Schnelligkeit</option>
-          <option>Ausdauer</option>
-          <option>Aufwärmen</option>
-          <option>Spiel</option>
-          <option>Torwart</option>
-          <option>Sonstiges</option>
+      <!-- KATEGORIE -->
+
+      <div class="form-group">
+
+        <label>
+          Kategorie *
+        </label>
+
+        <select
+          id="exerciseCategory"
+          class="form-control"
+          required
+        >
+
+          <option value="Hockeyspielform">
+            Hockeyspielform
+          </option>
+
+          <option value="Hockeyübung">
+            Hockeyübung
+          </option>
+
+          <option value="Bewegungsspiel">
+            Bewegungsspiel
+          </option>
+
+          <option value="Koordination">
+            Koordination
+          </option>
+
+          <option value="Warnung-Phase">
+            Warnung-Phase
+          </option>
+
         </select>
 
       </div>
 
-      <div class="form-group">
-        <label>Tags</label>
-        <input
-          id="exerciseTags"
-          class="form-control"
-          placeholder="z. B. U10, Anfänger, 3 Spieler"
-        >
-      </div>
+
+      <!-- TAGS -->
 
       <div class="form-group">
-        <label>Beschreibung</label>
+
+        <label>
+          Tags
+        </label>
+
+        <div class="selection-title">
+          Tags anklicken – mehrere möglich
+        </div>
+
+
+        <div
+          id="tagSelector"
+          class="selection-grid"
+        ></div>
+
+
+        <div class="custom-tag-row">
+
+          <input
+            id="customTagInput"
+            class="form-control"
+            placeholder="Eigenes Tag eingeben..."
+          >
+
+          <button
+            type="button"
+            class="btn"
+            onclick="addCustomTag()"
+          >
+            + Tag
+          </button>
+
+        </div>
+
+
+        <div
+          id="selectedTagsDisplay"
+          class="tags"
+        ></div>
+
+      </div>
+
+
+      <!-- ALTERSKLASSE -->
+
+      <div class="form-group">
+
+        <label>
+          Altersklasse
+        </label>
+
+        <div class="selection-title">
+          Mehrere Altersklassen können ausgewählt werden
+        </div>
+
+
+        <div
+          id="ageSelector"
+          class="selection-grid"
+        ></div>
+
+      </div>
+
+
+      <!-- BESCHREIBUNG -->
+
+      <div class="form-group">
+
+        <label>
+          Beschreibung
+        </label>
+
         <textarea
           id="exerciseDescription"
           class="form-control"
           placeholder="Ablauf, Aufbau, Coachingpunkte..."
         ></textarea>
+
       </div>
 
+
+      <!-- DAUER -->
+
       <div class="form-group">
-        <label>Standarddauer in Minuten</label>
+
+        <label>
+          Standarddauer in Minuten
+        </label>
+
         <input
           id="exerciseDuration"
           class="form-control"
@@ -854,13 +1481,21 @@ textarea.form-control {
           min="1"
           value="10"
         >
+
       </div>
+
+
+      <!-- BILD -->
 
       <div class="form-group">
 
-        <label>Bild</label>
+        <label>
+          Bild
+        </label>
+
 
         <label class="file-label">
+
           🖼️ Bild aus Fotos / Dateien auswählen
 
           <input
@@ -869,15 +1504,18 @@ textarea.form-control {
             accept="image/*"
             onchange="handleImage(event)"
           >
+
         </label>
+
 
         <img
           id="imagePreview"
           class="image-preview"
-          alt="Vorschau"
+          alt="Bildvorschau"
         >
 
       </div>
+
 
       <div class="toolbar">
 
@@ -889,6 +1527,7 @@ textarea.form-control {
           Abbrechen
         </button>
 
+
         <button
           type="submit"
           class="btn primary"
@@ -898,36 +1537,62 @@ textarea.form-control {
 
       </div>
 
+
     </form>
 
   </div>
+
 </div>
 
 
-<!-- ÜBUNGSDETAILS -->
+<!-- =====================================================
+     DETAIL MODAL
+===================================================== -->
 
-<div id="detailModal" class="modal">
+<div
+  id="detailModal"
+  class="modal"
+>
 
   <div class="modal-card">
 
+
     <div class="modal-header">
+
       <h2 id="detailTitle"></h2>
 
-      <button class="close" onclick="closeDetailModal()">
+      <button
+        class="close"
+        onclick="closeDetailModal()"
+      >
         ×
       </button>
+
     </div>
 
-    <div id="detailContent"></div>
+
+    <div
+      id="detailContent"
+    ></div>
+
 
     <div class="toolbar">
-      <button class="btn primary" onclick="addDetailExerciseToTraining()">
+
+      <button
+        class="btn primary"
+        onclick="addDetailExerciseToTraining()"
+      >
         + Zum Training hinzufügen
       </button>
 
-      <button class="btn" onclick="editDetailExercise()">
+
+      <button
+        class="btn"
+        onclick="editDetailExercise()"
+      >
         ✏️ Bearbeiten
       </button>
+
     </div>
 
   </div>
@@ -936,100 +1601,247 @@ textarea.form-control {
 
 
 <script>
+
 /* =========================================================
-   TRAININGSPLAN – V4
-   ========================================================= */
+   DATENBANK
+========================================================= */
 
 const DB_NAME = "TrainingsplanDB";
-const DB_VERSION = 1;
+
+const DB_VERSION = 2;
+
 const STORE = "app";
+
 
 let db = null;
 
+
 let state = {
+
   exercises: [],
+
   trainings: [],
+
   currentTraining: {
+
     id: null,
+
     title: "",
+
     date: "",
+
     goal: "",
+
     exercises: []
+
   }
+
 };
 
+
 let selectedCategory = "Alle";
+
 let detailExerciseId = null;
+
+let selectedTags = [];
+
+let selectedAges = [];
+
+
+/* =========================================================
+   FESTE AUSWAHLEN
+========================================================= */
+
+const CATEGORIES = [
+
+  "Hockeyspielform",
+
+  "Hockeyübung",
+
+  "Bewegungsspiel",
+
+  "Koordination",
+
+  "Warnung-Phase"
+
+];
+
+
+const DEFAULT_TAGS = [
+
+  "Ballführung",
+
+  "Ball Annahme",
+
+  "Ball An- und Abgabe",
+
+  "Ball Abgabe",
+
+  "Torschuss",
+
+  "Technikverbindung",
+
+  "Schnelligkeit",
+
+  "Koordination",
+
+  "Reaktion",
+
+  "Umspieltechnik",
+
+  "Sonstige Hockeyübung",
+
+  "Hockey-Spielform",
+
+  "Sonstiges"
+
+];
+
+
+const AGE_CLASSES = [
+
+  "U6",
+
+  "U8",
+
+  "Erwachsene"
+
+];
 
 
 /* =========================================================
    INDEXED DB
-   ========================================================= */
+========================================================= */
 
 function openDB() {
 
   return new Promise((resolve, reject) => {
 
-    const request = indexedDB.open(DB_NAME, DB_VERSION);
+    const request =
+      indexedDB.open(
+        DB_NAME,
+        DB_VERSION
+      );
 
-    request.onupgradeneeded = event => {
 
-      const database = event.target.result;
+    request.onupgradeneeded =
+      event => {
 
-      if (!database.objectStoreNames.contains(STORE)) {
-        database.createObjectStore(STORE);
-      }
-    };
+        const database =
+          event.target.result;
 
-    request.onsuccess = event => {
+        if (
+          !database.objectStoreNames
+            .contains(STORE)
+        ) {
 
-      db = event.target.result;
+          database.createObjectStore(
+            STORE
+          );
 
-      resolve(db);
-    };
+        }
 
-    request.onerror = () => reject(request.error);
+      };
+
+
+    request.onsuccess =
+      event => {
+
+        db = event.target.result;
+
+        resolve(db);
+
+      };
+
+
+    request.onerror =
+      () => {
+
+        reject(
+          request.error
+        );
+
+      };
+
   });
+
 }
 
 
 function dbGet(key) {
 
-  return new Promise((resolve, reject) => {
+  return new Promise(
+    (resolve, reject) => {
 
-    const transaction = db.transaction(STORE, "readonly");
+      const transaction =
+        db.transaction(
+          STORE,
+          "readonly"
+        );
 
-    const store = transaction.objectStore(STORE);
+      const store =
+        transaction.objectStore(
+          STORE
+        );
 
-    const request = store.get(key);
+      const request =
+        store.get(key);
 
-    request.onsuccess = () => resolve(request.result);
+      request.onsuccess =
+        () => resolve(
+          request.result
+        );
 
-    request.onerror = () => reject(request.error);
-  });
+      request.onerror =
+        () => reject(
+          request.error
+        );
+
+    }
+  );
+
 }
 
 
 function dbSet(key, value) {
 
-  return new Promise((resolve, reject) => {
+  return new Promise(
+    (resolve, reject) => {
 
-    const transaction = db.transaction(STORE, "readwrite");
+      const transaction =
+        db.transaction(
+          STORE,
+          "readwrite"
+        );
 
-    const store = transaction.objectStore(STORE);
+      const store =
+        transaction.objectStore(
+          STORE
+        );
 
-    const request = store.put(value, key);
+      const request =
+        store.put(
+          value,
+          key
+        );
 
-    request.onsuccess = () => resolve();
+      request.onsuccess =
+        () => resolve();
 
-    request.onerror = () => reject(request.error);
-  });
+      request.onerror =
+        () => reject(
+          request.error
+        );
+
+    }
+  );
+
 }
 
 
 /* =========================================================
    START
-   ========================================================= */
+========================================================= */
 
 async function init() {
 
@@ -1037,105 +1849,232 @@ async function init() {
 
     await openDB();
 
-    const saved = await dbGet("state");
+    const saved =
+      await dbGet("state");
+
 
     if (saved) {
+
       state = saved;
+
     }
+
 
   } catch (error) {
 
     console.error(error);
 
     alert(
-      "Die lokale Datenspeicherung konnte nicht geöffnet werden. " +
-      "Bitte öffne die Seite direkt in Safari."
+      "Die lokale Datenspeicherung konnte nicht geöffnet werden. Bitte öffne die Seite direkt in Safari."
     );
+
   }
 
-  if (!state.currentTraining) {
 
-    state.currentTraining = {
-      id: null,
-      title: "",
-      date: "",
-      goal: "",
-      exercises: []
-    };
-  }
+  normalizeState();
 
   loadCurrentTraining();
 
   renderAll();
+
+}
+
+
+function normalizeState() {
+
+  if (!Array.isArray(state.exercises)) {
+
+    state.exercises = [];
+
+  }
+
+
+  if (!Array.isArray(state.trainings)) {
+
+    state.trainings = [];
+
+  }
+
+
+  if (!state.currentTraining) {
+
+    state.currentTraining = {
+
+      id: createId(),
+
+      title: "",
+
+      date: today(),
+
+      goal: "",
+
+      exercises: []
+
+    };
+
+  }
+
+
+  if (
+    !Array.isArray(
+      state.currentTraining.exercises
+    )
+  ) {
+
+    state.currentTraining.exercises = [];
+
+  }
+
+
+  /*
+   * Falls ältere Übungen aus der vorherigen
+   * Version vorhanden sind, werden fehlende
+   * Felder ergänzt.
+   */
+
+  state.exercises =
+    state.exercises.map(
+      exercise => ({
+
+        ...exercise,
+
+        category:
+          CATEGORIES.includes(
+            exercise.category
+          )
+            ? exercise.category
+            : "Hockeyübung",
+
+        tags:
+          Array.isArray(exercise.tags)
+            ? exercise.tags
+            : typeof exercise.tags === "string"
+              ? exercise.tags
+                  .split(",")
+                  .map(x => x.trim())
+                  .filter(Boolean)
+              : [],
+
+        ages:
+          Array.isArray(exercise.ages)
+            ? exercise.ages
+            : [],
+
+        duration:
+          exercise.duration || 10,
+
+        image:
+          exercise.image || ""
+
+      })
+    );
+
 }
 
 
 async function saveState() {
 
-  await dbSet("state", state);
+  await dbSet(
+    "state",
+    state
+  );
+
 }
 
 
 /* =========================================================
    NAVIGATION
-   ========================================================= */
+========================================================= */
 
 function showView(view) {
 
   document
     .querySelectorAll(".view")
-    .forEach(element => element.classList.remove("active"));
+    .forEach(
+      element =>
+        element.classList.remove(
+          "active"
+        )
+    );
+
 
   document
     .querySelectorAll(".nav-btn")
-    .forEach(element => element.classList.remove("active"));
+    .forEach(
+      element =>
+        element.classList.remove(
+          "active"
+        )
+    );
+
 
   if (view === "library") {
 
     document
-      .getElementById("libraryView")
+      .getElementById(
+        "libraryView"
+      )
       .classList.add("active");
 
     document
-      .getElementById("navLibrary")
+      .getElementById(
+        "navLibrary"
+      )
       .classList.add("active");
 
   }
+
 
   if (view === "training") {
 
     document
-      .getElementById("trainingView")
+      .getElementById(
+        "trainingView"
+      )
       .classList.add("active");
 
     document
-      .getElementById("navTraining")
+      .getElementById(
+        "navTraining"
+      )
       .classList.add("active");
 
     renderTraining();
+
   }
+
 
   if (view === "data") {
 
     document
-      .getElementById("dataView")
+      .getElementById(
+        "dataView"
+      )
       .classList.add("active");
 
     document
-      .getElementById("navData")
+      .getElementById(
+        "navData"
+      )
       .classList.add("active");
+
   }
 
+
   window.scrollTo({
+
     top: 0,
+
     behavior: "smooth"
+
   });
+
 }
 
 
 /* =========================================================
    RENDER
-   ========================================================= */
+========================================================= */
 
 function renderAll() {
 
@@ -1146,1252 +2085,827 @@ function renderAll() {
   renderTraining();
 
   updateStats();
+
 }
 
 
 function updateStats() {
 
-  document.getElementById("exerciseCount").textContent =
-    state.exercises.length;
-
-  const categories = [
-    ...new Set(
-      state.exercises
-        .map(e => e.category)
-        .filter(Boolean)
+  document
+    .getElementById(
+      "exerciseCount"
     )
-  ];
+    .textContent =
+      state.exercises.length;
 
-  document.getElementById("categoryCount").textContent =
-    categories.length;
 
-  document.getElementById("trainingCount").textContent =
-    state.trainings.length;
+  const categories =
+    [
+      ...new Set(
+        state.exercises
+          .map(
+            e => e.category
+          )
+          .filter(Boolean)
+      )
+    ];
+
+
+  document
+    .getElementById(
+      "categoryCount"
+    )
+    .textContent =
+      categories.length;
+
+
+  document
+    .getElementById(
+      "trainingCount"
+    )
+    .textContent =
+      state.trainings.length;
+
 }
 
 
 /* =========================================================
-   CATEGORIES
-   ========================================================= */
+   KATEGORIEN
+========================================================= */
 
 function renderCategories() {
 
   const container =
-    document.getElementById("categoryFilters");
+    document.getElementById(
+      "categoryFilters"
+    );
+
 
   const categories = [
+
     "Alle",
-    ...new Set(
-      state.exercises
-        .map(e => e.category)
-        .filter(Boolean)
-    )
+
+    ...CATEGORIES
+
   ];
+
 
   container.innerHTML = "";
 
-  categories.forEach(category => {
 
-    const button = document.createElement("button");
+  categories.forEach(
+    category => {
 
-    button.className =
-      "filter-chip " +
-      (selectedCategory === category ? "active" : "");
+      const button =
+        document.createElement(
+          "button"
+        );
 
-    button.textContent = category;
 
-    button.onclick = () => {
+      button.className =
+        "filter-chip " +
+        (
+          selectedCategory === category
+            ? "active"
+            : ""
+        );
 
-      selectedCategory = category;
 
-      renderCategories();
+      button.textContent =
+        category;
 
-      renderLibrary();
-    };
 
-    container.appendChild(button);
-  });
+      button.onclick =
+        () => {
+
+          selectedCategory =
+            category;
+
+          renderCategories();
+
+          renderLibrary();
+
+        };
+
+
+      container.appendChild(
+        button
+      );
+
+    }
+  );
+
 }
 
 
 /* =========================================================
-   LIBRARY
-   ========================================================= */
+   BIBLIOTHEK
+========================================================= */
 
 function renderLibrary() {
 
   const grid =
-    document.getElementById("exerciseGrid");
+    document.getElementById(
+      "exerciseGrid"
+    );
+
 
   const search =
     document
-      .getElementById("searchInput")
+      .getElementById(
+        "searchInput"
+      )
       .value
       .toLowerCase()
       .trim();
 
-  let exercises = [...state.exercises];
 
-  if (selectedCategory !== "Alle") {
+  let exercises =
+    [...state.exercises];
+
+
+  if (
+    selectedCategory !==
+    "Alle"
+  ) {
 
     exercises =
       exercises.filter(
-        e => e.category === selectedCategory
+        e =>
+          e.category ===
+          selectedCategory
       );
+
   }
+
 
   if (search) {
 
     exercises =
-      exercises.filter(e => {
+      exercises.filter(
+        e => {
 
-        const text = [
-          e.name,
-          e.category,
-          e.tags,
-          e.description
-        ]
-        .join(" ")
-        .toLowerCase();
+          const text = [
 
-        return text.includes(search);
-      });
+            e.name,
+
+            e.category,
+
+            ...(e.tags || []),
+
+            ...(e.ages || []),
+
+            e.description
+
+          ]
+            .join(" ")
+            .toLowerCase();
+
+
+          return text.includes(
+            search
+          );
+
+        }
+      );
+
   }
+
 
   if (!exercises.length) {
 
     grid.innerHTML = `
-      <div class="empty" style="grid-column:1/-1">
-        <div style="font-size:42px">📚</div>
-        <h3>Noch keine Übungen</h3>
-        <p>Erstelle deine erste Übung.</p>
+
+      <div
+        class="empty"
+        style="grid-column:1/-1"
+      >
+
+        <div style="font-size:42px">
+          📚
+        </div>
+
+        <h3>
+          Noch keine Übungen
+        </h3>
+
+        <p>
+          Erstelle deine erste Übung.
+        </p>
+
         <button
           class="btn primary"
           onclick="openExerciseModal()"
         >
           + Erste Übung erstellen
         </button>
+
       </div>
+
     `;
 
     return;
+
   }
+
 
   grid.innerHTML = "";
 
-  exercises.forEach(exercise => {
 
-    const card =
-      document.createElement("article");
+  exercises.forEach(
+    exercise => {
 
-    card.className = "exercise-card";
+      const card =
+        document.createElement(
+          "article"
+        );
 
-    const image =
-      exercise.image
-        ? `<img class="exercise-image"
-                src="${escapeAttribute(exercise.image)}"
-                alt="">`
-        : `<div class="exercise-placeholder">🏑</div>`;
 
-    const tags =
-      (exercise.tags || "")
-        .split(",")
-        .map(tag => tag.trim())
-        .filter(Boolean)
-        .map(tag =>
-          `<span class="tag">${escapeHTML(tag)}</span>`
-        )
-        .join("");
+      card.className =
+        "exercise-card";
 
-    card.innerHTML = `
 
-      ${image}
+      const image =
+        exercise.image
 
-      <div class="exercise-body">
+          ? `
+            <img
+              class="exercise-image"
+              src="${escapeAttribute(
+                exercise.image
+              )}"
+              alt=""
+            >
+          `
 
-        <div class="exercise-title">
-          ${escapeHTML(exercise.name)}
+          : `
+            <div
+              class="exercise-placeholder"
+            >
+              🏑
+            </div>
+          `;
+
+
+      const tags =
+        (exercise.tags || [])
+          .map(
+            tag =>
+              `<span class="tag">
+                ${escapeHTML(tag)}
+              </span>`
+          )
+          .join("");
+
+
+      const ages =
+        (exercise.ages || [])
+          .map(
+            age =>
+              `<span class="tag age-tag">
+                ${escapeHTML(age)}
+              </span>`
+          )
+          .join("");
+
+
+      card.innerHTML = `
+
+        ${image}
+
+
+        <div class="exercise-body">
+
+          <div class="exercise-title">
+
+            ${escapeHTML(
+              exercise.name
+            )}
+
+          </div>
+
+
+          <div class="category-label">
+
+            ${escapeHTML(
+              exercise.category
+            )}
+
+          </div>
+
+
+          <div class="tags">
+
+            ${ages}
+
+          </div>
+
+
+          <div class="tags">
+
+            ${tags}
+
+          </div>
+
+
+          <div class="card-actions">
+
+            <button
+              class="btn"
+              onclick="showExerciseDetails(
+                '${exercise.id}'
+              )"
+            >
+              Details
+            </button>
+
+
+            <button
+              class="btn primary"
+              onclick="addExerciseToTraining(
+                '${exercise.id}'
+              )"
+            >
+              + Training
+            </button>
+
+          </div>
+
         </div>
 
-        <div class="muted">
-          ${escapeHTML(exercise.category || "")}
-        </div>
+      `;
 
-        <div class="tags">
-          ${tags}
-        </div>
 
-        <div class="card-actions">
+      grid.appendChild(
+        card
+      );
 
-          <button class="btn"
-            onclick="showExerciseDetails('${exercise.id}')">
-            Details
-          </button>
+    }
+  );
 
-          <button class="btn primary"
-            onclick="addExerciseToTraining('${exercise.id}')">
-            + Training
-          </button>
-
-        </div>
-
-      </div>
-    `;
-
-    grid.appendChild(card);
-  });
 }
 
 
 /* =========================================================
-   ÜBUNG ERSTELLEN / BEARBEITEN
-   ========================================================= */
+   TAG AUSWAHL
+========================================================= */
 
-function openExerciseModal(id = null) {
+function renderTagSelector() {
+
+  const container =
+    document.getElementById(
+      "tagSelector"
+    );
+
+
+  container.innerHTML = "";
+
+
+  /*
+   * Standardtags plus bereits vorhandene
+   * eigene Tags aus der Datenbank.
+   */
+
+  const customTags =
+    state.exercises
+      .flatMap(
+        e =>
+          Array.isArray(e.tags)
+            ? e.tags
+            : []
+      )
+      .filter(
+        tag =>
+          !DEFAULT_TAGS.includes(
+            tag
+          )
+      );
+
+
+  const allTags = [
+
+    ...DEFAULT_TAGS,
+
+    ...customTags
+
+  ];
+
+
+  [
+    ...new Set(allTags)
+  ]
+    .forEach(
+      tag => {
+
+        const button =
+          document.createElement(
+            "button"
+          );
+
+
+        button.type = "button";
+
+        button.className =
+          "select-chip " +
+          (
+            selectedTags.includes(tag)
+              ? "selected"
+              : ""
+          );
+
+
+        button.textContent =
+          tag;
+
+
+        button.onclick =
+          () => {
+
+            toggleTag(tag);
+
+          };
+
+
+        container.appendChild(
+          button
+        );
+
+      }
+    );
+
+
+  renderSelectedTags();
+
+}
+
+
+function toggleTag(tag) {
+
+  if (
+    selectedTags.includes(
+      tag
+    )
+  ) {
+
+    selectedTags =
+      selectedTags.filter(
+        x => x !== tag
+      );
+
+  } else {
+
+    selectedTags.push(
+      tag
+    );
+
+  }
+
+
+  renderTagSelector();
+
+}
+
+
+function renderSelectedTags() {
+
+  const container =
+    document.getElementById(
+      "selectedTagsDisplay"
+    );
+
+
+  if (!selectedTags.length) {
+
+    container.innerHTML = `
+      <span class="muted">
+        Keine Tags ausgewählt
+      </span>
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    selectedTags
+      .map(
+        tag =>
+          `<span class="tag">
+            ✓ ${escapeHTML(tag)}
+          </span>`
+      )
+      .join("");
+
+}
+
+
+function addCustomTag() {
+
+  const input =
+    document.getElementById(
+      "customTagInput"
+    );
+
+
+  const tag =
+    input.value.trim();
+
+
+  if (!tag) return;
+
+
+  if (
+    !selectedTags.includes(
+      tag
+    )
+  ) {
+
+    selectedTags.push(
+      tag
+    );
+
+  }
+
+
+  input.value = "";
+
+
+  renderTagSelector();
+
+}
+
+
+/* =========================================================
+   ALTERSKLASSEN
+========================================================= */
+
+function renderAgeSelector() {
+
+  const container =
+    document.getElementById(
+      "ageSelector"
+    );
+
+
+  container.innerHTML = "";
+
+
+  AGE_CLASSES.forEach(
+    age => {
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.type = "button";
+
+
+      button.className =
+        "select-chip " +
+        (
+          selectedAges.includes(age)
+            ? "selected"
+            : ""
+        );
+
+
+      button.textContent =
+        age;
+
+
+      button.onclick =
+        () => {
+
+          toggleAge(age);
+
+        };
+
+
+      container.appendChild(
+        button
+      );
+
+    }
+  );
+
+}
+
+
+function toggleAge(age) {
+
+  if (
+    selectedAges.includes(
+      age
+    )
+  ) {
+
+    selectedAges =
+      selectedAges.filter(
+        x => x !== age
+      );
+
+  } else {
+
+    selectedAges.push(
+      age
+    );
+
+  }
+
+
+  renderAgeSelector();
+
+}
+
+
+/* =========================================================
+   ÜBUNG MODAL
+========================================================= */
+
+function openExerciseModal(
+  id = null
+) {
 
   document
-    .getElementById("exerciseModal")
-    .classList.add("show");
+    .getElementById(
+      "exerciseModal"
+    )
+    .classList.add(
+      "show"
+    );
+
 
   document
-    .getElementById("exerciseForm")
+    .getElementById(
+      "exerciseForm"
+    )
     .reset();
 
+
   document
-    .getElementById("exerciseId")
+    .getElementById(
+      "exerciseId"
+    )
     .value = "";
 
-  document
-    .getElementById("imagePreview")
-    .style.display = "none";
 
   document
-    .getElementById("exerciseModalTitle")
-    .textContent = "Neue Übung";
+    .getElementById(
+      "imagePreview"
+    )
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById(
+      "imagePreview"
+    )
+    .removeAttribute(
+      "data-image"
+    );
+
+
+  document
+    .getElementById(
+      "exerciseModalTitle"
+    )
+    .textContent =
+      "Neue Übung";
+
+
+  selectedTags = [];
+
+  selectedAges = [];
+
 
   if (id) {
 
     const exercise =
-      state.exercises.find(e => e.id === id);
+      state.exercises.find(
+        e => e.id === id
+      );
+
 
     if (!exercise) return;
 
-    document
-      .getElementById("exerciseModalTitle")
-      .textContent = "Übung bearbeiten";
 
     document
-      .getElementById("exerciseId")
-      .value = exercise.id;
+      .getElementById(
+        "exerciseModalTitle"
+      )
+      .textContent =
+        "Übung bearbeiten";
+
 
     document
-      .getElementById("exerciseName")
-      .value = exercise.name || "";
+      .getElementById(
+        "exerciseId"
+      )
+      .value =
+        exercise.id;
+
 
     document
-      .getElementById("exerciseCategory")
-      .value = exercise.category || "Sonstiges";
+      .getElementById(
+        "exerciseName"
+      )
+      .value =
+        exercise.name || "";
+
 
     document
-      .getElementById("exerciseTags")
-      .value = exercise.tags || "";
+      .getElementById(
+        "exerciseCategory"
+      )
+      .value =
+        exercise.category ||
+        "Hockeyübung";
+
 
     document
-      .getElementById("exerciseDescription")
-      .value = exercise.description || "";
+      .getElementById(
+        "exerciseDescription"
+      )
+      .value =
+        exercise.description ||
+        "";
+
 
     document
-      .getElementById("exerciseDuration")
-      .value = exercise.duration || 10;
+      .getElementById(
+        "exerciseDuration"
+      )
+      .value =
+        exercise.duration ||
+        10;
+
+
+    selectedTags =
+      Array.isArray(
+        exercise.tags
+      )
+        ? [...exercise.tags]
+        : [];
+
+
+    selectedAges =
+      Array.isArray(
+        exercise.ages
+      )
+        ? [...exercise.ages]
+        : [];
+
 
     if (exercise.image) {
 
       const preview =
-        document.getElementById("imagePreview");
+        document.getElementById(
+          "imagePreview"
+        );
 
-      preview.src = exercise.image;
 
-      preview.style.display = "block";
+      preview.src =
+        exercise.image;
+
+
+      preview.style.display =
+        "block";
+
+
+      preview.dataset.image =
+        exercise.image;
+
     }
+
   }
+
+
+  renderTagSelector();
+
+  renderAgeSelector();
+
 }
 
 
 function closeExerciseModal() {
 
   document
-    .getElementById("exerciseModal")
-    .classList.remove("show");
-}
-
-
-async function handleImage(event) {
-
-  const file =
-    event.target.files &&
-    event.target.files[0];
-
-  if (!file) return;
-
-  if (!file.type.startsWith("image/")) {
-
-    alert("Bitte ein Bild auswählen.");
-
-    return;
-  }
-
-  try {
-
-    const image =
-      await resizeImage(file, 1600, 0.82);
-
-    const preview =
-      document.getElementById("imagePreview");
-
-    preview.src = image;
-
-    preview.style.display = "block";
-
-    preview.dataset.image = image;
-
-  } catch (error) {
-
-    console.error(error);
-
-    alert("Das Bild konnte nicht verarbeitet werden.");
-  }
-}
-
-
-function resizeImage(file, maxSize, quality) {
-
-  return new Promise((resolve, reject) => {
-
-    const reader = new FileReader();
-
-    reader.onload = () => {
-
-      const img = new Image();
-
-      img.onload = () => {
-
-        let width = img.width;
-        let height = img.height;
-
-        if (width > height) {
-
-          if (width > maxSize) {
-
-            height =
-              height * maxSize / width;
-
-            width = maxSize;
-          }
-
-        } else {
-
-          if (height > maxSize) {
-
-            width =
-              width * maxSize / height;
-
-            height = maxSize;
-          }
-        }
-
-        const canvas =
-          document.createElement("canvas");
-
-        canvas.width = width;
-        canvas.height = height;
-
-        const context =
-          canvas.getContext("2d");
-
-        context.drawImage(
-          img,
-          0,
-          0,
-          width,
-          height
-        );
-
-        resolve(
-          canvas.toDataURL(
-            "image/jpeg",
-            quality
-          )
-        );
-      };
-
-      img.onerror = reject;
-
-      img.src = reader.result;
-    };
-
-    reader.onerror = reject;
-
-    reader.readAsDataURL(file);
-  });
-}
-
-
-document
-  .getElementById("exerciseForm")
-  .addEventListener("submit", async event => {
-
-    event.preventDefault();
-
-    const id =
-      document.getElementById("exerciseId").value;
-
-    const name =
-      document.getElementById("exerciseName").value.trim();
-
-    if (!name) {
-
-      alert("Bitte einen Übungsnamen eingeben.");
-
-      return;
-    }
-
-    const existing =
-      state.exercises.find(e => e.id === id);
-
-    const preview =
-      document.getElementById("imagePreview");
-
-    let image =
-      preview.dataset.image || "";
-
-    if (!image && existing) {
-      image = existing.image || "";
-    }
-
-    const exercise = {
-
-      id: id || createId(),
-
-      name,
-
-      category:
-        document.getElementById("exerciseCategory").value,
-
-      tags:
-        document.getElementById("exerciseTags").value,
-
-      description:
-        document.getElementById("exerciseDescription").value,
-
-      duration:
-        Number(
-          document.getElementById("exerciseDuration").value
-        ) || 10,
-
-      image,
-
-      updated:
-        new Date().toISOString()
-    };
-
-    if (existing) {
-
-      const index =
-        state.exercises.findIndex(e => e.id === id);
-
-      state.exercises[index] = exercise;
-
-    } else {
-
-      state.exercises.unshift(exercise);
-    }
-
-    await saveState();
-
-    closeExerciseModal();
-
-    renderAll();
-  });
-
-
-/* =========================================================
-   DETAILS
-   ========================================================= */
-
-function showExerciseDetails(id) {
-
-  const exercise =
-    state.exercises.find(e => e.id === id);
-
-  if (!exercise) return;
-
-  detailExerciseId = id;
-
-  document
-    .getElementById("detailTitle")
-    .textContent = exercise.name;
-
-  const image =
-    exercise.image
-      ? `<img src="${escapeAttribute(exercise.image)}"
-              style="width:100%;max-height:330px;object-fit:contain;border-radius:14px;background:#f3f4f6;margin-bottom:14px">`
-      : "";
-
-  const tags =
-    (exercise.tags || "")
-      .split(",")
-      .map(t => t.trim())
-      .filter(Boolean)
-      .map(t =>
-        `<span class="tag">${escapeHTML(t)}</span>`
-      )
-      .join("");
-
-  document
-    .getElementById("detailContent")
-    .innerHTML = `
-
-      ${image}
-
-      <p>
-        <strong>Kategorie:</strong>
-        ${escapeHTML(exercise.category || "-")}
-      </p>
-
-      <p>
-        <strong>Dauer:</strong>
-        ${exercise.duration || 10} Minuten
-      </p>
-
-      <div class="tags">${tags}</div>
-
-      <p>
-        ${escapeHTML(exercise.description || "Keine Beschreibung.")}
-      </p>
-
-      <div class="toolbar no-print">
-
-        <button
-          class="btn danger"
-          onclick="deleteExercise('${exercise.id}')">
-          Übung löschen
-        </button>
-
-      </div>
-    `;
-
-  document
-    .getElementById("detailModal")
-    .classList.add("show");
-}
-
-
-function closeDetailModal() {
-
-  document
-    .getElementById("detailModal")
-    .classList.remove("show");
-}
-
-
-function editDetailExercise() {
-
-  const id = detailExerciseId;
-
-  closeDetailModal();
-
-  openExerciseModal(id);
-}
-
-
-async function deleteExercise(id) {
-
-  const exercise =
-    state.exercises.find(e => e.id === id);
-
-  if (!exercise) return;
-
-  if (
-    !confirm(
-      `„${exercise.name}“ wirklich löschen?`
+    .getElementById(
+      "exerciseModal"
     )
-  ) return;
-
-  state.exercises =
-    state.exercises.filter(
-      e => e.id !== id
+    .classList.remove(
+      "show"
     );
 
-  state.trainings =
-    state.trainings.map(training => ({
-      ...training,
-      exercises:
-        training.exercises.filter(
-          item => item.exerciseId !== id
-        )
-    }));
-
-  state.currentTraining.exercises =
-    state.currentTraining.exercises.filter(
-      item => item.exerciseId !== id
-    );
-
-  await saveState();
-
-  closeDetailModal();
-
-  renderAll();
 }
 
 
 /* =========================================================
-   TRAINING
-   ========================================================= */
+   BILDER
+========================================================= */
 
-function createNewTrainingIfNeeded() {
-
-  if (!state.currentTraining) {
-
-    state.currentTraining = {
-      id: createId(),
-      title: "Neues Training",
-      date: today(),
-      goal: "",
-      exercises: []
-    };
-  }
-}
-
-
-function loadCurrentTraining() {
-
-  createNewTrainingIfNeeded();
-
-  document.getElementById("trainingTitle").value =
-    state.currentTraining.title || "";
-
-  document.getElementById("trainingDate").value =
-    state.currentTraining.date || today();
-
-  document.getElementById("trainingGoal").value =
-    state.currentTraining.goal || "";
-}
-
-
-async function saveCurrentTraining() {
-
-  createNewTrainingIfNeeded();
-
-  state.currentTraining.title =
-    document.getElementById("trainingTitle").value;
-
-  state.currentTraining.date =
-    document.getElementById("trainingDate").value;
-
-  state.currentTraining.goal =
-    document.getElementById("trainingGoal").value;
-
-  await saveState();
-}
-
-
-async function addExerciseToTraining(id) {
-
-  const exercise =
-    state.exercises.find(e => e.id === id);
-
-  if (!exercise) return;
-
-  createNewTrainingIfNeeded();
-
-  state.currentTraining.exercises.push({
-
-    id: createId(),
-
-    exerciseId: id,
-
-    duration: exercise.duration || 10,
-
-    note: ""
-
-  });
-
-  await saveCurrentTraining();
-
-  renderTraining();
-
-  showView("training");
-}
-
-
-function addDetailExerciseToTraining() {
-
-  if (!detailExerciseId) return;
-
-  closeDetailModal();
-
-  addExerciseToTraining(detailExerciseId);
-}
-
-
-function renderTraining() {
-
-  const list =
-    document.getElementById("trainingList");
-
-  createNewTrainingIfNeeded();
-
-  const items =
-    state.currentTraining.exercises || [];
-
-  if (!items.length) {
-
-    list.innerHTML = `
-      <div class="empty">
-        <div style="font-size:42px">📋</div>
-        <h3>Training ist noch leer</h3>
-        <p>
-          Gehe zur Bibliothek und füge Übungen hinzu.
-        </p>
-        <button
-          class="btn primary"
-          onclick="showView('library')">
-          Übungen auswählen
-        </button>
-      </div>
-    `;
-
-    return;
-  }
-
-  list.innerHTML = "";
-
-  items.forEach((item, index) => {
-
-    const exercise =
-      state.exercises.find(
-        e => e.id === item.exerciseId
-      );
-
-    if (!exercise) return;
-
-    const element =
-      document.createElement("div");
-
-    element.className = "training-item";
-
-    const image =
-      exercise.image
-        ? `<img class="training-thumb"
-                src="${escapeAttribute(exercise.image)}">`
-        : `<div class="training-thumb"
-                style="display:flex;align-items:center;justify-content:center;font-size:30px">
-             🏑
-           </div>`;
-
-    element.innerHTML = `
-
-      ${image}
-
-      <div class="training-number">
-        ${index + 1}
-      </div>
-
-      <div class="training-content">
-
-        <strong>${escapeHTML(exercise.name)}</strong>
-
-        <span class="muted">
-          ${escapeHTML(exercise.category || "")}
-        </span>
-
-        <div style="margin-top:7px">
-
-          <input
-            class="form-control"
-            style="min-height:40px"
-            type="number"
-            min="1"
-            value="${item.duration || exercise.duration || 10}"
-            onchange="changeDuration('${item.id}', this.value)"
-            aria-label="Dauer"
-          >
-
-        </div>
-
-        <div style="margin-top:6px">
-
-          <input
-            class="form-control"
-            style="min-height:40px"
-            placeholder="Trainerhinweis..."
-            value="${escapeAttribute(item.note || "")}"
-            onchange="changeNote('${item.id}', this.value)"
-          >
-
-        </div>
-
-        <div class="training-actions" style="margin-top:7px">
-
-          <button onclick="moveTrainingItem('${item.id}', -1)">
-            ↑
-          </button>
-
-          <button onclick="moveTrainingItem('${item.id}', 1)">
-            ↓
-          </button>
-
-          <button onclick="removeTrainingItem('${item.id}')">
-            🗑️
-          </button>
-
-        </div>
-
-      </div>
-    `;
-
-    list.appendChild(element);
-  });
-}
-
-
-async function changeDuration(id, value) {
-
-  const item =
-    state.currentTraining.exercises
-      .find(e => e.id === id);
-
-  if (!item) return;
-
-  item.duration =
-    Math.max(1, Number(value) || 1);
-
-  await saveState();
-}
-
-
-async function changeNote(id, value) {
-
-  const item =
-    state.currentTraining.exercises
-      .find(e => e.id === id);
-
-  if (!item) return;
-
-  item.note = value;
-
-  await saveState();
-}
-
-
-async function moveTrainingItem(id, direction) {
-
-  const list =
-    state.currentTraining.exercises;
-
-  const index =
-    list.findIndex(e => e.id === id);
-
-  if (index === -1) return;
-
-  const newIndex =
-    index + direction;
-
-  if (
-    newIndex < 0 ||
-    newIndex >= list.length
-  ) return;
-
-  const temp = list[index];
-
-  list[index] = list[newIndex];
-
-  list[newIndex] = temp;
-
-  await saveState();
-
-  renderTraining();
-}
-
-
-async function removeTrainingItem(id) {
-
-  state.currentTraining.exercises =
-    state.currentTraining.exercises
-      .filter(e => e.id !== id);
-
-  await saveState();
-
-  renderTraining();
-}
-
-
-async function clearTraining() {
-
-  if (
-    !confirm(
-      "Alle Übungen aus diesem Training entfernen?"
-    )
-  ) return;
-
-  state.currentTraining.exercises = [];
-
-  await saveState();
-
-  renderTraining();
-}
-
-
-/* =========================================================
-   TRAINING SPEICHERN
-   ========================================================= */
-
-async function saveTrainingAsFinished() {
-
-  createNewTrainingIfNeeded();
-
-  const copy =
-    JSON.parse(
-      JSON.stringify(state.currentTraining)
-    );
-
-  copy.id = createId();
-
-  state.trainings.unshift(copy);
-
-  state.currentTraining = {
-    id: createId(),
-    title: "",
-    date: today(),
-    goal: "",
-    exercises: []
-  };
-
-  await saveState();
-
-  loadCurrentTraining();
-
-  renderAll();
-}
-
-
-/* =========================================================
-   PDF
-   ========================================================= */
-
-function printTraining() {
-
-  saveCurrentTraining();
-
-  window.print();
-}
-
-
-/* =========================================================
-   EXPORT
-   ========================================================= */
-
-async function exportData() {
-
-  const exportObject = {
-
-    app: "Trainingsplan",
-
-    version: 4,
-
-    exportedAt:
-      new Date().toISOString(),
-
-    exercises:
-      state.exercises,
-
-    trainings:
-      state.trainings,
-
-    currentTraining:
-      state.currentTraining
-  };
-
-  const json =
-    JSON.stringify(
-      exportObject,
-      null,
-      2
-    );
-
-  const blob =
-    new Blob(
-      [json],
-      {
-        type: "application/json"
-      }
-    );
-
-  const url =
-    URL.createObjectURL(blob);
-
-  const a =
-    document.createElement("a");
-
-  a.href = url;
-
-  a.download =
-    "trainingsplan-backup-" +
-    formatDateFile(new Date()) +
-    ".json";
-
-  document.body.appendChild(a);
-
-  a.click();
-
-  a.remove();
-
-  setTimeout(
-    () => URL.revokeObjectURL(url),
-    1000
-  );
-}
-
-
-/* =========================================================
-   IMPORT
-   ========================================================= */
-
-async function importData(event) {
-
-  const file =
-    event.target.files &&
-    event.target.files[0];
-
-  if (!file) return;
-
-  try {
-
-    const text =
-      await file.text();
-
-    const imported =
-      JSON.parse(text);
-
-    if (
-      !imported ||
-      !Array.isArray(imported.exercises)
-    ) {
-
-      throw new Error(
-        "Ungültiges Dateiformat."
-      );
-    }
-
-    const replace =
-      confirm(
-        "OK = vorhandene Daten ersetzen\n\n" +
-        "Abbrechen = importierte Daten hinzufügen"
-      );
-
-    if (replace) {
-
-      state.exercises =
-        imported.exercises || [];
-
-      state.trainings =
-        imported.trainings || [];
-
-      state.currentTraining =
-        imported.currentTraining || {
-          id: createId(),
-          title: "",
-          date: today(),
-          goal: "",
-          exercises: []
-        };
-
-    } else {
-
-      state.exercises = [
-        ...state.exercises,
-        ...imported.exercises
-      ];
-
-      state.trainings = [
-        ...state.trainings,
-        ...(imported.trainings || [])
-      ];
-    }
-
-    await saveState();
-
-    loadCurrentTraining();
-
-    renderAll();
-
-    alert("Import erfolgreich.");
-
-  } catch (error) {
-
-    console.error(error);
-
-    alert(
-      "Die Datei konnte nicht importiert werden."
-    );
-  }
-
-  event.target.value = "";
-}
-
-
-/* =========================================================
-   ALLE DATEN LÖSCHEN
-   ========================================================= */
-
-async function deleteAllData() {
-
-  if (
-    !confirm(
-      "Wirklich ALLE Übungen und Trainings löschen?"
-    )
-  ) return;
-
-  state = {
-
-    exercises: [],
-
-    trainings: [],
-
-    currentTraining: {
-
-      id: createId(),
-
-      title: "",
-
-      date: today(),
-
-      goal: "",
-
-      exercises: []
-    }
-  };
-
-  await saveState();
-
-  loadCurrentTraining();
-
-  renderAll();
-
-  alert("Alle Daten wurden gelöscht.");
-}
-
-
-/* =========================================================
-   HILFSFUNKTIONEN
-   ========================================================= */
-
-function createId() {
-
-  if (
-    window.crypto &&
-    crypto.randomUUID
-  ) {
-    return crypto.randomUUID();
-  }
-
-  return (
-    Date.now().toString(36) +
-    Math.random()
-      .toString(36)
-      .substring(2)
-  );
-}
-
-
-function today() {
-
-  const date =
-    new Date();
-
-  const year =
-    date.getFullYear();
-
-  const month =
-    String(date.getMonth() + 1)
-      .padStart(2, "0");
-
-  const day =
-    String(date.getDate())
-      .padStart(2, "0");
-
-  return `${year}-${month}-${day}`;
-}
-
-
-function formatDateFile(date) {
-
-  return [
-    date.getFullYear(),
-
-    String(date.getMonth() + 1)
-      .padStart(2, "0"),
-
-    String(date.getDate())
-      .padStart(2, "0")
-  ].join("-");
-}
-
-
-function escapeHTML(value) {
-
-  return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-
-function escapeAttribute(value) {
-
-  return escapeHTML(value);
-}
-
-
-/* =========================================================
-   MODAL AUSSERHALB SCHLIESSEN
-   ========================================================= */
-
-document
-  .getElementById("exerciseModal")
-  .addEventListener("click", event => {
-
-    if (
-      event.target ===
-      document.getElementById("exerciseModal")
-    ) {
-      closeExerciseModal();
-    }
-  });
-
-
-document
-  .getElementById("detailModal")
-  .addEventListener("click", event => {
-
-    if (
-      event.target ===
-      document.getElementById("detailModal")
-    ) {
-      closeDetailModal();
-    }
-  });
-
-
-/* =========================================================
-   START
-   ========================================================= */
-
-init();
-
-</script>
-
-</body>
-</html>
+async function handleImage(
